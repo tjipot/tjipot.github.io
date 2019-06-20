@@ -5,19 +5,20 @@
   
 
   
-  <title>Univesre</title>
+  <title>札记_TensorFlow_机制 | Univesre</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Computer Fake Science">
+  <meta name="description" content="1.参考CNBLOGS博文 2.参考TENSORFLY社区 0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通. 首先, 先看一段Python中Tensorflow的代码: 12345678910111213141516171819202122232425262728293031323334import tensorflow as tfimport numpy a">
 <meta name="keywords" content="Univesre">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Univesre">
-<meta property="og:url" content="https://tjipot.github.io/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="札记_TensorFlow_机制">
+<meta property="og:url" content="https://tjipot.github.io/2019/06/21/札记-TensorFlow-机制/index.html">
 <meta property="og:site_name" content="Univesre">
-<meta property="og:description" content="Computer Fake Science">
+<meta property="og:description" content="1.参考CNBLOGS博文 2.参考TENSORFLY社区 0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通. 首先, 先看一段Python中Tensorflow的代码: 12345678910111213141516171819202122232425262728293031323334import tensorflow as tfimport numpy a">
 <meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-06-20T16:39:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Univesre">
-<meta name="twitter:description" content="Computer Fake Science">
+<meta name="twitter:title" content="札记_TensorFlow_机制">
+<meta name="twitter:description" content="1.参考CNBLOGS博文 2.参考TENSORFLY社区 0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通. 首先, 先看一段Python中Tensorflow的代码: 12345678910111213141516171819202122232425262728293031323334import tensorflow as tfimport numpy a">
   
     <link rel="alternate" href="/atom.xml" title="Univesre" type="application/atom+xml">
   
@@ -68,9 +69,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-札记-TensorFlow-机制" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-札记-TensorFlow-机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/21/札记-TensorFlow-机制/" class="article-date">
   <time datetime="2019-06-20T16:38:06.000Z" itemprop="datePublished">2019-06-21</time>
@@ -83,8 +82,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/札记-TensorFlow-机制/">札记_TensorFlow_机制</a>
+    <h1 class="article-title" itemprop="name">
+      札记_TensorFlow_机制
     </h1>
   
 
@@ -162,252 +161,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-札记-论文-AlexNet" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/札记-论文-AlexNet/" class="article-date">
-  <time datetime="2019-06-20T16:37:49.000Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/札记-论文-AlexNet/">札记_论文_AlexNet</a>
-    </h1>
+    <a href="/2019/06/21/札记-论文-AlexNet/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">札记_论文_AlexNet</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>AlexNet的”官方”论文为<strong><em>ImageNet Classiﬁcation with Deep Convolutional Neural Networks</em></strong> [<a href="http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networ" target="_blank" rel="noopener">ref</a>], 发表于2012(7年前, :)), 论文的三位作者分别是Alex(第一作者), Ilya和Geoffrey Hinton(前两位的导师), 其中的<strong>Dropout</strong>概念, 应当是很有影响的概念了.</p>
-<p>此篇论文共7个章节, 下面我将论文的读后理解札记下来, 输出出来加深印象.</p>
-<p>(Abstract)</p>
-<ol>
-<li>Introduction</li>
-<li>The Dataset</li>
-<li>The Architecture</li>
-<li>Reducing Overfitting</li>
-<li>Details of learning</li>
-<li>Results</li>
-<li>Discussion</li>
-</ol>
-<p>(Reference)<br><br><br></p>
-<hr>
-<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="(Abstract)"></a>(Abstract)</h4><p>概括了作者要提出的模型的一些简要情况: ILSVRC-2010的top-1和top-5的错误率为37.5%和17.0%的一个模型(比之前的都要好), 以及这个模型有6,000万个参数和6.5万个神经元. 该模型使用的一些技巧, 有: 5个卷积层(后接最大池化层)和3个全连接层(其中两个应用了Dropout), (为了加速训练)非饱和神经元(即ReLU)以及GPU的使用. 使用该模型的一个变化版本, 在ILSVRC-2012得到了15.3%的错误率(top-5).<br><br><br></p>
-<hr>
-<h4 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h4><p>该部分首先简述了小数据集(几万张的级别)的作用: 在简单的识别任务中(如MNIST数字识别), 这样的数据集可以适用和胜任. 然后, 说明了在真实环境中对象是会变化的(variability, 注: 如角度, 成像大小等), 引出我们需要更大的数据集的需求, 并提到了其中两个: LabelMe和ImageNet.</p>
-<p>接着该部分的第二段, 提到了模型的学习能力(learning capacity, 学习什么?! 识别对象): 即便有了像ImageNet这样的大数据集, 由于对象识别任务的巨大复杂性(immense complexity, 没法靠人工去一一指定), 也不可能将对象识别这个任务明确指定好(具体如何识别对象). 继续, 文中提到CNN, 提及CNN的学习能力(匹配识别对象的复杂度)可由CNN模型的深度(depth)和广度(breadth)控制.</p>
-<p>接下去的三段, 主要内容为: 1.CNN与GPU与数据, 2.论文的几点重要贡献罗列, 3.论文中网络的尺寸(受限于GPU内存与训练时间).<br><br><br></p>
-<hr>
-<h4 id="2-The-Dataset"><a href="#2-The-Dataset" class="headerlink" title="2.The Dataset"></a>2.The Dataset</h4><p>这一部分, 先是介绍了ImageNet(1,500万高分辨率图像, 22,000个类别), 而ILSVRC使用的是ImageNet的一个子集. 然后, 在下一段, 论文说明了测试集标签的问题: ILSVRC-2010是ILSVRC竞赛中唯一有测试集标签的版本(大多数实验都在此版本上进行), 论文中使用了top-1和top-5错误率作为报告的错误率.</p>
-<p>最后一段, 讲述了论文处理图像分辨率的方式: 短边缩放至256的值, 并裁剪长边为256. 另外, 论文方法也对整个训练集的图片进行了”减去平均活跃值”(mean activity)的处理.<br><br><br></p>
-<hr>
-<h4 id="3-The-Architecture"><a href="#3-The-Architecture" class="headerlink" title="3.The Architecture"></a>3.The Architecture</h4><p>该部分主要讲述模型的架构(8个主要网络层 = 5个Conv + 3个FC), 以及网络中使用到的一些特性(ReLU, 多GPU训练等).</p>
-<p>首先, 在3.1节ReLU Nonlinearity中, 论文对比了饱和非线性性(saturating nonlinearity, 如tanh函数)和非饱和非线性性(non-saturating nonlinearity, 此处的ReLU函数), 指出ReLU加快了网络的训练(图1).<br><img src="https://i.loli.net/2019/06/18/5d08e449496d242029.png" alt="AlexNet_Fig_01.png">{:height=”250”}</p>
-<p>(图自: 论文 Figure 1)</p>
-<p>其次, 在3.2节”Training on Multiple GPUs”中, 提到受限于GPU内存的大小(论文使用的GPU内存为3GB), 故将网络分布在两个GPU上进行训练, 此并行方案是: 基本上, 每个GPU放置一半的核; 另外, 在第3层时进行GPU间的通信: 第3层的核(分别在两个GPU中)会将第2层的所有feature map(两个GPU中所有的)同时作为输入进行卷积运算.</p>
-<p>接下去, 论文的3.3节”Local Response Normalization”和3.4节”Overlapping Pooling”分别讲述了这两种技术(局部响应归一化, 重叠池化), 但现在这两种技巧并不被经常使用(?!).</p>
-<p>最后, 3.5节”Overall Architecture”描述了AlexNet模型的总体架构, 为5个卷积层与3个全连接层的”一个序列”, 具体有如下图的结构:<br><img src="https://i.loli.net/2019/06/18/5d08e44a99ba510264.png" alt="AlexNet_Fig_02.png"></p>
-<p>(图自: 论文 Figure 2)</p>
-<p><br><br></p>
-<hr>
-<h4 id="4-Reducing-Overfitting"><a href="#4-Reducing-Overfitting" class="headerlink" title="4.Reducing Overfitting"></a>4.Reducing Overfitting</h4><p>在这一部分, 论文提及到了减小过拟合的两个主要方式(数据增强, Dropout), 这么做的原因是因为网络架构的参数有6,000万个(很多, 多于数据集的scale), 会产生过拟合.</p>
-<p>在4.1节”Data Augmentation”中, 论文提及了两种数据增强的方式: 1.图像变换和水平翻转(裁剪出224x224的图像块), 2.改变训练集图像RGB通道的强度(对像素值集合执行PCA并对图像加上多倍找到的主成分).</p>
-<p>在4.2节”Dropout”中, 论文介绍了这一概念, 以及它的应用位置: 在三个全连接层的前两层的输出中应用.<br><br><br></p>
-<hr>
-<h4 id="5-Details-of-learning"><a href="#5-Details-of-learning" class="headerlink" title="5.Details of learning"></a>5.Details of learning</h4><p>此部分具体讲述了论文模型的训练细节: 如参数设置, 参数初始化等. 在模型训练中, 论文团队使用了SGD(随机梯度下降, batch_size=128), 动量(=0.9), 权重衰减(=0.0005)等设置.<br><br><br></p>
-<hr>
-<h4 id="6-Results"><a href="#6-Results" class="headerlink" title="6.Results"></a>6.Results</h4><p>论文的神经网络在ILSVRC-2010数据集上的结果有top-1 37.5%和top-5 17.5%的表现, 这在当时(2012年及以前)来说, 是已公布结果中最好的(ILSVRC-2010竞赛的最佳结果是: top-1 47.1%, top-5 28.2%). 另外, 论文也涵盖了所涉模型在ILSVRC-2012竞赛(测试集标签不公开)中的结果.<br><br><br></p>
-<hr>
-<h4 id="7-Discussion"><a href="#7-Discussion" class="headerlink" title="7.Discussion"></a>7.Discussion</h4><p>讨论部分, 论文总述大型深度卷积神经网络(A large, deep convolutional neural network)可以取得的破纪录结果, 并佐证深度的重要性: 在论文的模型中, 移除任何中间层都会导致大约2%的top-1性能损失.</p>
-<p>最后, 论文进行了一些模型之外的探讨.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://tjipot.github.io/2019/06/21/札记-论文-AlexNet/" data-id="cjx4w4tha000441zswh33wl7y" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-札记-PYTHON" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/札记-PYTHON/" class="article-date">
-  <time datetime="2019-06-20T16:35:42.000Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/札记-PYTHON/">札记_PYTHON</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>1.参考<a href="https://gitbook.cn/gitchat/column/5ad56a79af8f2f35290f6535#catalog" target="_blank" rel="noopener">博文</a></em></p>
-<p>　　现有最基本最基本的Python概念点(看一遍都懂, 就记不住)整理了, Mark在文章中, 日后有更丰富的经验, 可以以此为基础添加上去, 使枝叶丰茂. (P.s. 重要的是, 摆脱Java和C++等编译语言的长期影响!)<br><br>
-　　</p>
-<hr>
-<h3 id="Section-00-Python简史-略"><a href="#Section-00-Python简史-略" class="headerlink" title="Section 00: Python简史(略)"></a>Section 00: Python简史(略)</h3><br>
-
-<hr>
-<h3 id="Section-01-预备知识-开发环境-略"><a href="#Section-01-预备知识-开发环境-略" class="headerlink" title="Section 01: 预备知识, 开发环境(略)"></a>Section 01: 预备知识, 开发环境(略)</h3><br>
-
-<hr>
-<h3 id="Section-02-数字-运算符"><a href="#Section-02-数字-运算符" class="headerlink" title="Section 02: 数字, 运算符"></a>Section 02: 数字, 运算符</h3><h4 id="数字"><a href="#数字" class="headerlink" title="数字:"></a>数字:</h4><p>Python中有三种数字: int, float, complex;</p>
-<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符:"></a>运算符:</h4><p><strong>1</strong>.算术(7种): 加(<figure class="highlight plain"><figcaption><span>减(```-```), 乘(```*```), 除(```/```), 取模(```%```), 幂运算(```**```)和取整预算(```//```);</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**2**.比较(6种, 结果是布尔值): ```&gt;```(大于), ```&lt;```(小于), ```==```(等于), ```!=```(不等于), ```&gt;=```(大于等于), ```&lt;=```(小于等于); </span><br><span class="line"></span><br><span class="line">**3**.赋值运算(&quot;=&quot;与算术运算符搭配使用): ```+=```, ```-=```, ```*=```, ```/=```, ```%=```, ```**=```, ```//=```;</span><br><span class="line"></span><br><span class="line">**4**.逻辑运算: ```and or not```(与或非);</span><br><span class="line"></span><br><span class="line">**5**.位运算(操作的是二进制上的bit): ```&amp;```与, ```|```或, ```^```异或, ```~```取反, ```&gt;&gt;```右移(几位), ```&lt;&lt;```左移(几位, 高位丢弃, 低位补0);</span><br><span class="line"></span><br><span class="line">**6**.成员运算: 某元素是否在一个数据结构(如字符串,列表,元组,字典)中, 关键字```in```;</span><br><span class="line"></span><br><span class="line">**7**.身份运算符: 比较两个标识符所引用对象的存储单元, 判断它们是否引用自同一个对象, 关键字```is```和```is not```;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">### Section 03: 字符串, 列表, 栈</span><br><span class="line">数据结构(包含的是数据元素): 包括字符串, 列表, 元组, 字典, 栈, 队列和集合; 很多时候, 确定了数据结构后, 算法就容易得到了.</span><br><span class="line"></span><br><span class="line">**1**.字符串: 注意(很多)内建方法;</span><br><span class="line"></span><br><span class="line">**2**.列表: 最基本最重要的数据结构, 访问列表中的元素可以是以&quot;切片&quot;的形式, 列表的迭代, 则是熟悉的&quot;for ele in list:&quot;的&quot;for循环&quot;形式;</span><br><span class="line"></span><br><span class="line">**3**.栈: 列表的两个内建函数的组合: ```append()```和```pop()```, 即列尾添加和列尾取出(先进后出);</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">### Section 04: (数据类型)元组, 字典, 集合, 队列</span><br><span class="line"></span><br><span class="line">**1**.元组, 属于序列类别;</span><br><span class="line"></span><br><span class="line">**2**.字典(可理解成&apos;映射表&apos;), 操作: 创建, 添加, 修改, 删除</span><br><span class="line"></span><br><span class="line">**3**.集合: 一个或多个确定的元素(仅元素)所构成的整体, 基本功能包括关系测试和消除重复元素;</span><br><span class="line">集合操作: 创建, 添加, 移除元素;</span><br><span class="line">集合运算: 交/并/补集;</span><br><span class="line"></span><br><span class="line">**4**.队列: &quot;先进先出&quot;, 就好像排队打饭, Python中有专门的队列模块Queue(以及deque, etc.); </span><br><span class="line">```python</span><br><span class="line">from collections import deque</span><br><span class="line">queue = deque([&apos;A&apos;,&apos;B&apos;,&apos;C&apos;])</span><br><span class="line"># 操作;</span><br><span class="line">queue.append(&apos;D&apos;)</span><br><span class="line">queue.popleft()</span><br></pre></td></tr></table></figure></p>
-<br>
-
-
-<hr>
-<h3 id="Section-05-条件-循环-其它语句"><a href="#Section-05-条件-循环-其它语句" class="headerlink" title="Section 05: 条件, 循环, 其它语句;"></a>Section 05: 条件, 循环, 其它语句;</h3><br>
-
-<hr>
-<h3 id="Section-06-Python抽象-gt-函数-对一组需求进行囊括-他们说抽象"><a href="#Section-06-Python抽象-gt-函数-对一组需求进行囊括-他们说抽象" class="headerlink" title="Section 06: Python抽象 -&gt; 函数, 对一组需求进行囊括(他们说抽象)"></a>Section 06: Python抽象 -&gt; 函数, 对一组需求进行囊括(他们说抽象)</h3><p>1.定义与调用, 2.参数传递(变量与引用/不可变/可变类型), 3.函数的参数类型(必须参数, 关键字参数, 默认参数和不定长参数), 4.Return语句(变量作用域: Local&gt;Enclosing&gt;Global&gt;Build-in, <a href="https://www.jianshu.com/p/3bb277c2935c" target="_blank" rel="noopener">详见</a>)
-<br><br><br></p>
-<hr>
-<h3 id="Section-07-抽象-gt-类-略"><a href="#Section-07-抽象-gt-类-略" class="headerlink" title="Section 07: 抽象 -&gt; 类(略)"></a>Section 07: 抽象 -&gt; 类(略)</h3><br>
-
-<hr>
-<h3 id="Section-08-错误和异常-略"><a href="#Section-08-错误和异常-略" class="headerlink" title="Section 08: 错误和异常(略)"></a>Section 08: 错误和异常(略)</h3><br>
-
-
-
-<hr>
-<h3 id="Section-09-模块和标准库"><a href="#Section-09-模块和标准库" class="headerlink" title="Section 09: 模块和标准库"></a>Section 09: 模块和标准库</h3><p>1.Import语句与模块, 2.编写一个极简的模块, 3.模块的位置, 4.from…import语句, 5.深入模块, 6.用help获取帮助, 7.文档<code>__doc__</code>, 8.标准库;<br><br><br><br></p>
-<hr>
-<h3 id="Section-10-文件和流"><a href="#Section-10-文件和流" class="headerlink" title="Section 10: 文件和流"></a>Section 10: 文件和流</h3><p>一些场景下, 程序需要和外部进行交互, 如: 1.input和print函数等标准I/O类的交互, 2.此处的新的交互方式: 文件和流(读/写);<br>1.打开文件, 2.文件模式, 3.缓冲, 4.读写文件, 5.读写行, 6.使用fileinput进行迭代, 7.文件迭代器;<br><br><br><br></p>
-<hr>
-<h3 id="Section-11-数据库与网络编程-略"><a href="#Section-11-数据库与网络编程-略" class="headerlink" title="Section 11: 数据库与网络编程(略)"></a>Section 11: 数据库与网络编程(略)</h3><p>1.数据库支持, 2.网络编程(如自带的Socket模块);<br><br><br><br></p>
-<hr>
-<h3 id="Section-12-图形用户界面-略"><a href="#Section-12-图形用户界面-略" class="headerlink" title="Section 12: 图形用户界面(略)"></a>Section 12: 图形用户界面(略)</h3><p>(自带的: TKinter), Py不用来做图形界面开发, GUI工具包”很一般”;<br><br><br><br></p>
-<hr>
-<h3 id="Section-13-抢票软件-略"><a href="#Section-13-抢票软件-略" class="headerlink" title="Section 13: 抢票软件(略)"></a>Section 13: 抢票软件(略)</h3><br>
-<br>
-
-<hr>
-<h3 id="Section-14-爬虫-略"><a href="#Section-14-爬虫-略" class="headerlink" title="Section 14: 爬虫(略)"></a>Section 14: 爬虫(略)</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://tjipot.github.io/2019/06/21/札记-PYTHON/" data-id="cjx4w4th4000141zssfqooqjp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-New-For-Hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/New-For-Hexo/" class="article-date">
-  <time datetime="2019-06-20T16:30:38.000Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/New-For-Hexo/">New_For_Hexo</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://tjipot.github.io/2019/06/21/New-For-Hexo/" data-id="cjx4w4th0000041zspscn1f4a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/20/hello-world/" class="article-date">
-  <time datetime="2019-06-20T15:44:21.000Z" itemprop="datePublished">2019-06-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://tjipot.github.io/2019/06/20/hello-world/" data-id="cjx4w4th8000241zslhycgpjn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
