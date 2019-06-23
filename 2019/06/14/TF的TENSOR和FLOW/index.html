@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="1.参考CNBLOGS博文 2.参考TENSORFLY社区 0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通.">
+  <meta name="description" content="0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通. 首先, 先看一段Python中Tensorflow的代码:">
 <meta name="keywords" content="Python,TensorFlow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="札记_TensorFlow_机制">
-<meta property="og:url" content="https://tjipot.github.io/2019/06/14/札记-TensorFlow-机制/index.html">
+<meta property="og:title" content="TF的TENSOR和FLOW">
+<meta property="og:url" content="https://tjipot.github.io/2019/06/14/TF的TENSOR和FLOW/index.html">
 <meta property="og:site_name" content="Univesre">
-<meta property="og:description" content="1.参考CNBLOGS博文 2.参考TENSORFLY社区 0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通.">
+<meta property="og:description" content="0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通. 首先, 先看一段Python中Tensorflow的代码:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-21T04:29:38.000Z">
+<meta property="og:updated_time" content="2019-06-23T15:31:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="札记_TensorFlow_机制">
-<meta name="twitter:description" content="1.参考CNBLOGS博文 2.参考TENSORFLY社区 0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通.">
+<meta name="twitter:title" content="TF的TENSOR和FLOW">
+<meta name="twitter:description" content="0.简介此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通. 首先, 先看一段Python中Tensorflow的代码:">
 
 
 
@@ -113,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://tjipot.github.io/2019/06/14/札记-TensorFlow-机制/">
+  <link rel="canonical" href="https://tjipot.github.io/2019/06/14/TF的TENSOR和FLOW/">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>札记_TensorFlow_机制 | Univesre</title>
+  <title>TF的TENSOR和FLOW | Univesre</title>
   
 
 
@@ -343,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/06/14/札记-TensorFlow-机制/">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/06/14/TF的TENSOR和FLOW/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Haoran Ye">
@@ -360,7 +360,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">札记_TensorFlow_机制
+          <h1 class="post-title" itemprop="name headline">TF的TENSOR和FLOW
 
               
             
@@ -403,7 +403,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-21 12:29:38" itemprop="dateModified" datetime="2019-06-21T12:29:38+08:00">2019-06-21</time>
+                <time title="修改时间：2019-06-23 23:31:26" itemprop="dateModified" datetime="2019-06-23T23:31:26+08:00">2019-06-23</time>
               
             
           </span>
@@ -455,12 +455,10 @@
       
 
       
-        <p><em>1.参考<a href="https://www.cnblogs.com/bonelee/p/7902705.html" target="_blank" rel="noopener">CNBLOGS博文</a></em></p>
-<p><em>2.参考<a href="http://www.tensorfly.cn/tfdoc/get_started/basic_usage.html" target="_blank" rel="noopener">TENSORFLY社区</a></em></p>
-<h2 id="0-简介"><a href="#0-简介" class="headerlink" title="0.简介"></a>0.简介</h2><p>此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通.</p>
+        <h2 id="0-简介"><a href="#0-简介" class="headerlink" title="0.简介"></a>0.简介</h2><p>此札记的目的还是, 通过输出: 1.理解概念, 2.加深印象, 3.融会贯通.</p>
+<p>首先, 先看一段Python中Tensorflow的代码:</p>
 <a id="more"></a>
 
-<p>首先, 先看一段Python中Tensorflow的代码:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># NumPy生成假数据(phony data), 共100个;</span></span><br><span class="line">x_data = np.float32(np.random.rand(<span class="number">2</span>, <span class="number">100</span>))         <span class="comment"># 随机生成: shape=(2,100);</span></span><br><span class="line">y_data = np.dot([<span class="number">0.100</span>, <span class="number">0.200</span>], x_data) + <span class="number">0.300</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造一个线性模型;</span></span><br><span class="line"><span class="comment"># 只有tensor(变量)才能被tf的图接受(这是语法上的问题);</span></span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">1</span>]))</span><br><span class="line"><span class="comment"># 均匀分布的介于-1和1之间的1行2列的tensor(array);</span></span><br><span class="line">W = tf.Variable(tf.random_uniform([<span class="number">1</span>, <span class="number">2</span>], <span class="number">-1.0</span>, <span class="number">1.0</span>))</span><br><span class="line">y = tf.matmul(W, x_data) + b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小化方差;</span></span><br><span class="line">loss = tf.reduce_mean(tf.square(y - y_data))        <span class="comment"># 图中的一个operator;</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>)  <span class="comment"># 图中的一个operator;</span></span><br><span class="line">train = optimizer.minimize(loss)                    <span class="comment"># 图中的一个operator;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化变量;</span></span><br><span class="line">init = tf.initialize_all_variables()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动图(graph);</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line">sess.run(init)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拟合平面;</span></span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> xrange(<span class="number">0</span>, <span class="number">201</span>):</span><br><span class="line">    <span class="comment"># train是一个operator, 图(即sess)的run()会自动根据依赖, 进行相应计算;</span></span><br><span class="line">    sess.run(train)</span><br><span class="line">    <span class="keyword">if</span> step % <span class="number">20</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">print</span> step, sess.run(W), sess.run(b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 得到最佳拟合结果 W: [[0.100  0.200]], b: [0.300]</span></span><br></pre></td></tr></table></figure>
 
 <p>在上面的注释中, 我反复添加了注释<figure class="highlight plain"><figcaption><span>图中的一个operator;```, 是为了强调这三行代码中的每个Python变量都是tf图中的operator. 这里的疑问是: 明摆着的是Python代码, 可底层到底如何运作的? 难道Python解释器自动感知了那三个变量? 它怎么知道是```train```和```optimizer```变量是要做模型的训练和优化? 它并没有被告知使用什么模型?</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">上面的例子直接使用了复杂的训练和优化流程来解释tf图的概念, 下面用一个简单点的例子, 同样也是tf图的概念, 只不过数据没那么复杂了:</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"># 创建一个变量, 初始化为标量 0.</span><br><span class="line">state     = tf.Variable(0, name=&quot;counter&quot;)</span><br><span class="line"># 创建一个 op, 其作用是使 state 增加 1</span><br><span class="line">one       = tf.constant(1)</span><br><span class="line">new_value = tf.add(state, one)</span><br><span class="line">update    = tf.assign(state, new_value)</span><br><span class="line"># 启动图后, 变量必须先经过`初始化` (init) op 初始化,</span><br><span class="line"># 首先必须增加一个`初始化` op 到图中.</span><br><span class="line">init_op   = tf.initialize_all_variables()</span><br><span class="line"></span><br><span class="line"># 启动图, 运行 op</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">  sess.run(init_op)     # 运行 &apos;init&apos; op</span><br><span class="line">  print sess.run(state) # 打印 &apos;state&apos; 的初始值</span><br><span class="line">  for _ in range(3):    # 运行 op, 更新 &apos;state&apos;, 并打印 &apos;state&apos;</span><br><span class="line">    sess.run(update)</span><br><span class="line">    print sess.run(state)</span><br></pre></td></tr></table></figure></p>
@@ -518,6 +516,10 @@
 <br>
 (Note *Ends*, Keep For Future *Fine-Tuning*, :))
 
+<hr>
+<h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p><em>1.参考<a href="https://www.cnblogs.com/bonelee/p/7902705.html" target="_blank" rel="noopener">CNBLOGS博文</a></em></p>
+<p><em>2.参考<a href="http://www.tensorfly.cn/tfdoc/get_started/basic_usage.html" target="_blank" rel="noopener">TENSORFLY社区</a></em></p>
+
       
     </div>
 
@@ -558,8 +560,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/13/札记-论文-AlexNet/" rel="next" title="札记_论文_AlexNet">
-                <i class="fa fa-chevron-left"></i> 札记_论文_AlexNet
+              <a href="/2019/06/13/论文-ALEXNET/" rel="next" title="论文_AlexNet">
+                <i class="fa fa-chevron-left"></i> 论文_AlexNet
               </a>
             
           </div>
@@ -658,6 +660,12 @@
                     
                       
                     
+                      
+                    
+                      
+                    
+                      
+                    
                     <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
@@ -687,7 +695,21 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -740,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-简介"><span class="nav-number">1.</span> <span class="nav-text">0.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本使用"><span class="nav-number">2.</span> <span class="nav-text">1.基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-启动图-在会话中启动"><span class="nav-number">3.</span> <span class="nav-text">5.启动图(在会话中启动)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于CPU和GPU-等设备"><span class="nav-number">3.0.1.</span> <span class="nav-text">关于CPU和GPU(等设备)</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#6-交互式使用"><span class="nav-number">4.</span> <span class="nav-text">6.交互式使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Tensor"><span class="nav-number">5.</span> <span class="nav-text">7.Tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-变量-More-Details"><span class="nav-number">6.</span> <span class="nav-text">8.变量(More Details)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Feed-即’Placeholder’"><span class="nav-number">7.</span> <span class="nav-text">10.Feed(即’Placeholder’)</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-简介"><span class="nav-number">1.</span> <span class="nav-text">0.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本使用"><span class="nav-number">2.</span> <span class="nav-text">1.基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-启动图-在会话中启动"><span class="nav-number">3.</span> <span class="nav-text">5.启动图(在会话中启动)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于CPU和GPU-等设备"><span class="nav-number">3.0.1.</span> <span class="nav-text">关于CPU和GPU(等设备)</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#6-交互式使用"><span class="nav-number">4.</span> <span class="nav-text">6.交互式使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Tensor"><span class="nav-number">5.</span> <span class="nav-text">7.Tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-变量-More-Details"><span class="nav-number">6.</span> <span class="nav-text">8.变量(More Details)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Feed-即’Placeholder’"><span class="nav-number">7.</span> <span class="nav-text">10.Feed(即’Placeholder’)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#References"><span class="nav-number">7.0.1.</span> <span class="nav-text">References</span></a></li></ol></li></div>
             
 
           </div>
