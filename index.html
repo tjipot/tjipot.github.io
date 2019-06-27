@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-27 21:25:51" itemprop="dateModified" datetime="2019-06-27T21:25:51+08:00">2019-06-27</time>
+                <time title="修改时间：2019-06-27 22:01:29" itemprop="dateModified" datetime="2019-06-27T22:01:29+08:00">2019-06-27</time>
               
             
           </span>
@@ -458,90 +458,17 @@
 
       
         
+          <h4 id="TF-APIs-Used-In-Code"><a href="#TF-APIs-Used-In-Code" class="headerlink" title="TF_APIs_Used_In_Code"></a>TF_APIs_Used_In_Code</h4><h5 id="1-tf-nn-conv2d-ref"><a href="#1-tf-nn-conv2d-ref" class="headerlink" title="#1 - tf.nn.conv2d[ref]"></a>#1 - tf.nn.conv2d[<a href="https://tensorflow.google.cn/api_docs/python/tf/nn/conv2d" target="_blank" rel="noopener">ref</a>]</h5><p>这是最先去查找的API函数(足见其使用程度), 它定义在 <a href="https://tensorflow.google.cn/code/stable/tensorflow/python/ops/nn_ops.py" target="_blank" rel="noopener"><code>tensorflow/python/ops/nn_ops.py</code></a>中, 它对所给的4D <code>input</code>和<code>filter</code>张量(Tensor)进行2D的卷积运算(这里的2-D和4-D别搞混了, 一个是卷积, 一个是Tensor的尺寸), 它有别名<code>tf.compat.v1.nn.conv2d</code>和<code>tf.nn.conv2d</code>, 它的函数形式为:</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.conv2d(</span><br><span class="line">    input,</span><br><span class="line">    filter=<span class="literal">None</span>,</span><br><span class="line">    strides=<span class="literal">None</span>,</span><br><span class="line">    padding=<span class="literal">None</span>,</span><br><span class="line">    use_cudnn_on_gpu=<span class="literal">True</span>,</span><br><span class="line">    data_format=<span class="string">'NHWC'</span>,</span><br><span class="line">    dilations=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">    name=<span class="literal">None</span>,</span><br><span class="line">    filters=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
           
-            <h4 id="TF-APIs-Used-In-Code"><a href="#TF-APIs-Used-In-Code" class="headerlink" title="TF_APIs_Used_In_Code"></a>TF_APIs_Used_In_Code</h4><ol>
-<li><p>tf.nn.conv2d[<a href="https://tensorflow.google.cn/api_docs/python/tf/nn/conv2d" target="_blank" rel="noopener">ref</a>]: 这是首先去查找的API函数(足见其使用程度), 它定义在 <a href="https://tensorflow.google.cn/code/stable/tensorflow/python/ops/nn_ops.py" target="_blank" rel="noopener"><code>tensorflow/python/ops/nn_ops.py</code></a>中, 它computes a 2-D convolution given 4-D <code>input</code> and <code>filter</code> tensors(这里的2-D和4-D别搞混了, 一个是卷积, 一个是Tensor的尺寸), 它的函数形式:</p>
-</li>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.conv2d(</span><br><span class="line">    input,</span><br><span class="line">    filter=<span class="literal">None</span>,</span><br><span class="line">    strides=<span class="literal">None</span>,</span><br><span class="line">    padding=<span class="literal">None</span>,</span><br><span class="line">    use_cudnn_on_gpu=<span class="literal">True</span>,</span><br><span class="line">    data_format=<span class="string">'NHWC'</span>,</span><br><span class="line">    dilations=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">    name=<span class="literal">None</span>,</span><br><span class="line">    filters=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>其中, <strong>Input</strong>和<strong>Filter</strong>的shape如下:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Input Tensor Shape</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">[batch, in_height, in_width, in_channels]</td>
-</tr>
-<tr>
-<td align="center">输入: [批的大小(数据数), 高, 宽, 输入通道数(如RGB)]</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">Filter/Kernel Tensor Shape</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">[filter_height, filter_width, in_channels, out_channels]</td>
-</tr>
-<tr>
-<td align="center">滤核: [高, 宽, 输入通道数(要被卷积的输入), 输出通道数(输出的特征图数)]</td>
-</tr>
-</tbody></table>
-<p>下面, 再讨论下它的参数:</p>
-<table>
-<thead>
-<tr>
-<th>参数名</th>
-<th>参数说明(针对理解和记忆)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>input</code></td>
-<td>参数类型: Tensor(4D), 另: 这里4D中维度顺序(Order)的含义, 与下面的<code>data_format</code>参数值有关.</td>
-</tr>
-<tr>
-<td>filter=None</td>
-<td>参数类型: 4D Tensor, 与<code>input</code>参数同type, shape是: [filter_height, filter_width, in_channels, out_channels].</td>
-</tr>
-<tr>
-<td>strides=None</td>
-<td>单元格</td>
-</tr>
-<tr>
-<td>padding=None</td>
-<td>单元格</td>
-</tr>
-<tr>
-<td>use_cudnn_on_gpu=True</td>
-<td>单元格</td>
-</tr>
-<tr>
-<td>data_format=’NHWC’</td>
-<td>Optional, 有”NHWC”(默认)和”NCHW”两种, “NHWC”格式的数据存储顺序为: [batch, height, width, channels], “NCHW”也同理.</td>
-</tr>
-<tr>
-<td>dilations=[1,1,1,1]</td>
-<td>单元格</td>
-</tr>
-<tr>
-<td>name=None</td>
-<td>单元格</td>
-</tr>
-<tr>
-<td>filters=None</td>
-<td>单元格</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-<p>返回: A <code>Tensor</code>. Has the same type as <code>input</code>, 注: 即返回Tensor的type同输入的type.</p>
-<h4 id="W3Cschool-TF-Api"><a href="#W3Cschool-TF-Api" class="headerlink" title="W3Cschool_TF_Api"></a>W3Cschool_TF_Api</h4><p><a href="https://www.w3cschool.cn/tensorflow_python/?" target="_blank" rel="noopener">主页</a>链接.</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/16/2019-06-16-AlexNet复现及TF-API及权重可视化/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
