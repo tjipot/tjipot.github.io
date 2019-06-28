@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="NUMPY_LIB_PLAYGROUNDAxis https://www.cnblogs.com/rrttp/p/8028421.html">
+<meta name="keywords" content="Numpy,Lib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NUMPY_LIB_PLAYGROUND">
+<meta property="og:url" content="https://tjipot.github.io/2019/06/27/NUMPY-LIB-PLG/index.html">
+<meta property="og:site_name" content="Univesre">
+<meta property="og:description" content="NUMPY_LIB_PLAYGROUNDAxis https://www.cnblogs.com/rrttp/p/8028421.html">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-28T14:45:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NUMPY_LIB_PLAYGROUND">
+<meta name="twitter:description" content="NUMPY_LIB_PLAYGROUNDAxis https://www.cnblogs.com/rrttp/p/8028421.html">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://tjipot.github.io/2019/06/27/NUMPY-LIB-PLG/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>NUMPY_LIB_PLAYGROUND | Univesre</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Univesre</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Universe Is Not Univesre</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/06/27/NUMPY-LIB-PLG/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haoran Ye">
+      <meta itemprop="description" content="Computer Fake Science">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Univesre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NUMPY_LIB_PLAYGROUND
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-27 23:01:48" itemprop="dateCreated datePublished" datetime="2019-06-27T23:01:48+08:00">2019-06-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-28 22:45:29" itemprop="dateModified" datetime="2019-06-28T22:45:29+08:00">2019-06-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NUMPY/" itemprop="url" rel="index"><span itemprop="name">NUMPY</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="NUMPY-LIB-PLAYGROUND"><a href="#NUMPY-LIB-PLAYGROUND" class="headerlink" title="NUMPY_LIB_PLAYGROUND"></a>NUMPY_LIB_PLAYGROUND</h3><h4 id="Axis"><a href="#Axis" class="headerlink" title="Axis"></a>Axis</h4><ol>
+<li><a href="https://www.cnblogs.com/rrttp/p/8028421.html" target="_blank" rel="noopener">https://www.cnblogs.com/rrttp/p/8028421.html</a></li>
+</ol>
+<a id="more"></a>
+
+<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p><a href="https://www.numpy.org/devdocs/reference/generated/numpy.load.html?highlight=load#numpy.load" target="_blank" rel="noopener">https://www.numpy.org/devdocs/reference/generated/numpy.load.html?highlight=load#numpy.load</a></p>
+<p><a href="https://www.numpy.org/devdocs/user/index.html#user" target="_blank" rel="noopener">https://www.numpy.org/devdocs/user/index.html#user</a></p>
+<p><a href="https://www.numpy.org/devdocs/reference/arrays.ndarray.html" target="_blank" rel="noopener">https://www.numpy.org/devdocs/reference/arrays.ndarray.html</a></p>
+<p><a href="https://www.numpy.org/devdocs/reference/arrays.dtypes.html#arrays-dtypes" target="_blank" rel="noopener">https://www.numpy.org/devdocs/reference/arrays.dtypes.html#arrays-dtypes</a></p>
+<p><a href="https://www.cnblogs.com/hezhiyao/p/7833867.html" target="_blank" rel="noopener">https://www.cnblogs.com/hezhiyao/p/7833867.html</a></p>
+<p><a href="https://www.numpy.org/devdocs/reference/generated/numpy.reshape.html#numpy.reshape" target="_blank" rel="noopener">https://www.numpy.org/devdocs/reference/generated/numpy.reshape.html#numpy.reshape</a></p>
+<p><a href="https://blog.csdn.net/krislee_zz/article/details/80141593" target="_blank" rel="noopener">https://blog.csdn.net/krislee_zz/article/details/80141593</a></p>
+<p><a href="https://blog.csdn.net/HHTNAN/article/details/79799612" target="_blank" rel="noopener">https://blog.csdn.net/HHTNAN/article/details/79799612</a></p>
+<p><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randn.html#numpy.random.randn" target="_blank" rel="noopener">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.randn.html#numpy.random.randn</a></p>
+<h4 id="With语句"><a href="#With语句" class="headerlink" title="With语句"></a>With语句</h4><p>### </p>
+<h4 id="WITH语句"><a href="#WITH语句" class="headerlink" title="WITH语句"></a>WITH语句</h4><h5 id="WITH语句的背景-IBM-Developer-REF"><a href="#WITH语句的背景-IBM-Developer-REF" class="headerlink" title="WITH语句的背景[IBM_Developer REF]"></a>WITH语句的背景[IBM_Developer <a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/" target="_blank" rel="noopener">REF</a>]</h5><p><code>with</code>语句在Python2.5开始引入使用(可以理解成, 此时与异常处理一起使用), 但with语句适用于对资源进行访问的场合(如文件使用后自动关闭, 线程中锁的自动获取和释放), 确保不管使用过程中是否发生异常, 都执行必要的清理操作(以释放资源, 如上述的文件, 锁等). (注: 区别普通计算的工作(如只占用CPU和内存)和资源访问的工作, 从这个角度去勾勒概念, 便容易理解with的实在意义) (IBM社区[<a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/" target="_blank" rel="noopener">ref</a>]) =&gt; 这里还只是说说, 还是从代码逻辑中去夯实理解, 代码看起.</p>
+<table>
+<thead>
+<tr>
+<th>上下文管理协议(Context Management Protocol)</th>
+<th>上下文管理器(Context Manager)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>包含方法<code>__enter()__</code>和 <code>__exit()__</code>, 支持该协议的对象要实现这两个方法.</td>
+<td>实现了<code>__enter()__</code>和<code>__exit()__</code>方法, 也就支持了上下文管理协议.</td>
+</tr>
+<tr>
+<td>注: 上述两个方法是PYTHON内置方法, 理解成默认就是上下文协议的实现, 那么, “采用”这两个方法的其它对象, 就是支持上下文协议的了.</td>
+<td>注: 在PYTHON中, 通常使用<code>with</code>语句调用上下文管理器, 不过也可以通过直接调用其方法来使用.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>其它术语/概念</th>
+<th>解释/说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运行时上下文(Runtime Context)</td>
+<td>由上下文管理器创建, 通过上下文管理器的 <code>__enter()__</code>和<code>__exit()__</code>方法实现, <code>__enter()__</code>方法在语句体执行之前进入运行时上下文, <code>__exit()__</code>在语句体执行完后从运行时上下文退出, <code>with</code>语句支持运行时上下文这一概念. (<strong>注: 什么狗屁解释, 语文的辞藻上下文一定要生搬硬套到计算机中: 把<code>context</code>理解成一段”有进(<code>__enter()__</code>)有出(<code>__exit()__</code>)要控制的代码块”</strong>)</td>
+</tr>
+<tr>
+<td>上下文表达式(Context Expression)</td>
+<td><code>with</code>语句中跟在关键字<code>with</code>之后的表达式, 该表达式要返回一个上下文管理器对象, 如: <code>with context_expression [as target(s)]: ...</code>, 至于怎么返回: 要么自定义好上下文管理器对象, 要么调用原有PYTHON中的上下文管理器对象.</td>
+</tr>
+<tr>
+<td>语句体(<code>with-body</code>)</td>
+<td><code>with</code>语句包裹起来的代码块, 在执行语句体之前会调用上下文管理器(对象)的<code>__enter()__</code>方法, 执行完语句体之后会执行<code>__exit()__</code>方法. (<strong>注: 这里, 我估计PYTHON解释器做了手脚, 它在解析PYTHON语句时自动(隐式地)把<code>__enter()__</code>语句和<code>__exit()__</code>语句安插在了<code>with</code>语句块的前后两端, 没错了没跑了, 就这样了</strong>)</td>
+</tr>
+</tbody></table>
+<p>具体地, 我觉得还是不要自己去解释好了, 还是看看<strong>PEP-343</strong>(The “with” Statement)[<a href="https://www.python.org/dev/peps/pep-0343/" target="_blank" rel="noopener">REF</a>]中怎么说的好了, 然后根据自己的理解去理解: (见”Specification: The ‘with’ Statement”小节[<a href="https://www.python.org/dev/peps/pep-0343/#id38" target="_blank" rel="noopener">REF</a>])</p>
+<p>A new statement is proposed with the syntax:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> EXPR <span class="keyword">as</span> VAR:</span><br><span class="line">    BLOCK</span><br></pre></td></tr></table></figure>
+
+<p>Here, ‘with’ and ‘as’ are new keywords; <code>EXPR</code> is an arbitrary expression (but not an expression-list) and <code>VAR</code> is a single assignment target. It can <strong>not</strong> be a comma-separated sequence of variables, but it <strong>can</strong> be a <strong>parenthesized</strong> comma-separated sequence of variables. (This restriction makes a future extension possible of the syntax to have multiple comma-separated resources, each with its own optional as-clause.)</p>
+<p>The “as VAR” part is optional.</p>
+<p>The translation of the above statement is:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mgr = (EXPR)</span><br><span class="line">exit = type(mgr).__exit__  <span class="comment"># Not calling it yet</span></span><br><span class="line">value = type(mgr).__enter__(mgr)</span><br><span class="line">exc = <span class="literal">True</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        VAR = value  <span class="comment"># Only if "as VAR" is present</span></span><br><span class="line">        BLOCK</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment"># The exceptional case is handled here</span></span><br><span class="line">        exc = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> exit(mgr, *sys.exc_info()):</span><br><span class="line">            <span class="keyword">raise</span></span><br><span class="line">        <span class="comment"># The exception is swallowed if exit() returns true</span></span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="comment"># The normal and non-local-goto cases are handled here</span></span><br><span class="line">    <span class="keyword">if</span> exc:</span><br><span class="line">        exit(mgr, <span class="literal">None</span>, <span class="literal">None</span>, <span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>好了, 以上部分是截取自<strong>PEP-343</strong>网页的内容, 个人觉得是<code>with</code>语句的核心释义, 也是不详细解释”<code>with</code>语句就是拿来当做<code>try..catch..finally</code>来使用的”中的具体说明: 以上部分用官方实例说明了”<code>with</code>语句为什么就是<code>try..catch..finally</code>“.</p>
+<h4 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h4><p>[<a href="https://www.baidu.com/s?ie=utf-8&amp;f=3&amp;rsv_bp=1&amp;tn=baidu&amp;wd=python%20%E4%B8%89%E4%B8%AA%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88&amp;oq=python%2520%255B...%252C1%255D&amp;rsv_pq=8fb8af7300091dc1&amp;rsv_t=e3bfgD6VwlkiSC%2FrX3FsjGy%2F67wagG4EYxPFbj5ZVoyber%2F3C42QbfGoB70&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=9064&amp;rsv_sug3=24&amp;rsv_sug1=20&amp;rsv_sug7=100&amp;rsv_sug2=0&amp;prefixsug=python%2520sangedian&amp;rsp=0&amp;rsv_sug4=9377]" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=3&amp;rsv_bp=1&amp;tn=baidu&amp;wd=python%20%E4%B8%89%E4%B8%AA%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88&amp;oq=python%2520%255B...%252C1%255D&amp;rsv_pq=8fb8af7300091dc1&amp;rsv_t=e3bfgD6VwlkiSC%2FrX3FsjGy%2F67wagG4EYxPFbj5ZVoyber%2F3C42QbfGoB70&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=9064&amp;rsv_sug3=24&amp;rsv_sug1=20&amp;rsv_sug7=100&amp;rsv_sug2=0&amp;prefixsug=python%2520sangedian&amp;rsp=0&amp;rsv_sug4=9377]</a>(<a href="https://www.baidu.com/s?ie=utf-8&amp;f=3&amp;rsv_bp=1&amp;tn=baidu&amp;wd=python" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=3&amp;rsv_bp=1&amp;tn=baidu&amp;wd=python</a> 三个点是什么&amp;oq=python%20%5B…%2C1%5D&amp;rsv_pq=8fb8af7300091dc1&amp;rsv_t=e3bfgD6VwlkiSC%2FrX3FsjGy%2F67wagG4EYxPFbj5ZVoyber%2F3C42QbfGoB70&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=9064&amp;rsv_sug3=24&amp;rsv_sug1=20&amp;rsv_sug7=100&amp;rsv_sug2=0&amp;prefixsug=python%20sangedian&amp;rsp=0&amp;rsv_sug4=9377)</p>
+<p><a href="https://blog.csdn.net/z13653662052/article/details/78010654" target="_blank" rel="noopener">https://blog.csdn.net/z13653662052/article/details/78010654</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Numpy/" rel="tag"># Numpy</a>
+          
+            <a href="/tags/Lib/" rel="tag"># Lib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/16/2019-06-16-AlexNet复现及TF-API及权重可视化/" rel="next" title="AlexNet复现及TF_API及权重可视化">
+                <i class="fa fa-chevron-left"></i> AlexNet复现及TF_API及权重可视化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/27/MATPLOTLIB-PLG/" rel="prev" title="MATPLOTLIB_PLAYGROUND">
+                MATPLOTLIB_PLAYGROUND <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Haoran Ye</p>
+              <div class="site-description motion-element" itemprop="description">Computer Fake Science</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/tjipot" title="GitHub &rarr; https://github.com/tjipot" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NUMPY-LIB-PLAYGROUND"><span class="nav-number">1.</span> <span class="nav-text">NUMPY_LIB_PLAYGROUND</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Axis"><span class="nav-number">1.1.</span> <span class="nav-text">Axis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Others"><span class="nav-number">2.</span> <span class="nav-text">Others</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#With语句"><span class="nav-number">2.1.</span> <span class="nav-text">With语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WITH语句"><span class="nav-number">2.2.</span> <span class="nav-text">WITH语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#WITH语句的背景-IBM-Developer-REF"><span class="nav-number">2.2.1.</span> <span class="nav-text">WITH语句的背景[IBM_Developer REF]</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切片"><span class="nav-number">2.3.</span> <span class="nav-text">切片</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Haoran Ye</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
