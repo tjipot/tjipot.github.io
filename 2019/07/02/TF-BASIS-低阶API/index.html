@@ -94,17 +94,18 @@
 
 
 
-  <meta name="description" content="Computer Fake Science">
-<meta name="keywords" content="Univesre">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Univesre">
-<meta property="og:url" content="https://tjipot.github.io/archives/2019/06/index.html">
+  <meta name="description" content="前言: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的: 如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境),  图和会话, https://tensorflow.google.cn/guide/graphs 以及, 关于张量的官方释义: https://tensorflow.google.cn/guide/tensors; 指">
+<meta name="keywords" content="TF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TF_BASIS_低阶API">
+<meta property="og:url" content="https://tjipot.github.io/2019/07/02/TF-BASIS-低阶API/index.html">
 <meta property="og:site_name" content="Univesre">
-<meta property="og:description" content="Computer Fake Science">
+<meta property="og:description" content="前言: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的: 如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境),  图和会话, https://tensorflow.google.cn/guide/graphs 以及, 关于张量的官方释义: https://tensorflow.google.cn/guide/tensors; 指">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-02T10:08:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Univesre">
-<meta name="twitter:description" content="Computer Fake Science">
+<meta name="twitter:title" content="TF_BASIS_低阶API">
+<meta name="twitter:description" content="前言: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的: 如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境),  图和会话, https://tensorflow.google.cn/guide/graphs 以及, 关于张量的官方释义: https://tensorflow.google.cn/guide/tensors; 指">
 
 
 
@@ -112,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://tjipot.github.io/archives/2019/06/">
+  <link rel="canonical" href="https://tjipot.github.io/2019/07/02/TF-BASIS-低阶API/">
 
 
 
@@ -122,7 +123,7 @@
   };
 </script>
 
-  <title>归档 | Univesre</title>
+  <title>TF_BASIS_低阶API | Univesre</title>
   
 
 
@@ -170,7 +171,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -280,7 +281,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -301,28 +302,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -348,397 +327,199 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/02/TF-BASIS-低阶API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haoran Ye">
+      <meta itemprop="description" content="Computer Fake Science">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Univesre">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">TF_BASIS_低阶API
+
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-02 13:23:06 / 修改时间：18:08:03" itemprop="dateCreated datePublished" datetime="2019-07-02T13:23:06+08:00">2019-07-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 13 篇日志。 继续努力。
-      </span>
-      
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/码码码上/" itemprop="url" rel="index"><span itemprop="name">码码码上</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/30/SAVE-RESTORE-MODEL/" itemprop="url">
+          
             
-              <span itemprop="name">SAVE_RESTORE_MODEL</span>
             
-          </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-30T22:10:20+08:00" content="2019-06-30">
-          06-30
-        </time>
-      </div>
+          
+          
 
-    </header>
-  </article>
+          
 
+          
 
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/29/CV-ALG/" itemprop="url">
-            
-              <span itemprop="name">CV_ALG</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-29T21:33:30+08:00" content="2019-06-29">
-          06-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/29/STATISTICS-ML/" itemprop="url">
-            
-              <span itemprop="name">STATISTICS_ML</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-29T21:33:00+08:00" content="2019-06-29">
-          06-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p><strong>前言</strong>: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的:</p>
+<p>如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境), </p>
+<p>图和会话, <a href="https://tensorflow.google.cn/guide/graphs" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/graphs</a></p>
+<p>以及, 关于张量的官方释义: <a href="https://tensorflow.google.cn/guide/tensors" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/tensors</a>;</p>
+<p>指南: <a href="https://tensorflow.google.cn/guide" target="_blank" rel="noopener">https://tensorflow.google.cn/guide</a>;</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/29/FashionMNIST/" itemprop="url">
-            
-              <span itemprop="name">FashionMNIST</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-29T15:22:36+08:00" content="2019-06-29">
-          06-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/27/MATPLOTLIB-PLG/" itemprop="url">
-            
-              <span itemprop="name">MATPLOTLIB_PLAYGROUND</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-27T23:06:45+08:00" content="2019-06-27">
-          06-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/27/NUMPY-LIB-PLG/" itemprop="url">
-            
-              <span itemprop="name">NUMPY_LIB_PLAYGROUND</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-27T23:01:48+08:00" content="2019-06-27">
-          06-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/16/AlexNet复现/" itemprop="url">
-            
-              <span itemprop="name">ALEXNET复现</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-16T00:38:06+08:00" content="2019-06-16">
-          06-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/14/TENSOR和FLOW/" itemprop="url">
-            
-              <span itemprop="name">TENSOR和FLOW</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-14T00:38:06+08:00" content="2019-06-14">
-          06-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/13/论文-ALEXNET/" itemprop="url">
-            
-              <span itemprop="name">论文_AlexNet</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-13T00:37:49+08:00" content="2019-06-13">
-          06-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/12/PYTHON_GITCHAT/" itemprop="url">
-            
-              <span itemprop="name">PYTHON_GITCHAT</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-12T00:35:42+08:00" content="2019-06-12">
-          06-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/TF/" rel="tag"># TF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/02/ERROR-LOG-S/" rel="next" title="ERROR_LOG_S">
+                <i class="fa fa-chevron-left"></i> ERROR_LOG_S
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2019/06/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/06/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1034,6 +815,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
 
   
 
@@ -1049,6 +834,8 @@
 
   
 
+
+  
 
 
   
