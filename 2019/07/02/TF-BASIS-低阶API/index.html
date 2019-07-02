@@ -94,18 +94,20 @@
 
 
 
-  <meta name="description" content="前言: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的: 如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境),  图和会话, https://tensorflow.google.cn/guide/graphs 以及, 关于张量的官方释义: https://tensorflow.google.cn/guide/tensors; 指">
+  <meta name="description" content="前言: 这篇原文是英文的中文翻译文档我给了三星(第一次)和二星(第二次), 但其中的内容, 还是靠谱的(比博文强), 毕竟这是官方的东西了. 下面, 我将个人觉得很释义的几处要点罗列了, 看能否说的明白.">
 <meta name="keywords" content="TF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TF_BASIS_低阶API">
 <meta property="og:url" content="https://tjipot.github.io/2019/07/02/TF-BASIS-低阶API/index.html">
 <meta property="og:site_name" content="Univesre">
-<meta property="og:description" content="前言: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的: 如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境),  图和会话, https://tensorflow.google.cn/guide/graphs 以及, 关于张量的官方释义: https://tensorflow.google.cn/guide/tensors; 指">
+<meta property="og:description" content="前言: 这篇原文是英文的中文翻译文档我给了三星(第一次)和二星(第二次), 但其中的内容, 还是靠谱的(比博文强), 毕竟这是官方的东西了. 下面, 我将个人觉得很释义的几处要点罗列了, 看能否说的明白.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-02T10:08:03.000Z">
+<meta property="og:image" content="https://i.loli.net/2019/07/02/5d1b42cc7582329679.gif">
+<meta property="og:updated_time" content="2019-07-02T15:58:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TF_BASIS_低阶API">
-<meta name="twitter:description" content="前言: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的: 如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境),  图和会话, https://tensorflow.google.cn/guide/graphs 以及, 关于张量的官方释义: https://tensorflow.google.cn/guide/tensors; 指">
+<meta name="twitter:description" content="前言: 这篇原文是英文的中文翻译文档我给了三星(第一次)和二星(第二次), 但其中的内容, 还是靠谱的(比博文强), 毕竟这是官方的东西了. 下面, 我将个人觉得很释义的几处要点罗列了, 看能否说的明白.">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/02/5d1b42cc7582329679.gif">
 
 
 
@@ -386,7 +388,7 @@
                 
               
 
-              <time title="创建时间：2019-07-02 13:23:06 / 修改时间：18:08:03" itemprop="dateCreated datePublished" datetime="2019-07-02T13:23:06+08:00">2019-07-02</time>
+              <time title="创建时间：2019-07-02 13:23:06 / 修改时间：23:58:09" itemprop="dateCreated datePublished" datetime="2019-07-02T13:23:06+08:00">2019-07-02</time>
             
 
             
@@ -443,9 +445,41 @@
       
 
       
-        <p><strong>前言</strong>: 虽然我给了这篇文档三星(第一次)和二星(第二次), 但是其中有些内容, 还是解释了我之前没能解决的疑惑的:</p>
-<p>如: 默认图, 子图, 上下文的理解(同一时刻的某个运行环境), </p>
-<p>图和会话, <a href="https://tensorflow.google.cn/guide/graphs" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/graphs</a></p>
+        <p><strong>前言</strong>: 这篇原文是英文的中文翻译文档我给了三星(第一次)和二星(第二次), 但其中的内容, 还是靠谱的(比博文强), 毕竟这是官方的东西了. 下面, 我将个人觉得<em>很释义</em>的几处要点罗列了, 看能否说的明白.</p>
+<a id="more"></a>
+
+<h4 id="要点0"><a href="#要点0" class="headerlink" title="要点0"></a>要点0</h4><p>这个要点其实是我对这篇文档的简要而大纲性的总结, 这个要点有以下几点总结(可以结合下面动图去理解):</p>
+<ul>
+<li><strong>默认图</strong>: 如果在代码中什么图的声明(如, <code>xx=tf.Grpah()</code>)也没有, 而却使用了如<code>tf.Variable</code>这样的涉及到图<code>Graph</code>的操作(TF本身就是一个数据流图的架构, 哪怕你就声明一个常量也涉及到计算图), 那么这时候就用到了默认的计算图;</li>
+<li><strong>子图</strong>: 当我们计算某个变量的依赖时, 只涉及到一部分而非图中所有的数据依赖, 那么我们可以理解这时候该变量依赖之内的计算图是一个子图;</li>
+<li><strong>上下文</strong>: 文档中有提到图的上下文(Context), 这个词的用法过于”文学”, 其实在我看资料的逐渐理解中, 觉得这个上下文可以理解成代码中的变量作用域, 当你不在某个上下文中, 你也不在某个作用域中, 是这样吗?! (或: 同一时刻的某个运行环境)</li>
+</ul>
+<p> <img src="https://i.loli.net/2019/07/02/5d1b42cc7582329679.gif" alt="tensors_flowing.gif"></p>
+<p><em>Source: <a href="https://tensorflow.google.cn/guide/graphs" target="_blank" rel="noopener">tf.g.cn</a></em></p>
+<p>下面, 开始要点的稍微详细点的说明.</p>
+<h4 id="要点1-图结构和图集合"><a href="#要点1-图结构和图集合" class="headerlink" title="要点1: 图结构和图集合"></a>要点1: 图结构和图集合</h4><p><strong>图结构</strong>就如上面动图所演示的那样, 包含图的节点和边缘, 同时也包含了各个操作组合依赖关系的信息. </p>
+<p>下面重点理解<strong>图集合</strong>. 首先, 我们有两个TF函数API: <code>tf.add_to_collection</code>和<code>tf.get_collection</code>, 文档中说它们是<code>tf.Graph</code>中存储元数据集合的通用机制. 然后, 关键来了, 文档中说TF的很多部分都会使用此<em>facility</em>, 如: 在创建 <a href="https://tensorflow.google.cn/api_docs/python/tf/Variable" target="_blank" rel="noopener"><code>tf.Variable</code></a> 时, 系统会默认将其添加到表示“全局变量”和“可训练变量”的集合中. 在后续创建 <a href="https://tensorflow.google.cn/api_docs/python/tf/train/Saver" target="_blank" rel="noopener"><code>tf.train.Saver</code></a> 或 <a href="https://tensorflow.google.cn/api_docs/python/tf/train/Optimizer" target="_blank" rel="noopener"><code>tf.train.Optimizer</code></a> 时, 这些集合中的变量将用作默认参数.</p>
+<p>这里, 可以联系到<strong>默认图</strong>, 声明那个变量时(<code>tf.Variable</code>), 那个变量应该添加(<code>tf.add_to_collection</code>)到了默认图中了, 而对默认图进行<code>tf.get_collection</code>操作时, 则获取到了”全局变量”和”可训练变量”. 这一步的解释至关重要, 它说明了简单的变量声明是如何与图联系起来的: 这么看来, 图可以理解成一个<code>collection</code>?! 这一步的解释也说明了<code>tf.train.Saver/Optimizer</code>是如何索取到图的变量并用于它们依赖上的计算的.</p>
+<p>总之, 在没有这个解释之前, 真的很难对TF知其所以然.</p>
+<h4 id="要点2-子图"><a href="#要点2-子图" class="headerlink" title="要点2: 子图"></a>要点2: 子图</h4><p>有以下文档中的原文:</p>
+<blockquote>
+<p><a href="https://tensorflow.google.cn/api_docs/python/tf/Session#run" target="_blank" rel="noopener"><code>tf.Session.run</code></a> 要求您指定一组 <strong>fetch</strong>，这些 fetch 可确定返回值，并且可能是 <a href="https://tensorflow.google.cn/api_docs/python/tf/Operation" target="_blank" rel="noopener"><code>tf.Operation</code></a>、<a href="https://tensorflow.google.cn/api_docs/python/tf/Tensor" target="_blank" rel="noopener"><code>tf.Tensor</code></a>或<a href="https://tensorflow.google.cn/guide/graphs#tensor_like_objects" target="_blank" rel="noopener">类张量类型</a>，例如 <a href="https://tensorflow.google.cn/api_docs/python/tf/Variable" target="_blank" rel="noopener"><code>tf.Variable</code></a>。这些 fetch 决定了必须执行哪些<strong>子图</strong>（属于整体 <a href="https://tensorflow.google.cn/api_docs/python/tf/Graph" target="_blank" rel="noopener"><code>tf.Graph</code></a>）以生成结果：该子图包含 fetch 列表中指定的所有操作，以及其输出用于计算 fetch 值的所有操作。</p>
+</blockquote>
+<p>看完这段话, 使我给了两星评价. 什么是<strong>fetch</strong>?! (这文字中时不时穿插一些代码变量, 读着很累) 连官方文档都不翻译中文了, 何解? 这个”fetch”其实就是图中的某个变量吧, 因为图中有很多变量可以单独求解, 我们每次也可以fetch(取)不同的变量来求解, 所以fetch就应该是照着这个意思用上了.</p>
+<p>“以下代码段说明了<a href="https://tensorflow.google.cn/api_docs/python/tf/Session#run" target="_blank" rel="noopener"><code>tf.Session.run</code></a>的不同参数如何导致执行不同的子图”:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">x = tf.constant([[<span class="number">37.0</span>, <span class="number">-23.0</span>], [<span class="number">1.0</span>, <span class="number">4.0</span>]])</span><br><span class="line">w = tf.Variable(tf.random_uniform([<span class="number">2</span>, <span class="number">2</span>]))</span><br><span class="line">y = tf.matmul(x, w)</span><br><span class="line">output = tf.nn.softmax(y)</span><br><span class="line">init_op = w.initializer</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">  <span class="comment"># Run the initializer on `w`.</span></span><br><span class="line">  sess.run(init_op)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Evaluate `output`. `sess.run(output)` will return a NumPy array containing</span></span><br><span class="line">  <span class="comment"># the result of the computation.</span></span><br><span class="line">  print(sess.run(output))										<span class="comment"># Fetch了output这个子图;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Evaluate `y` and `output`. Note that `y` will only be computed once, and its</span></span><br><span class="line">  <span class="comment"># result used both to return `y_val` and as an input to the `tf.nn.softmax()`</span></span><br><span class="line">  <span class="comment"># op. Both `y_val` and `output_val` will be NumPy arrays.</span></span><br><span class="line">  y_val, output_val = sess.run([y, output])	<span class="comment"># Fetch了y和output这两个子图;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="要点3-上下文"><a href="#要点3-上下文" class="headerlink" title="要点3: 上下文"></a>要点3: 上下文</h4><p>tf.Session(上下文, 资源管理(tf.Session拥有物理资源（例如 GPU 和网络连接）)), 它运行在默认图中, 就会使用默认图上下文(或, 即, 环境)中的变量等东西.</p>
+<p>以下是文档中提及”上下文”的一些语句(并不是全部的”上下文”出处):</p>
+<ul>
+<li>[<a href="https://tensorflow.google.cn/guide/graphs#building_a_tfgraph" target="_blank" rel="noopener">REF</a>]: TensorFlow 提供了一个<strong>默认图</strong>，此图是同一上下文中的所有 API 函数的明确参数。</li>
+<li>[<a href="https://tensorflow.google.cn/guide/graphs#placing_operations_on_different_devices" target="_blank" rel="noopener">REF</a>]: 如果您希望 TensorFlow 程序使用多台不同的设备，则可以使用 <a href="https://tensorflow.google.cn/api_docs/python/tf/device" target="_blank" rel="noopener"><code>tf.device</code></a> 函数轻松地请求将在特定上下文中创建的所有操作放置到同一设备（或同一类型的设备）上。</li>
+<li>[<a href="https://tensorflow.google.cn/guide/graphs#creating_a_tfsession" target="_blank" rel="noopener">REF</a>]: 由于 <a href="https://tensorflow.google.cn/api_docs/python/tf/Session" target="_blank" rel="noopener"><code>tf.Session</code></a> 拥有物理资源（例如 GPU 和网络连接），因此通常（在 <code>with</code> 代码块中）用作上下文管理器，并在您退出代码块时自动关闭会话。</li>
+</ul>
+<p>以上三处”上下文”, 应该有助于理解”Context”的中文”上下文”的意思了: <strong>第一个</strong>“上下文”应该指没有明确声明过<code>tf.Graph</code>的代码段了, 这可以是整个Python文件中的代码(如果此文件从没有声明过<code>tf.Graph</code>的话), <strong>第二个</strong>“上下文”应该是指<code>with tf.device(&quot;/device:CPU:0&quot;):</code>这个代码块中的语句了, <strong>第三个</strong>“上下文”和第二个类似, 同样指<code>with</code>语句块中的语句, 或者这个语句块与别的语句块的上下文关系.</p>
+<p>这么看来, 我们说的”上下文”, 是在编程(代码)中, 某处代码位置不同于别处代码位置而造成的语法或语义差别的现象(如一段代码语句在函数中和函数外的差别, 这就是这段代码语句的不同上下文), 这就好比在语文文章中, 不同词句在文章的不同位置有不同的含义一样. 由此, 上下文的用法完成了从语文到编程的转移.  </p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>至此, 此篇官方文档的一些至关重要的概念的理解总结, 完成了, 真是, 官方靠谱!</p>
+<h4 id="Drafts-Area"><a href="#Drafts-Area" class="headerlink" title="Drafts Area"></a>Drafts Area</h4><p>图和会话, <a href="https://tensorflow.google.cn/guide/graphs" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/graphs</a></p>
 <p>以及, 关于张量的官方释义: <a href="https://tensorflow.google.cn/guide/tensors" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/tensors</a>;</p>
 <p>指南: <a href="https://tensorflow.google.cn/guide" target="_blank" rel="noopener">https://tensorflow.google.cn/guide</a>;</p>
 
@@ -539,8 +573,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -687,6 +730,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#要点0"><span class="nav-number">1.</span> <span class="nav-text">要点0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要点1-图结构和图集合"><span class="nav-number">2.</span> <span class="nav-text">要点1: 图结构和图集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要点2-子图"><span class="nav-number">3.</span> <span class="nav-text">要点2: 子图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#要点3-上下文"><span class="nav-number">4.</span> <span class="nav-text">要点3: 上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Drafts-Area"><span class="nav-number">6.</span> <span class="nav-text">Drafts Area</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
