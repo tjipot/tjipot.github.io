@@ -103,7 +103,7 @@
 <meta property="og:description" content="前言: 这篇原文是英文的中文翻译文档我给了三星(第一次)和二星(第二次), 但其中的内容, 还是靠谱的(比博文强), 毕竟这是官方的东西了. 下面, 我将个人觉得很释义的几处要点罗列了, 看能否说的明白.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/07/02/5d1b42cc7582329679.gif">
-<meta property="og:updated_time" content="2019-07-02T15:59:11.000Z">
+<meta property="og:updated_time" content="2019-07-03T05:04:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TF_BASIS_低阶API">
 <meta name="twitter:description" content="前言: 这篇原文是英文的中文翻译文档我给了三星(第一次)和二星(第二次), 但其中的内容, 还是靠谱的(比博文强), 毕竟这是官方的东西了. 下面, 我将个人觉得很释义的几处要点罗列了, 看能否说的明白.">
@@ -388,12 +388,24 @@
                 
               
 
-              <time title="创建时间：2019-07-02 13:23:06 / 修改时间：23:59:11" itemprop="dateCreated datePublished" datetime="2019-07-02T13:23:06+08:00">2019-07-02</time>
+              <time title="创建时间：2019-07-02 13:23:06" itemprop="dateCreated datePublished" datetime="2019-07-02T13:23:06+08:00">2019-07-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 13:04:04" itemprop="dateModified" datetime="2019-07-03T13:04:04+08:00">2019-07-03</time>
               
             
           </span>
@@ -478,9 +490,12 @@
 </ul>
 <p>以上三处”上下文”, 应该有助于理解”Context”的中文”上下文”的意思了: <strong>第一个</strong>“上下文”应该指没有明确声明过<code>tf.Graph</code>的代码段了, 这可以是整个Python文件中的代码(如果此文件从没有声明过<code>tf.Graph</code>的话), <strong>第二个</strong>“上下文”应该是指<code>with tf.device(&quot;/device:CPU:0&quot;):</code>这个代码块中的语句了, <strong>第三个</strong>“上下文”和第二个类似, 同样指<code>with</code>语句块中的语句, 或者这个语句块与别的语句块的上下文关系.</p>
 <p>这么看来, 我们说的”上下文”, 是在编程(代码)中, 某处代码位置不同于别处代码位置而造成的语法或语义差别的现象(如一段代码语句在函数中和函数外的差别, 这就是这段代码语句的不同上下文), 这就好比在语文文章中, 不同词句在文章的不同位置有不同的含义一样. 由此, 上下文的用法完成了从语文到编程的转移.  </p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>至此, 此篇官方文档的一些至关重要的概念的理解总结, 完成了, 真是, 官方靠谱!</p>
-<h4 id="Drafts-Area-M"><a href="#Drafts-Area-M" class="headerlink" title="Drafts Area(M)"></a>Drafts Area(M)</h4><p>图和会话, <a href="https://tensorflow.google.cn/guide/graphs" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/graphs</a></p>
-<p>以及, 关于张量的官方释义: <a href="https://tensorflow.google.cn/guide/tensors" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/tensors</a>;</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>至此, 此篇官方文档中对我来说至关重要的一些概念的总结完成了, 文档中还有别的概念介绍(如: tensorboard等), 也可以一看.</p>
+<p><strong><em>Reference</em></strong></p>
+<ol>
+<li>TensorFlow Learn Guide, 图和会话, [<a href="https://tensorflow.google.cn/guide/graphs" target="_blank" rel="noopener">REF</a>].</li>
+</ol>
+<h4 id="Drafts-Area-M"><a href="#Drafts-Area-M" class="headerlink" title="Drafts Area(M)"></a>Drafts Area(M)</h4><p>以及, 关于张量的官方释义: <a href="https://tensorflow.google.cn/guide/tensors" target="_blank" rel="noopener">https://tensorflow.google.cn/guide/tensors</a>;</p>
 <p>指南: <a href="https://tensorflow.google.cn/guide" target="_blank" rel="noopener">https://tensorflow.google.cn/guide</a>;</p>
 
       
@@ -530,6 +545,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/03/PAPER-RCNN/" rel="prev" title="PAPER_RCNN">
+                PAPER_RCNN <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -598,7 +617,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
