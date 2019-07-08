@@ -543,7 +543,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-07 23:54:42" itemprop="dateModified" datetime="2019-07-07T23:54:42+08:00">2019-07-07</time>
+                <time title="修改时间：2019-07-08 21:50:15" itemprop="dateModified" datetime="2019-07-08T21:50:15+08:00">2019-07-08</time>
               
             
           </span>
@@ -639,12 +639,46 @@
 <blockquote>
 <p>原文: <em>We use a simple bounding-box regression stage to improve localization performance.</em></p>
 </blockquote>
-<p>论文在使用了SVM进行区域内内容的<em>class-specific detection</em>后, 开始使用<em>class-specific bounding-box regressor</em>来预测边界框(bounding box)了, 并提及, 此边界框回归和DPM(Deformable Part Models)模型中的边界框回归思想类似. 然而, 它们的不同之处是, 论文中边界框回归使用的数据是CNN输出的特征(向量), 而DPM使用的数据是<em>geometric features computed on the inferred DPM part locations</em>.</p>
-<p>MMMMMM-MM</p>
-<p>而论文给出的$W_*$公式如下:</p>
+<p><strong>回归与数据</strong>: 论文在使用了SVM进行区域内内容的<em>class-specific detection</em>后, 开始使用<em>class-specific bounding-box regressor</em>来预测边界框(bounding box)了, 并提及, 此边界框回归和DPM(Deformable Part Models)模型中的边界框回归思想类似. 然而, 它们的不同之处是两者使用的数据来源, 论文中边界框回归使用的数据是CNN输出的特征(向量), 而DPM使用的数据是<em>geometric features computed on the inferred DPM part locations</em>.</p>
+<p>公式符号设置:</p>
+<p>${(P^i,G^i)}_{i=1,…,N}$: 表示N组训练数据对, 其中, $P^i=(P^i_x,P^i_y,P^i_w,P^i_h)$代表第<em>i</em>个候选区域在整张原图的中心点坐标(x,y)以及它的宽和高(w,h). 同理, G符号代表的则是真实框(Ground Truth)对应的四个像素位置坐标值: $G=(G_x,G_y,G_w,G_h)$(此处省略上标 <em>i</em>).</p>
+<p>Transformation:</p>
+<ul>
+<li>$d_x(P)$, $d_y(P)$: 边界框中心的位移(高宽比不变, scale-invariant);</li>
+<li>$d_w(P)$, $d_h(P)$: 边界框高宽变化的转换(log-space translation);</li>
+<li>$\hat G$: 转换后的predicted ground-truth box.</li>
+</ul>
+<p>$\hat G$具体公式:</p>
+<ul>
+<li><p>$\hat G_x=P_wd_x(P)+P_x$</p>
+</li>
+<li><p>$\hat G_y=P_hd_y(P)+P_y$</p>
+</li>
+<li><p>$\hat G_w=P_wexp(d_w(P))$</p>
+</li>
+<li><p>$\hat G_h=P_hexp(d_h(P))$</p>
+</li>
+</ul>
+<p>通过以上计算, 则有了我们在<em>(x,y,w,h)</em>四个维度上对真实值的预测了, 下面, 我们要计算这个预测G值与真实G值. 我们有一个参数向量$W_*$, 它是用于学习的的可调参数, 有:</p>
+<p>$d_<em>(P)=W^T_</em>\phi_5(P)$, 其中$\phi_5(P)$是pool5层产生的特征向量</p>
+<p>则关于最优$W_*$的公式为如下公式, 其中加号后面的一项是L2正则项(least squares objective), 故此回归也是岭回归(ridge regression):</p>
 <p>$W_* = argmin_{\hat W_<em>} \displaystyle \sum^{N}<em>{i}(t^i</em></em>-\hat W^T_<em>\phi_5(P^i))^{2}+\lambda||\hat W_</em>||^2$</p>
-<p>$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</p>
-<h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><ol>
+<p>另外, 还有对关于训练数据<em>(P, G)</em>的回归目标$t_*$的定义:</p>
+<ul>
+<li>$t_x=(G_x-P_x)/P_w$</li>
+<li>$t_y=(G_y-P_y)/P_h$</li>
+<li>$t_w=log(G_w/P_w)$</li>
+<li>$t_h=log(G_h/P_h)$</li>
+</ul>
+<p>直觉地理解上面的目标项, 就是让训练参数$W$尽量去拟合<strong>pool5层特征值</strong>和<strong>G数据与P数据在(x,y)上的位移值和在(w,h)上的缩放值</strong>, 这样, CNN的特征值与位移/缩放就关联上了, 目标检测中的定位问题也就完成了.</p>
+<p>在此附录C末尾, 作者提到两点细微的问题: </p>
+<ol>
+<li>正则化在此处对模型是重要的: 论文设置了$\lambda=1000$, 在评估数据中(validation set);</li>
+<li>选择(P, G)数据对时需选择两者相距不远的(not <em>far from</em>), 否则这个转换就没什么意义了(transform P to G does not make sense), 个人觉得, 这是因为如果一个P相距所有的G都太远, 则说明这个候选区域P本身就是没有选对的(selective search这一步只是把所有候选区域选出来, 当然会选出不含目标的区域), 故不应将P和G关联. 以上只是我的一个猜想推理.</li>
+</ol>
+<p>以上, 论文的部分讲解与理解.</p>
+<p>行内与独行</p>
+<ol>
 <li>行内公式：将公式插入到本行内，符号：<code>$公式内容$</code>，如：$xyz$</li>
 <li>独行公式：将公式插入到新的一行内，并且居中，符号：<code>$$公式内容$$</code>，如：$$xyz$$</li>
 </ol>
