@@ -388,7 +388,7 @@
                 
               
 
-              <time title="创建时间：2019-07-12 17:55:57 / 修改时间：22:27:42" itemprop="dateCreated datePublished" datetime="2019-07-12T17:55:57+08:00">2019-07-12</time>
+              <time title="创建时间：2019-07-12 17:55:57 / 修改时间：23:12:09" itemprop="dateCreated datePublished" datetime="2019-07-12T17:55:57+08:00">2019-07-12</time>
             
 
             
@@ -454,16 +454,29 @@
 <p>In addition, in the learning process, we propose a new online hard sample mining strategy that can improve the performance automatically without manual sample selection. Our method achieves superior accuracy over the state-of-the-art techniques on the challenging FDDB and WIDER FACE benchmark for face detection, and AFLW benchmark for face alignment, while keeps real time performance.</p>
 <p>此外, 在学习过程中, 论文也提出了一项新的在线(即及时)难例挖掘策略(它能自动提升性能, 且不需要手工筛选采样).    论文的模型方法在人脸检测中超越了FDDB和WIDER FACE这两个基准模型(benchmark), 在人脸对齐中超越了AFLW基准模型, 且都保持了实时性.</p>
 <p><em>Index Terms</em>—Face detection, face alignment, cascaded convolutional neural network (人脸检测, 人脸对齐, 层叠CNN)</p>
-<p><img src="https://i.loli.net/2019/07/12/5d2892a982edf29524.png" alt="层叠结构的三个任务步骤"></p>
+<p><img src="https://i.loli.net/2019/07/12/5d2892a982edf29524.png" alt="图1-层叠结构的三个任务步骤"></p>
 <p><em>图1: 层叠结构的三个任务步骤</em></p>
 <h4 id="要点笔记-论文第二部分-Approach-理论方法"><a href="#要点笔记-论文第二部分-Approach-理论方法" class="headerlink" title="要点笔记 (论文第二部分 - Approach(理论方法))"></a>要点笔记 (论文第二部分 - Approach(理论方法))</h4><p>此部分是论文关键性算法的一个阐释, 但如果要在里面找代码实现性的Solution, 会抓狂失望的, 因为, 这部分只有分散的某些局部算法, 却构不成整体宏观视角.</p>
 <p><strong><em>A. Overall Framework</em></strong> </p>
+<p>MTCCN模型结构的流程(pipeline)如<em>图1</em>所示, 以下则是对应的描述:</p>
 <ol start="0">
 <li>首先, 将一个输入图像Resize成不同Scale的, 构建一个系列不同大小的图集(放置在一起有如金字塔形): test image =&gt; image pyramid;</li>
 <li>Proposal Network(P-Net): 获取<em>候选Window</em>(candidate windows)及它们相应的<em>边界框回归向量</em>(bounding box regression vector, 用引用[29]中的方法), 之后, 使用预估后的上述回归向量去调整候选框(的具体坐标位置), 并使用非极值抑制(Non-Maximum Suppression, NMS)剔除那些高度重叠却不是极值的框;</li>
-<li>Refine Network(R-Net): </li>
+<li>Refine Network(R-Net): (上一步中的)候选window(图片中的某块区域)输入到此R-Net中, 通过以下校准(calibration)操作排除输入中假(false)的候选window: 边界框回归, 及NMS;</li>
+<li>Output Network(O-Net): 同上一步类似(的模型网络结构), 但这一步更具体: 输出5个脸部标志位置(landmark position), 即两眼, 鼻子, 嘴巴两端.</li>
 </ol>
-<p><img src="https://i.loli.net/2019/07/12/5d2891e4163c575358.png" alt="屏幕快照 2019-07-12 下午9.45.30.png"></p>
+<p>以上步骤1-3中的网络模型结构如<em>图2</em>所示.</p>
+<p><img src="https://i.loli.net/2019/07/12/5d2891e4163c575358.png" alt="图2-3个模型的具体结构"><br><em>图2: 3个模型的具体结构</em></p>
+<p><strong><em>B. CNN Architecture</em></strong></p>
+<p>此小节给出在引用[19]中人脸检测性能受限的可能两个因素:</p>
+<ol>
+<li>一些过滤器缺乏权重的多样性, 此种情况可能限制它们生成(对于(人脸)特征的)区分/识别性描述(discriminative description)(的能力);</li>
+<li>相对于其它多类别对象检测和分类任务, 脸部检测是种有挑战的二分类任务: 它需要的是可能少一点的过滤器但更具识别性的能力.</li>
+</ol>
+<p>对此, 论文中的做法是: 减少过滤器数量, 过滤器(尺寸)由5*5改成3*3(减少计算量?!), 增加模型网络深度. 随后, 论文给出<em>表1</em>证明以上改进比引用[19]中的模型有更好的性能: 更佳的表现, 更少的耗时(作为对比的公平性, 两者使用相同的数据).</p>
+<p><img src="https://i.loli.net/2019/07/12/5d28a2610ece975207.png" alt="表1-MTCCN与其它模型对比"></p>
+<p><em>表1: MTCCN与其它模型对比</em></p>
+<p><strong><em>C. Training</em></strong></p>
 
           
         
