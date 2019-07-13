@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-13 19:26:37" itemprop="dateModified" datetime="2019-07-13T19:26:37+08:00">2019-07-13</time>
+                <time title="修改时间：2019-07-13 21:23:19" itemprop="dateModified" datetime="2019-07-13T21:23:19+08:00">2019-07-13</time>
               
             
           </span>
@@ -458,89 +458,16 @@
 
       
         
+          <h2 id="MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><a href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016" class="headerlink" title="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)"></a>MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</h2><p><strong>0.摘要解读</strong> <strong><em>Abstract</em></strong> - Face detection and alignment in unconstrained environment are challenging due to various poses, illuminations and occlusions. Recent studies show that deep learning approaches can achieve impressive performance on these two tasks. <strong><em>文意转义</em></strong>: 人脸检测与对齐(找到几个关键点: 嘴, 鼻子, 眼睛)在开放环境(unconstrained)是一件挑战性的事情. (如果你在阅读时发现公式没有被渲染, 请用Chrome浏览器并安装使用插件:”Math Anywhere”[<a href="https://chrome.google.com/webstore/detail/math-anywhere/gebhifiddmaaeecbaiemfpejghjdjmhc" target="_blank" rel="noopener">REF</a>], 这是一个暂时不完美解决方法)</p>
+          <!--noindex-->
           
-            <h2 id="MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><a href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016" class="headerlink" title="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)"></a>MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</h2><h4 id="0-摘要解读"><a href="#0-摘要解读" class="headerlink" title="0.摘要解读"></a>0.摘要解读</h4><p><strong><em>Abstract</em></strong> - Face detection and alignment in unconstrained environment are challenging due to various poses, illuminations and occlusions. Recent studies show that deep learning approaches can achieve impressive performance on these two tasks.</p>
-<p>人脸检测与对齐(找到几个关键点: 嘴, 鼻子, 眼睛)在开放环境(unconstrained)是一件挑战性的事情. </p>
-<p>In this paper, we propose a deep cascaded multi-task framework which exploits the inherent correlation between them to boost up their performance. In particular, our framework adopts a cascaded structure with three stages of carefully designed deep convolutional networks that predict face and landmark location in a coarse-to-fine manner.</p>
-<p>在此篇论文中, 将会提出深度层叠多任务的一个框架, 此框架挖掘出这些任务间的内在关联并提升(boost up)了它们的表现. 具体的, 论文提出的框架采用了一个三阶段的层叠(cascade)结构, 而其中的每个阶段都是经过精心设计的一个深度卷积网络, 即后面要讲到的Proposal, Refine, Output 网络.</p>
-<p>In addition, in the learning process, we propose a new online hard sample mining strategy that can improve the performance automatically without manual sample selection. Our method achieves superior accuracy over the state-of-the-art techniques on the challenging FDDB and WIDER FACE benchmark for face detection, and AFLW benchmark for face alignment, while keeps real time performance.</p>
-<p>此外, 在学习过程中, 论文也提出了一项新的在线(即及时)难例挖掘策略(它能自动提升性能, 且不需要手工筛选采样).    论文的模型方法在人脸检测中超越了FDDB和WIDER FACE这两个基准模型(benchmark), 在人脸对齐中超越了AFLW基准模型, 且都保持了实时性.</p>
-<p><em>Index Terms</em>—Face detection, face alignment, cascaded convolutional neural network (人脸检测, 人脸对齐, 层叠CNN)</p>
-<p><img src="https://i.loli.net/2019/07/12/5d2892a982edf29524.png" alt="图1-层叠结构的三个任务步骤"></p>
-<p><em>图1: 层叠结构的三个任务步骤</em></p>
-<h4 id="1-论文第II部分-Approach-理论方法-要点笔记"><a href="#1-论文第II部分-Approach-理论方法-要点笔记" class="headerlink" title="1.论文第II部分(Approach, 理论方法)要点笔记"></a>1.论文第II部分(Approach, 理论方法)要点笔记</h4><p>此部分是论文关键性算法的一个阐释, 但如果要在里面找代码实现性的Solution, 会抓狂失望的, 因为, 这部分只有分散的某些局部算法, 却构不成整体宏观视角.</p>
-<p><strong><em>A. Overall Framework</em></strong> </p>
-<p>MTCCN模型结构的流程(pipeline)如<em>图1</em>所示, 以下则是对应的描述:</p>
-<ol>
-<li>首先, 将一个输入图像Resize成不同Scale的, 构建一个系列不同大小的图集(放置在一起有如金字塔形): test image =&gt; image pyramid;</li>
-<li>Proposal Network(P-Net): 获取<em>候选Window</em>(candidate windows)及它们相应的<em>边界框回归向量</em>(bounding box regression vector, 用引用[29]中的方法), 之后, 使用预估后的上述回归向量去调整候选框(的具体坐标位置), 并使用非极值抑制(Non-Maximum Suppression, NMS)剔除那些高度重叠却不是极值的框;</li>
-<li>Refine Network(R-Net): (上一步中的)候选window(图片中的某块区域)输入到此R-Net中, 通过以下校准(calibration)操作排除输入中假(false)的候选window: 边界框回归, 及NMS;</li>
-<li>Output Network(O-Net): 同上一步类似(的模型网络结构), 但这一步更具体: 输出5个脸部标志位置(landmark position), 即两眼, 鼻子, 嘴巴两端.</li>
-</ol>
-<p>以上步骤1-3中的网络模型结构如<em>图2</em>所示.</p>
-<p><img src="https://i.loli.net/2019/07/12/5d2891e4163c575358.png" alt="图2-3个模型的具体结构"><br><em>图2: 3个模型的具体结构</em></p>
-<p><strong><em>B. CNN Architecture</em></strong></p>
-<p>此小节给出在引用[19]中人脸检测性能受限的可能两个因素:</p>
-<ol>
-<li>一些过滤器缺乏权重的多样性(<strong>How/Why?!</strong>), 此种情况可能限制它们生成(对于(人脸)特征的)区分/识别性描述(discriminative description)(的能力);</li>
-<li>相对于其它多类别对象检测和分类任务, 脸部检测是种有挑战的二分类任务: 它需要的是可能少一点的过滤器但更具识别性的能力.</li>
-</ol>
-<p>对此, 论文中的做法是: 减少过滤器数量, 过滤器(尺寸)由5*5改成3*3(减少计算量?!), 增加模型网络深度. 随后, 论文给出<em>表1</em>证明以上改进比引用[19]中的模型有更好的性能: 更佳的表现, 更少的耗时(为保证对比的公平性, 两者使用相同的数据).</p>
-<p><img src="https://i.loli.net/2019/07/12/5d28a2610ece975207.png" alt="表1-MTCCN与其它模型对比"></p>
-<p><em>表1: MTCCN与其它模型对比</em></p>
-<p><strong><em>C. Training</em></strong></p>
-<p>关于训练的设置: 包括几个网络的损失函数, 数据难例挖掘等.</p>
-<h4 id="2-论文第III部分-Experiments-实验细节-要点笔记"><a href="#2-论文第III部分-Experiments-实验细节-要点笔记" class="headerlink" title="2.论文第III部分(Experiments, 实验细节)要点笔记"></a>2.论文第III部分(Experiments, 实验细节)要点笔记</h4><p>论文使用了三个任务训练每个CNN检测器(三个P/R/O子网络): 1.脸/非脸分类, 2.边界框回归, 3.脸部标志定位, 即, 在每个子网络中各自训练这三项任务.</p>
-<p><strong><em>1) Face classification</em></strong>: 这项任务是(二元)分类任务, 对于每个输入(样本)$x_i$, 论文使用的损失计量方法是:</p>
-<p>​    $L^{det}_i=-(y^{det}_ilog(p_i)+(1-y^{det}_i)(1-log(p_i)))$</p>
-<p>其中, $p_i$是网络预测这个输入是人脸的概率, 标记$y^{det}_i$是含两个值的实际值集合$\{0,1\}$.</p>
-<p><strong><em>2) Bounding box regression</em></strong>: 对于边界框的回归, 论文中使用欧式距离(即几项坐标差的平方)作为损失的计量方式: 让模型最后的输出坐标去拟合(通过损失函数的定义及后向传播)距离最近的真实值的坐标, 该损失函数为:</p>
-<p>​    $L^{box}_i=||\hat y^{box}_i-y^{box}_i||^2_2$</p>
-<p>其中, $\hat y^{box}_i$是网络给出的预测值(即输出), 而$y^{box}_i$则是该数据的真实(坐标)值了, 四个坐标值分别为: 边框左上角的x和y, 高度height和宽度width, 所以: $y^{box}_i\in\mathbb{R^4}$(此向量属于4维实数空间).</p>
-<blockquote>
-<p><strong>注</strong>: 特征向量能用于回归(或是分类, 或是landmark标记学习), 是因为这个输入的特征向量(或说feature map)中含有我们的关注的以及不关注的对象的特征, 如关注的是人脸, 不关注的可以是背景或其它不需要学习的对象, 当我们告诉网络这些特征的最终目标(或说定义损失的计量方法)时, 就决定了这些我们关注的特征将产生怎样的结果: 分类, 人脸坐标(location), 关键点坐标(landmark loc.).</p>
-<p>此外, 以下这一点理解也不能缺少: 以上是一个数据的特征与结果的关联, 如果说就用一个样本数据就能学会上述任务我觉得很玄学, 这就是我们为什么需要大量数据以及随机梯度的原因了.</p>
-<p>在不同的人脸图像数据中人脸的坐标位置一般都是不一样的, 那么, 当我给你一个新的人脸, 你怎么就能预测它的位置了?! 因为虽然是不同位置的人脸, 但只要是人脸, 在网络靠后(或是最后)的feature map中, 肯定有它对应的激活神经元, 而因为它们在原图中的位置不同, 所以在一层层的卷积(及其它网络计算)到最后的feature map层之后, 人脸对应的激活神经元会不同, 我们预测位置, 不就要根据不同位置的神经元来做位置回归吗?!  在使用大量数据时, 就是就是告诉网络: 这是个人脸, 它的位置是这个, 下次来别的人脸图像, 你的参数要给力要能预测出位置来.</p>
-<p>(上述讲解没有配图(如何配?), 我先将自己对于这个”人脸/位置回归”网络抽象概念的理解, 梳理一遍, 希望也能有助于本文阅读者) </p>
-</blockquote>
-<p><strong><em>3) Facial landmark localization</em></strong>: 此部分的学习任务, 原理上与上一部分”边框回归”的一模一样(同样的”特征图+坐标”回归形式), 只不过现在要回归的对象是我们规定好的五个位置: 两眼, 鼻尖, 嘴唇两端, 这些点的坐标在训练数据中会给出(此种训练数据与普通的分类数据也是不一样的: 标签/标定值不同), 此处, 损失函数为:</p>
-<p>​    $L^{landmark}_i=||\hat y^{landmark}_i-y^{landmark}_i||^2_2$</p>
-<p>我们要预测的眼部标志位置有5个, 共10个坐标维度, 故: $y^{landmark}_i\in\mathbb{R^{10}}$.</p>
-<p><strong><em>4) Multi-source training</em></strong>: </p>
-<p>对于P/R/O网络中最后的三种训练任务, 它们所需要的数据集会有所不同(如face, non-face和partially aligned face的数据集), 为此, 论文对每个训练任务采用了不同权重的损失计算比例(系数$\alpha$):</p>
-<ul>
-<li>P-Net和R-Net: $\alpha_{det}=1$, $\alpha_{box}=0.5$, $\alpha_{landmark}=0.5$;</li>
-<li>O-Net:  $\alpha_{det}=1$, $\alpha_{box}=0.5$, $\alpha_{landmark}=1$.</li>
-</ul>
-<p>在O-Net中, 其$\alpha$系数增大了(为1), 是想对脸部标志点有更多的权重更新(比重大, 损失值增加了), 以下, 给出论文中对于每个子网络总损失的计算公式(两次求和):</p>
-<script type="math/tex; mode=display">min\sum^{N}_{i=1}\sum_{j\in\{det,box,landmark\}}\alpha_j\beta^j_iL^j_i</script><p>  <img src="https://i.loli.net/2019/07/13/5d2996f84d31780977.png" alt="eqn.png"></p>
-<p>其中, $\beta^j_i\in\{0,1\}$是此样本类别的指示值(indicator)(指示是否是人脸), 以上设置中, 使用SGD(随机梯度下降)训练CNN(“it is natural to employ sgd…”).</p>
-<p><strong><em>5) Online Hard sample mining</em></strong>: </p>
-<p>不同于传统的hard sample mining方法(指在分类器训练完之后再进行mining), 论文中使用online mining策略, 以适应(adaptive)训练的过程, 具体方式为: 在每个(mini)batch的前向过程(forward propagation)中, 将损失值为top 70%的那些样本标定为困难(hard)样本, 在后项传播(backward propagation)中只更新这些样本权重的梯度(gradient).</p>
-<p>(这样操作, 意味着训练过程忽略那些不太能强化模型(detector)的容易样本(easy samples), 实验也表明它的效果比没有人工样本选取的参与(without manual sample selection)要好)</p>
-<h4 id="3-实验部分-EXPERIMENTS"><a href="#3-实验部分-EXPERIMENTS" class="headerlink" title="3.实验部分 / EXPERIMENTS"></a>3.实验部分 / EXPERIMENTS</h4><p>这一部分论文主要做了以下事情: 1.论文评估了上一部分提出的难例挖掘策略的效果(effectiveness), 2.将论文的人脸检测和对齐模型与其它模型(FDDB, WIDER FACE, AFLW)对比, 3.评估模型人脸检测的计算效率(computational efficiency).</p>
-<blockquote>
-<p>注: 以上数据集的缩写分别为: Face Detection Data Set and Benchmark(FDDB), WIDER FACE(无缩写), Annotated Facial Landmarks in the Wild(AFLW).</p>
-</blockquote>
-<p><strong><em>A. Training Data</em></strong></p>
-<p>四种模型训练时的数据标记: 1.负例(Negatives, 与GT标记的脸的IoU小于0.3), 2.正例(Positives, IoU&gt;0.65), 3.部分脸(Part faces, IoU介于0.4与0.65之间), 4.标志脸(Landmark faces, 此数据含有全部5个脸部标志). (其余略)</p>
-<p><strong><em>B. The effectiveness of online hard sample mining</em></strong></p>
-<p>论文训练了两个O-Nets用来对比有与没有online hard sample mining的效果, 且为了更直接地比较效果, 只对O-Nets的人脸分类任务进行了训练, 结果如下图3左:</p>
-<p><img src="https://i.loli.net/2019/07/12/5d2891e4249fd38140.png" alt="图3-O-Net的Online Hard Sample Mining效果比较"></p>
-<p><em>图3: O-Net的Online Hard Sample Mining效果比较(左图). 图注: (a) Validation loss of O-Net with and without hard sample mining. (b) “JA” denotes joint face alignment learning while “No JA” denotes do not joint it. “No JA in BBR” denotes do not joint it while training the CNN for bounding box regression.</em></p>
-<p><strong><em>C. The effectiveness of joint detection and alignment</em></strong></p>
-<p>此处论文讲述的是将人脸检测与对齐一起(joint)训练时带来的好处, 论文中也引入了边界框回归的效果比较, 结论是联合脸部标志一起训练(joint landmarks localization task learning)对人脸分类和边界框回归都具有好处(图3右).</p>
-<p><strong><em>D/E. Evaluation on face detection/alignment</em></strong></p>
-<p>此部分(D)论文展示了一些使用了FDDB和WIDER FACE数据集并有不错(state of the art)人脸识别效果的方法, 并且罗列在图4的(a-d)子图中, 可以看出, 论文的方法超过了基准模型一大截(a large margin):</p>
-<p><img src="https://i.loli.net/2019/07/12/5d2891e5700aa17967.png" alt="图4-MTCCN与基准模型的人脸检测与对齐比较"><br><em>图4: MTCCN与基准模型的人脸检测与对齐比较</em></p>
-<p>而E部分, 论文将模型的对齐表现与RCPR等7个方法进行了比较, 其效果要好于这几个模型(图4底).</p>
-<p><strong><em>F. Runtime efficiency</em></strong></p>
-<p>论文说了其方法在人脸检测和对齐(联合任务)中很快, 因为使用了层叠结构, 具体的, 在2.6GHz的CPU中速度是16fps, 在GPU(Nvidia Titan Black)中是99fps, (而且)实现在未经优化的MATLAB代码上.</p>
-<h4 id="4-结论"><a href="#4-结论" class="headerlink" title="4.结论"></a>4.结论</h4><p>论文为人脸检测和对齐(联合)任务提出了多任务及层叠CNN的模型结构, 该结构方法在超越不错的基准模型时还保持了实时性. 后续中, 论文作者会探索发掘人脸检测和其它人脸任务之间的内在关联(inherent correlation), 以进一步提高性能(没说什么的性能).</p>
-<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="二项式求解公式" align="left"></p>
-<p>$\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/12/PAPER-MTCNN/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -966,8 +893,8 @@
 <p>以上, 论文的部分讲解与理解.</p>
 <p>行内与独行</p>
 <ol>
-<li>行内公式：将公式插入到本行内，符号：<code>$公式内容$</code>，如：$xyz$</li>
-<li>独行公式：将公式插入到新的一行内，并且居中，符号：<code>$$公式内容$$</code>，如：<script type="math/tex">xyz</script></li>
+<li>行内公式：将公式插入到本行内，符号：<script type="math/tex">公式内容</script>，如：$xyz$</li>
+<li>独行公式：将公式插入到新的一行内，并且居中，符号：<script type="math/tex">$公式内容$$$，如：</script>xyz$$</li>
 </ol>
 <h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
 <li>上标符号，符号：<code>^</code>，如：$x^4$</li>
@@ -986,7 +913,7 @@
 <h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
 <li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
 <li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
-<li>大空格，符号<code>\</code>，如：$x   y$</li>
+<li>大空格，符号<code>\</code>，如：$x \  y$</li>
 <li>中空格，符号<code>\:</code>，如：$x : y$</li>
 <li>小空格，符号<code>\,</code>，如：$x , y$</li>
 <li>没有空格，符号``，如：$xy$</li>
@@ -1326,7 +1253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/02/DVPR-LOG-S/">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/02/DVPR-LOG/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Haoran Ye">
@@ -1346,7 +1273,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/02/DVPR-LOG-S/" class="post-title-link" itemprop="url">ERROR_LOG_S</a>
+                <a href="/2019/07/02/DVPR-LOG/" class="post-title-link" itemprop="url">ERROR_LOG</a>
               
             
           </h1>
@@ -1388,7 +1315,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-13 18:31:28" itemprop="dateModified" datetime="2019-07-13T18:31:28+08:00">2019-07-13</time>
+                <time title="修改时间：2019-07-13 21:21:39" itemprop="dateModified" datetime="2019-07-13T21:21:39+08:00">2019-07-13</time>
               
             
           </span>
@@ -1436,7 +1363,11 @@
 <p><a href="https://www.yueye.org/2016/entry-for-new-life.html/comment-page-1#comment-35279" target="_blank" rel="noopener">https://www.yueye.org/2016/entry-for-new-life.html/comment-page-1#comment-35279</a></p>
 <p>PyCharm 配置远程python解释器和在本地修改服务器代码: <a href="https://www.cnblogs.com/xiongmao-cpp/p/7856596.html" target="_blank" rel="noopener">https://www.cnblogs.com/xiongmao-cpp/p/7856596.html</a></p>
 <p>0713: 辛辛苦苦写的公式, 居然不能在github上渲染出来, 怎么破?! 解决方案在哪里.</p>
-<p>采用方案: 插件:”Math Anywhere”[<a href="https://chrome.google.com/webstore/detail/math-anywhere/gebhifiddmaaeecbaiemfpejghjdjmhc" target="_blank" rel="noopener">REF</a>], 以及Hexo的改造(安装kramed渲染引擎)</p>
+<p>采用方案(临时): 插件:”Math Anywhere”[<a href="https://chrome.google.com/webstore/detail/math-anywhere/gebhifiddmaaeecbaiemfpejghjdjmhc" target="_blank" rel="noopener">REF</a>], 以及Hexo的改造(安装kramed渲染引擎):</p>
+<p>如果没有在Chrome中安装上述插件, 则我本地使用kramed引擎渲染的markdown文档上传到github.io上一样还是显示未经渲染的原公式(raw): 如”$\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$“</p>
+<p>参考MatcJax渲染[<a href="https://blog.csdn.net/phdsky/article/details/81431279" target="_blank" rel="noopener">REF</a>], 此步骤中, 发现有在线将公式生成图片的网站: [<a href="http://www.sciweavers.org/free-online-latex-equation-editor" target="_blank" rel="noopener">SciWeavers</a>], [<a href="http://latex.codecogs.com/" target="_blank" rel="noopener">CodeCogs</a>], </p>
+<p>按照此篇博文01[<a href="https://blog.csdn.net/frone/article/details/81170627" target="_blank" rel="noopener">REF</a>]逻辑(说得通), 但并没有解决情况, 此篇02[<a href="https://blog.csdn.net/weixin_34026276/article/details/87031202" target="_blank" rel="noopener">REF</a>]就更加了, 逻辑也通, 但很多细节没有, 没法复现, 此篇简书博文03[<a href="https://www.jianshu.com/p/7ab21c7f0674" target="_blank" rel="noopener">REF</a>], 和博文01的说法类似, 就是不管用, 这篇04[<a href="https://blog.csdn.net/u014630987/article/details/78670258" target="_blank" rel="noopener">REF</a>]更不靠谱了, 内容类似, 第四步打开什么也没说(应该转的).</p>
+<p>问题没解决, 却搜集了一篇MathJax的[<a href="https://blog.csdn.net/ethmery/article/details/50670297" target="_blank" rel="noopener">语法</a>]和[<a href="https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="noopener">Tutorial</a>].</p>
 
           
         

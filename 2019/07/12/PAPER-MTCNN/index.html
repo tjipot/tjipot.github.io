@@ -94,25 +94,25 @@
 
 
 
-  <meta name="description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读Abstract - Face detection and alignment in unconstrained environment are challenging due to vario">
+  <meta name="description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读 Abstract - Face detection and alignment in unconstrained environment are challenging due to vari">
 <meta name="keywords" content="CV,PAPER,以读攻毒">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAPER_MTCCN">
 <meta property="og:url" content="https://tjipot.github.io/2019/07/12/PAPER-MTCNN/index.html">
 <meta property="og:site_name" content="Univesre">
-<meta property="og:description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读Abstract - Face detection and alignment in unconstrained environment are challenging due to vario">
+<meta property="og:description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读 Abstract - Face detection and alignment in unconstrained environment are challenging due to vari">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/07/12/5d2892a982edf29524.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/12/5d2891e4163c575358.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/12/5d28a2610ece975207.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/13/5d2996f84d31780977.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/12/5d2891e4249fd38140.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/12/5d2891e5700aa17967.png">
 <meta property="og:image" content="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}">
-<meta property="og:updated_time" content="2019-07-13T11:26:37.000Z">
+<meta property="og:image" content="https://i.loli.net/2019/07/13/5d2996f84d31780977.png">
+<meta property="og:updated_time" content="2019-07-13T13:23:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAPER_MTCCN">
-<meta name="twitter:description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读Abstract - Face detection and alignment in unconstrained environment are challenging due to vario">
+<meta name="twitter:description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读 Abstract - Face detection and alignment in unconstrained environment are challenging due to vari">
 <meta name="twitter:image" content="https://i.loli.net/2019/07/12/5d2892a982edf29524.png">
 
 
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-13 19:26:37" itemprop="dateModified" datetime="2019-07-13T19:26:37+08:00">2019-07-13</time>
+                <time title="修改时间：2019-07-13 21:23:19" itemprop="dateModified" datetime="2019-07-13T21:23:19+08:00">2019-07-13</time>
               
             
           </span>
@@ -463,13 +463,13 @@
       
 
       
-        <h2 id="MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><a href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016" class="headerlink" title="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)"></a>MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</h2><h4 id="0-摘要解读"><a href="#0-摘要解读" class="headerlink" title="0.摘要解读"></a>0.摘要解读</h4><p><strong><em>Abstract</em></strong> - Face detection and alignment in unconstrained environment are challenging due to various poses, illuminations and occlusions. Recent studies show that deep learning approaches can achieve impressive performance on these two tasks.</p>
-<p>人脸检测与对齐(找到几个关键点: 嘴, 鼻子, 眼睛)在开放环境(unconstrained)是一件挑战性的事情. </p>
+        <h2 id="MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><a href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016" class="headerlink" title="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)"></a>MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</h2><p><strong>0.摘要解读</strong> <strong><em>Abstract</em></strong> - Face detection and alignment in unconstrained environment are challenging due to various poses, illuminations and occlusions. Recent studies show that deep learning approaches can achieve impressive performance on these two tasks. <strong><em>文意转义</em></strong>: 人脸检测与对齐(找到几个关键点: 嘴, 鼻子, 眼睛)在开放环境(unconstrained)是一件挑战性的事情. (如果你在阅读时发现公式没有被渲染, 请用Chrome浏览器并安装使用插件:”Math Anywhere”[<a href="https://chrome.google.com/webstore/detail/math-anywhere/gebhifiddmaaeecbaiemfpejghjdjmhc" target="_blank" rel="noopener">REF</a>], 这是一个暂时不完美解决方法)</p>
+<a id="more"></a>
 <p>In this paper, we propose a deep cascaded multi-task framework which exploits the inherent correlation between them to boost up their performance. In particular, our framework adopts a cascaded structure with three stages of carefully designed deep convolutional networks that predict face and landmark location in a coarse-to-fine manner.</p>
 <p>在此篇论文中, 将会提出深度层叠多任务的一个框架, 此框架挖掘出这些任务间的内在关联并提升(boost up)了它们的表现. 具体的, 论文提出的框架采用了一个三阶段的层叠(cascade)结构, 而其中的每个阶段都是经过精心设计的一个深度卷积网络, 即后面要讲到的Proposal, Refine, Output 网络.</p>
 <p>In addition, in the learning process, we propose a new online hard sample mining strategy that can improve the performance automatically without manual sample selection. Our method achieves superior accuracy over the state-of-the-art techniques on the challenging FDDB and WIDER FACE benchmark for face detection, and AFLW benchmark for face alignment, while keeps real time performance.</p>
 <p>此外, 在学习过程中, 论文也提出了一项新的在线(即及时)难例挖掘策略(它能自动提升性能, 且不需要手工筛选采样).    论文的模型方法在人脸检测中超越了FDDB和WIDER FACE这两个基准模型(benchmark), 在人脸对齐中超越了AFLW基准模型, 且都保持了实时性.</p>
-<p><em>Index Terms</em>—Face detection, face alignment, cascaded convolutional neural network (人脸检测, 人脸对齐, 层叠CNN)</p>
+<p><em>Index Terms</em>—Face detection, face alignment, cascaded convolutional neural network (检索关键字: 人脸检测, 人脸对齐, 层叠CNN)</p>
 <p><img src="https://i.loli.net/2019/07/12/5d2892a982edf29524.png" alt="图1-层叠结构的三个任务步骤"></p>
 <p><em>图1: 层叠结构的三个任务步骤</em></p>
 <h4 id="1-论文第II部分-Approach-理论方法-要点笔记"><a href="#1-论文第II部分-Approach-理论方法-要点笔记" class="headerlink" title="1.论文第II部分(Approach, 理论方法)要点笔记"></a>1.论文第II部分(Approach, 理论方法)要点笔记</h4><p>此部分是论文关键性算法的一个阐释, 但如果要在里面找代码实现性的Solution, 会抓狂失望的, 因为, 这部分只有分散的某些局部算法, 却构不成整体宏观视角.</p>
@@ -517,8 +517,7 @@
 <li>O-Net:  $\alpha_{det}=1$, $\alpha_{box}=0.5$, $\alpha_{landmark}=1$.</li>
 </ul>
 <p>在O-Net中, 其$\alpha$系数增大了(为1), 是想对脸部标志点有更多的权重更新(比重大, 损失值增加了), 以下, 给出论文中对于每个子网络总损失的计算公式(两次求和):</p>
-<script type="math/tex; mode=display">min\sum^{N}_{i=1}\sum_{j\in\{det,box,landmark\}}\alpha_j\beta^j_iL^j_i</script><p>  <img src="https://i.loli.net/2019/07/13/5d2996f84d31780977.png" alt="eqn.png"></p>
-<p>其中, $\beta^j_i\in\{0,1\}$是此样本类别的指示值(indicator)(指示是否是人脸), 以上设置中, 使用SGD(随机梯度下降)训练CNN(“it is natural to employ sgd…”).</p>
+<script type="math/tex; mode=display">min\sum^{N}_{i=1}\sum_{j\in\{det,box,landmark\}}\alpha_j\beta^j_iL^j_i</script><p>其中, $\beta^j_i\in\{0,1\}$是此样本类别的指示值(indicator)(指示是否是人脸), 以上设置中, 使用SGD(随机梯度下降)训练CNN(“it is natural to employ sgd…”).</p>
 <p><strong><em>5) Online Hard sample mining</em></strong>: </p>
 <p>不同于传统的hard sample mining方法(指在分类器训练完之后再进行mining), 论文中使用online mining策略, 以适应(adaptive)训练的过程, 具体方式为: 在每个(mini)batch的前向过程(forward propagation)中, 将损失值为top 70%的那些样本标定为困难(hard)样本, 在后项传播(backward propagation)中只更新这些样本权重的梯度(gradient).</p>
 <p>(这样操作, 意味着训练过程忽略那些不太能强化模型(detector)的容易样本(easy samples), 实验也表明它的效果比没有人工样本选取的参与(without manual sample selection)要好)</p>
@@ -535,14 +534,16 @@
 <p><strong><em>C. The effectiveness of joint detection and alignment</em></strong></p>
 <p>此处论文讲述的是将人脸检测与对齐一起(joint)训练时带来的好处, 论文中也引入了边界框回归的效果比较, 结论是联合脸部标志一起训练(joint landmarks localization task learning)对人脸分类和边界框回归都具有好处(图3右).</p>
 <p><strong><em>D/E. Evaluation on face detection/alignment</em></strong></p>
-<p>此部分(D)论文展示了一些使用了FDDB和WIDER FACE数据集并有不错(state of the art)人脸识别效果的方法, 并且罗列在图4的(a-d)子图中, 可以看出, 论文的方法超过了基准模型一大截(a large margin):</p>
+<p>此部分(D)论文展示了一些使用了FDDB和WIDER FACE数据集并有不错(state of the art)人脸识别效果的方法, 并且罗列在图4的(a-d)子图中, 可以看出, 论文的方法超过了基准模型一大截(a large margin), 而E部分, 论文将模型的对齐表现与RCPR等7个方法进行了比较, 其效果要好于这几个模型(图4底).</p>
 <p><img src="https://i.loli.net/2019/07/12/5d2891e5700aa17967.png" alt="图4-MTCCN与基准模型的人脸检测与对齐比较"><br><em>图4: MTCCN与基准模型的人脸检测与对齐比较</em></p>
-<p>而E部分, 论文将模型的对齐表现与RCPR等7个方法进行了比较, 其效果要好于这几个模型(图4底).</p>
 <p><strong><em>F. Runtime efficiency</em></strong></p>
 <p>论文说了其方法在人脸检测和对齐(联合任务)中很快, 因为使用了层叠结构, 具体的, 在2.6GHz的CPU中速度是16fps, 在GPU(Nvidia Titan Black)中是99fps, (而且)实现在未经优化的MATLAB代码上.</p>
 <h4 id="4-结论"><a href="#4-结论" class="headerlink" title="4.结论"></a>4.结论</h4><p>论文为人脸检测和对齐(联合)任务提出了多任务及层叠CNN的模型结构, 该结构方法在超越不错的基准模型时还保持了实时性. 后续中, 论文作者会探索发掘人脸检测和其它人脸任务之间的内在关联(inherent correlation), 以进一步提高性能(没说什么的性能).</p>
+<hr>
+<p><strong>文末素材格式区</strong>(请忽略)</p>
 <p><img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="二项式求解公式" align="left"></p>
 <p>$\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$</p>
+<p> <img src="https://i.loli.net/2019/07/13/5d2996f84d31780977.png" alt="eqn.png"></p>
 
       
     </div>
@@ -810,7 +811,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><span class="nav-number">1.</span> <span class="nav-text">MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0-摘要解读"><span class="nav-number">1.0.1.</span> <span class="nav-text">0.摘要解读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-论文第II部分-Approach-理论方法-要点笔记"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.论文第II部分(Approach, 理论方法)要点笔记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-论文第III部分-Experiments-实验细节-要点笔记"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.论文第III部分(Experiments, 实验细节)要点笔记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-实验部分-EXPERIMENTS"><span class="nav-number">1.0.4.</span> <span class="nav-text">3.实验部分 / EXPERIMENTS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-结论"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.结论</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><span class="nav-number">1.</span> <span class="nav-text">MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-论文第II部分-Approach-理论方法-要点笔记"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.论文第II部分(Approach, 理论方法)要点笔记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-论文第III部分-Experiments-实验细节-要点笔记"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.论文第III部分(Experiments, 实验细节)要点笔记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-实验部分-EXPERIMENTS"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.实验部分 / EXPERIMENTS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-结论"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.结论</span></a></li></ol></li></ol></div>
             
 
           </div>
