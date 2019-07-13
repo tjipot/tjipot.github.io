@@ -94,20 +94,20 @@
 
 
 
-  <meta name="description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景*&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt;* 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN)">
+  <meta name="description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt; 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN),">
 <meta name="keywords" content="CV,PAPER,以读攻毒">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAPER_RCNN">
 <meta property="og:url" content="https://tjipot.github.io/2019/07/03/PAPER-RCNN/index.html">
 <meta property="og:site_name" content="Univesre">
-<meta property="og:description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景*&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt;* 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN)">
+<meta property="og:description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt; 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN),">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/05/5d1f65074044095107.png">
 <meta property="og:updated_time" content="2019-07-08T13:50:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAPER_RCNN">
-<meta name="twitter:description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景*&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt;* 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN)">
+<meta name="twitter:description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt; 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN),">
 <meta name="twitter:image" content="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png">
 
 
@@ -458,7 +458,7 @@
       
 
       
-        <h2 id="RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation"><a href="#RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation" class="headerlink" title="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation"></a>RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation</h2><h3 id="0-背景"><a href="#0-背景" class="headerlink" title="0.背景"></a>0.背景</h3><p>*&lt;&lt;精准目标检测和语义分割中的丰富特征层级&gt;&gt;* 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN), 2.基于端到端(YOLO, SSD).</p>
+        <h2 id="RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation"><a href="#RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation" class="headerlink" title="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation"></a>RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation</h2><h3 id="0-背景"><a href="#0-背景" class="headerlink" title="0.背景"></a>0.背景</h3><p><em>&lt;&lt;精准目标检测和语义分割中的丰富特征层级&gt;&gt;</em> 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN), 2.基于端到端(YOLO, SSD).</p>
 <p>下面, 我将认为重要的要点总结出来, 以巩固熟悉算法, 但总结的要点并不代表论文的全部.</p>
 <h3 id="1-鸟瞰模型整体"><a href="#1-鸟瞰模型整体" class="headerlink" title="1.鸟瞰模型整体"></a>1.鸟瞰模型整体</h3><p><img src="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png" alt="01_模型鸟瞰.png"></p>
 <p>首先, 贴出上图, 给出模型中区域特征提取的流程, 后续理解与解释则围绕图片展开. 我们有如下步骤:</p>
@@ -502,7 +502,7 @@
 </blockquote>
 <p><strong>回归与数据</strong>: 论文在使用了SVM进行区域内内容的<em>class-specific detection</em>后, 开始使用<em>class-specific bounding-box regressor</em>来预测边界框(bounding box)了, 并提及, 此边界框回归和DPM(Deformable Part Models)模型中的边界框回归思想类似. 然而, 它们的不同之处是两者使用的数据来源, 论文中边界框回归使用的数据是CNN输出的特征(向量), 而DPM使用的数据是<em>geometric features computed on the inferred DPM part locations</em>.</p>
 <p>公式符号设置:</p>
-<p>${(P^i,G^i)}_{i=1,…,N}$: 表示N组训练数据对, 其中, $P^i=(P^i_x,P^i_y,P^i_w,P^i_h)$代表第<em>i</em>个候选区域在整张原图的中心点坐标(x,y)以及它的宽和高(w,h). 同理, G符号代表的则是真实框(Ground Truth)对应的四个像素位置坐标值: $G=(G_x,G_y,G_w,G_h)$(此处省略上标 <em>i</em>).</p>
+<p>$\{(P^i,G^i)\}_{i=1,…,N}$: 表示N组训练数据对, 其中, $P^i=(P^i_x,P^i_y,P^i_w,P^i_h)$代表第<em>i</em>个候选区域在整张原图的中心点坐标(x,y)以及它的宽和高(w,h). 同理, G符号代表的则是真实框(Ground Truth)对应的四个像素位置坐标值: $G=(G_x,G_y,G_w,G_h)$(此处省略上标 <em>i</em>).</p>
 <p>Transformation:</p>
 <ul>
 <li>$d_x(P)$, $d_y(P)$: 边界框中心的位移(高宽比不变, scale-invariant);</li>
@@ -523,7 +523,7 @@
 <p>通过以上计算, 则有了我们在<em>(x,y,w,h)</em>四个维度上对真实值的预测了, 下面, 我们要计算这个预测G值与真实G值. 我们有一个参数向量$W_*$, 它是用于学习的的可调参数, 有:</p>
 <p>$d_<em>(P)=W^T_</em>\phi_5(P)$, 其中$\phi_5(P)$是pool5层产生的特征向量</p>
 <p>则关于最优$W_*$的公式为如下公式, 其中加号后面的一项是L2正则项(least squares objective), 故此回归也是岭回归(ridge regression):</p>
-<p>$W_* = argmin_{\hat W_<em>} \displaystyle \sum^{N}<em>{i}(t^i</em></em>-\hat W^T_<em>\phi_5(P^i))^{2}+\lambda||\hat W_</em>||^2$</p>
+<p>$W_<em> = argmin_{\hat W_</em>} \displaystyle \sum^{N}_{i}(t^i_<em>-\hat W^T_</em>\phi_5(P^i))^{2}+\lambda||\hat W_*||^2$</p>
 <p>另外, 还有对关于训练数据<em>(P, G)</em>的回归目标$t_*$的定义:</p>
 <ul>
 <li>$t_x=(G_x-P_x)/P_w$</li>
@@ -541,12 +541,12 @@
 <p>行内与独行</p>
 <ol>
 <li>行内公式：将公式插入到本行内，符号：<code>$公式内容$</code>，如：$xyz$</li>
-<li>独行公式：将公式插入到新的一行内，并且居中，符号：<code>$$公式内容$$</code>，如：$$xyz$$</li>
+<li>独行公式：将公式插入到新的一行内，并且居中，符号：<code>$$公式内容$$</code>，如：<script type="math/tex">xyz</script></li>
 </ol>
 <h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
 <li>上标符号，符号：<code>^</code>，如：$x^4$</li>
 <li>下标符号，符号：<code>_</code>，如：$x_1$</li>
-<li>组合符号，符号：<code>{}</code>，如：${16}<em>{8}O{2+}</em>{2}$</li>
+<li>组合符号，符号：<code>{}</code>，如：${16}_{8}O{2+}_{2}$</li>
 </ol>
 <h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
 <li>汉字形式，符号：<code>\mbox{}</code>，如：$V_{\mbox{初始}}$</li>
@@ -560,7 +560,7 @@
 <h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
 <li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
 <li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
-<li>大空格，符号<code>\</code>，如：$x \  y$</li>
+<li>大空格，符号<code>\</code>，如：$x   y$</li>
 <li>中空格，符号<code>\:</code>，如：$x : y$</li>
 <li>小空格，符号<code>\,</code>，如：$x , y$</li>
 <li>没有空格，符号``，如：$xy$</li>
@@ -600,7 +600,7 @@
 <li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
 <li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
 <li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
-<li>矩阵表示，符号：<code>\begin{matrix} \end{matrix}</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]$</li>
+<li>矩阵表示，符号：<code>\begin{matrix} \end{matrix}</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]$</li>
 </ol>
 <h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
 <li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>

@@ -457,11 +457,11 @@
       
         <h1 id="训练首个神经网络-基本分类-个人总结"><a href="#训练首个神经网络-基本分类-个人总结" class="headerlink" title="训练首个神经网络: 基本分类(个人总结)"></a>训练首个神经网络: 基本分类(个人总结)</h1><p><strong>项目背景</strong>: 数据集是FashionMNIST(70000张28*28灰度图像(训练6/测试1), 含衣服着装的10个类别), 此数据集本身已经被包含在keras中, 故只要导入keras.datasets.fashion_mnist模块, 调用函数<code>fashion_mnist.load_data()</code>, 便可以得到: 训练集数据/标签, 测试集数据/标签的变量(图片由<em>视觉平面</em>变成了<code>np.array()</code>的编程数据格式).</p>
 <a id="more"></a>
-
 <h4 id="步骤要点"><a href="#步骤要点" class="headerlink" title="步骤要点"></a>步骤要点</h4><p>以下罗列一个(神经网络)模型搭建并跑通的一套要素点, 分为以下4个步骤点.</p>
 <p><strong>步骤1: 数据预处理</strong>.</p>
 <p>图像为灰度图, 但是也有256个灰度, 在进入训练前, 要将其归一化到(0,1)区间(否则, 结果就是19.2%左右的准确度, 原因应该是相对于模型参数数量(一个128的Dense层和一个10的Dense层), 图片的值区间过大, 模型参数无法拟合它们?!).</p>
 <p><strong>步骤2/A: 模型构建</strong>. </p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -469,7 +469,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>keras.layers.Flatten(input_shape=(28, 28))</td>
 <td>将图片弄成784的行向量(Flatten, 扁平化)</td>
 </tr>
@@ -481,8 +482,11 @@
 <td>keras.layers.Dense(10, activation=tf.nn.softmax)</td>
 <td>含10个神经元(作为输出), 激活则是softmax(softmax之后才是最终分类概率, 这之前的是logits)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>步骤2/B: 模型编译</strong>.</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -490,7 +494,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>优化器(optimizer)</td>
 <td>根据模型损失函数的定义, 去减小数据与给定标签之间的损失函数值, 反正只要是连续函数, 优化器都想办法给你用偏导搞定, 偏导求出梯度之后(不是斜率), 模型得到更新, 更加拟合了, 我们说优化器(偏导+更新参数的方式)优化了模型, 或者机器/深度学习了. (注: 这里引出一个点, 机器学习, 更贴切的辞藻应该是<strong>数学拟合</strong>, 而<em>机器学习</em>这个用法给了外界一种前景预期)</td>
 </tr>
@@ -502,20 +507,18 @@
 <td>指标(metrics)</td>
 <td>评估模型效果的标准, 如”accuracy”, 就是<strong>准确数/总数</strong>, 这个指标/标准很常用了, 以至于其它标准说”ExcuseMe?!”.</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 代码;</span></span><br><span class="line">model.compile(optimizer = tf.train.AdamOptimizer(),</span><br><span class="line">              loss = <span class="string">'sparse_categorical_crossentropy'</span>,</span><br><span class="line">              metrics = [<span class="string">'accuracy'</span>])</span><br></pre></td></tr></table></figure>
-
 <p><strong>步骤3: 模型训练(拟合)</strong>.</p>
 <p>以上, 有了模型和一套对模型操作的具体方法(<code>compile()</code>中的内容), 那么就需要让它们动起来了, 让那套想法真正地作用于模型参数, 即优化并获取到更好的拟合参数, 下面, <code>model.fit()</code>出场:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">model.fit(train_images, train_labels, epochs=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># keras训练时的输出, 训练期间, 系统会显示损失和准确率指标;</span></span><br><span class="line">Epoch <span class="number">1</span>/<span class="number">5</span></span><br><span class="line"><span class="number">60000</span>/<span class="number">60000</span> [==============================] - <span class="number">5</span>s <span class="number">87</span>us/step - loss: <span class="number">0.5033</span> - acc: <span class="number">0.8242</span></span><br><span class="line">Epoch <span class="number">2</span>/<span class="number">5</span></span><br><span class="line"><span class="number">60000</span>/<span class="number">60000</span> [==============================] - <span class="number">5</span>s <span class="number">80</span>us/step - loss: <span class="number">0.3803</span> - acc: <span class="number">0.8643</span></span><br><span class="line">Epoch <span class="number">3</span>/<span class="number">5</span></span><br><span class="line"><span class="number">60000</span>/<span class="number">60000</span> [==============================] - <span class="number">5</span>s <span class="number">85</span>us/step - loss: <span class="number">0.3399</span> - acc: <span class="number">0.8758</span></span><br><span class="line">Epoch <span class="number">4</span>/<span class="number">5</span></span><br><span class="line"><span class="number">60000</span>/<span class="number">60000</span> [==============================] - <span class="number">5</span>s <span class="number">87</span>us/step - loss: <span class="number">0.3141</span> - acc: <span class="number">0.8855</span></span><br><span class="line">Epoch <span class="number">5</span>/<span class="number">5</span></span><br><span class="line"><span class="number">60000</span>/<span class="number">60000</span> [==============================] - <span class="number">5</span>s <span class="number">88</span>us/step - loss: <span class="number">0.2941</span> - acc: <span class="number">0.8917</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>步骤4: 模型评估/预测</strong>.</p>
 <p>上面, 我们得到了训练过的一个模型, 不管其参数是否理想, 我们接下来使用还没使用的测试集, 来评估<em>准确率</em>(<code>metrics=[&#39;accuracy&#39;]</code>):</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把 test_images 和 对应的test_labels 给 model.evaluate(), 它会帮你计算出结果;</span></span><br><span class="line">test_loss, test_acc = model.evaluate(test_images, test_labels)</span><br><span class="line">print(<span class="string">'Test accuracy:'</span>, test_acc)</span><br><span class="line"><span class="comment"># 输出;</span></span><br><span class="line"><span class="number">10000</span>/<span class="number">10000</span> [==============================] - <span class="number">1</span>s <span class="number">50</span>us/step</span><br><span class="line">Test accuracy: <span class="number">0.8734</span></span><br></pre></td></tr></table></figure>
-
 <p>上面是整个模型的准确率, 要用模型来做真正的事情了, 即<strong>预测</strong>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">predictions = model.predict(test_images)</span><br><span class="line">predictions[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 输出, 最后一个值最大, 所以argmax()应该挑选出它;</span></span><br><span class="line">array([<span class="number">4.2577299e-06</span>, <span class="number">7.2840301e-08</span>, <span class="number">2.3979945e-08</span>, <span class="number">2.0671453e-06</span>,</span><br><span class="line">       <span class="number">9.1094840e-08</span>, <span class="number">1.2096325e-01</span>, <span class="number">1.5182156e-06</span>, <span class="number">1.9717012e-01</span>,</span><br><span class="line">       <span class="number">1.2066002e-05</span>, <span class="number">6.8184656e-01</span>], dtype=float32)</span><br><span class="line">np.argmax(predictions[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 输出;</span></span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>至此, FashionMNIST与一个简单的神经网络总结完毕, 这里的模型是<em>神经网络</em>而不是<em>卷积神经网络</em>, 因为这个数据集中的数据相对简单(28<em>28, 黑白灰度, 干净, 归一化处理过), 所以用不了多少参数(784\</em>128 + 128*10, 这个数量只包含了w参数)就能学会拟合这个数据集了.</p>
 <p>一个模型的<strong>全过程</strong>: 1.数据(训练/测试), 2.模型构建/编译, 3.模型训练/拟合, 4.预测和指标评估.</p>
 <h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a><em>Reference:</em></h4><ol>
@@ -523,7 +526,6 @@
 <li>FashionMNIST[<a href="https://github.com/zalandoresearch/fashion-mnist" target="_blank" rel="noopener">数据集</a>].</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">graph LR</span><br><span class="line"></span><br><span class="line">A[方形] --&gt;B(圆角)</span><br><span class="line"></span><br><span class="line">B --&gt; C&#123;条件a&#125;</span><br><span class="line"></span><br><span class="line">C --&gt;|a=1| D[结果1]</span><br><span class="line"></span><br><span class="line">C --&gt;|a=2| E[结果2]</span><br><span class="line"></span><br><span class="line">F[横向流程图]</span><br></pre></td></tr></table></figure>
-
 <p>$\Gamma$</p>
 <p>${n+1 \choose k}={n \choose k}+{n \choose k-1}$</p>
 <p>$\overline{xyz}$</p>

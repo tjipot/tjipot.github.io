@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-13 17:29:24" itemprop="dateModified" datetime="2019-07-13T17:29:24+08:00">2019-07-13</time>
+                <time title="修改时间：2019-07-13 18:08:33" itemprop="dateModified" datetime="2019-07-13T18:08:33+08:00">2019-07-13</time>
               
             
           </span>
@@ -471,7 +471,7 @@
 <h4 id="1-论文第II部分-Approach-理论方法-要点笔记"><a href="#1-论文第II部分-Approach-理论方法-要点笔记" class="headerlink" title="1.论文第II部分(Approach, 理论方法)要点笔记"></a>1.论文第II部分(Approach, 理论方法)要点笔记</h4><p>此部分是论文关键性算法的一个阐释, 但如果要在里面找代码实现性的Solution, 会抓狂失望的, 因为, 这部分只有分散的某些局部算法, 却构不成整体宏观视角.</p>
 <p><strong><em>A. Overall Framework</em></strong> </p>
 <p>MTCCN模型结构的流程(pipeline)如<em>图1</em>所示, 以下则是对应的描述:</p>
-<ol start="0">
+<ol>
 <li>首先, 将一个输入图像Resize成不同Scale的, 构建一个系列不同大小的图集(放置在一起有如金字塔形): test image =&gt; image pyramid;</li>
 <li>Proposal Network(P-Net): 获取<em>候选Window</em>(candidate windows)及它们相应的<em>边界框回归向量</em>(bounding box regression vector, 用引用[29]中的方法), 之后, 使用预估后的上述回归向量去调整候选框(的具体坐标位置), 并使用非极值抑制(Non-Maximum Suppression, NMS)剔除那些高度重叠却不是极值的框;</li>
 <li>Refine Network(R-Net): (上一步中的)候选window(图片中的某块区域)输入到此R-Net中, 通过以下校准(calibration)操作排除输入中假(false)的候选window: 边界框回归, 及NMS;</li>
@@ -493,7 +493,7 @@
 <h4 id="2-论文第III部分-Experiments-实验细节-要点笔记"><a href="#2-论文第III部分-Experiments-实验细节-要点笔记" class="headerlink" title="2.论文第III部分(Experiments, 实验细节)要点笔记"></a>2.论文第III部分(Experiments, 实验细节)要点笔记</h4><p>论文使用了三个任务训练每个CNN检测器(三个P/R/O子网络): 1.脸/非脸分类, 2.边界框回归, 3.脸部标志定位, 即, 在每个子网络中各自训练这三项任务.</p>
 <p><strong><em>1) Face classification</em></strong>: 这项任务是(二元)分类任务, 对于每个输入(样本)$x_i$, 论文使用的损失计量方法是:</p>
 <p>​    $L^{det}_i=-(y^{det}_ilog(p_i)+(1-y^{det}_i)(1-log(p_i)))$</p>
-<p>其中, $p_i$是网络预测这个输入是人脸的概率, 标记$y^{det}_i$是含两个值的实际值集合${0,1}$.</p>
+<p>其中, $p_i$是网络预测这个输入是人脸的概率, 标记$y^{det}_i$是含两个值的实际值集合$\{0,1\}$.</p>
 <p><strong><em>2) Bounding box regression</em></strong>: 对于边界框的回归, 论文中使用欧式距离(即几项坐标差的平方)作为损失的计量方式: 让模型最后的输出坐标去拟合(通过损失函数的定义及后向传播)距离最近的真实值的坐标, 该损失函数为:</p>
 <p>​    $L^{box}_i=||\hat y^{box}_i-y^{box}_i||^2_2$</p>
 <p>其中, $\hat y^{box}_i$是网络给出的预测值(即输出), 而$y^{box}_i$则是该数据的真实(坐标)值了, 四个坐标值分别为: 边框左上角的x和y, 高度height和宽度width, 所以: $y^{box}_i\in\mathbb{R^4}$(此向量属于4维实数空间).</p>
@@ -513,9 +513,8 @@
 <li>O-Net:  $\alpha_{det}=1$, $\alpha_{box}=0.5$, $\alpha_{landmark}=1$.</li>
 </ul>
 <p>在O-Net中, 其$\alpha$系数增大了(为1), 是想对脸部标志点有更多的权重更新(比重大, 损失值增加了), 以下, 给出论文中对于每个子网络总损失的计算公式(两次求和):</p>
-<p>  $$min\sum^{N}<em>{i=1}\sum</em>{j\in{det,box,landmark}}\alpha_j\beta^j_iL^j_i$$</p>
-<p>  <img src="https://i.loli.net/2019/07/13/5d2996f84d31780977.png" alt="eqn.png"></p>
-<p>其中, $\beta^j_i\in{0,1}$是此样本类别的指示值(indicator)(指示是否是人脸), 以上设置中, 使用SGD(随机梯度下降)训练CNN(“it is natural to employ sgd…”).</p>
+<script type="math/tex; mode=display">min\sum^{N}_{i=1}\sum_{j\in\{det,box,landmark\}}\alpha_j\beta^j_iL^j_i</script><p>  <img src="https://i.loli.net/2019/07/13/5d2996f84d31780977.png" alt="eqn.png"></p>
+<p>其中, $\beta^j_i\in\{0,1\}$是此样本类别的指示值(indicator)(指示是否是人脸), 以上设置中, 使用SGD(随机梯度下降)训练CNN(“it is natural to employ sgd…”).</p>
 <p><strong><em>5) Online Hard sample mining</em></strong>: </p>
 <p>不同于传统的hard sample mining方法(指在分类器训练完之后再进行mining), 论文中使用online mining策略, 以适应(adaptive)训练的过程, 具体方式为: 在每个(mini)batch的前向过程(forward propagation)中, 将损失值为top 70%的那些样本标定为困难(hard)样本, 在后项传播(backward propagation)中只更新这些样本权重的梯度(gradient).</p>
 <p>(这样操作, 意味着训练过程忽略那些不太能强化模型(detector)的容易样本(easy samples), 实验也表明它的效果比没有人工样本选取的参与(without manual sample selection)要好)</p>
@@ -538,8 +537,7 @@
 <p><strong><em>F. Runtime efficiency</em></strong></p>
 <p>论文说了其方法在人脸检测和对齐(联合任务)中很快, 因为使用了层叠结构, 具体的, 在2.6GHz的CPU中速度是16fps, 在GPU(Nvidia Titan Black)中是99fps, (而且)实现在未经优化的MATLAB代码上.</p>
 <h4 id="4-结论"><a href="#4-结论" class="headerlink" title="4.结论"></a>4.结论</h4><p>论文为人脸检测和对齐(联合)任务提出了多任务及层叠CNN的模型结构, 该结构方法在超越不错的基准模型时还保持了实时性. 后续中, 论文作者会探索发掘人脸检测和其它人脸任务之间的内在关联(inherent correlation), 以进一步提高性能(没说什么的性能).</p>
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="二项式求解公式" align="left">
-
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="二项式求解公式" align="left"></p>
 
           
         
@@ -885,7 +883,7 @@
       
         
           
-            <h2 id="RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation"><a href="#RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation" class="headerlink" title="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation"></a>RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation</h2><h3 id="0-背景"><a href="#0-背景" class="headerlink" title="0.背景"></a>0.背景</h3><p>*&lt;&lt;精准目标检测和语义分割中的丰富特征层级&gt;&gt;* 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN), 2.基于端到端(YOLO, SSD).</p>
+            <h2 id="RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation"><a href="#RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation" class="headerlink" title="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation"></a>RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation</h2><h3 id="0-背景"><a href="#0-背景" class="headerlink" title="0.背景"></a>0.背景</h3><p><em>&lt;&lt;精准目标检测和语义分割中的丰富特征层级&gt;&gt;</em> 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN), 2.基于端到端(YOLO, SSD).</p>
 <p>下面, 我将认为重要的要点总结出来, 以巩固熟悉算法, 但总结的要点并不代表论文的全部.</p>
 <h3 id="1-鸟瞰模型整体"><a href="#1-鸟瞰模型整体" class="headerlink" title="1.鸟瞰模型整体"></a>1.鸟瞰模型整体</h3><p><img src="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png" alt="01_模型鸟瞰.png"></p>
 <p>首先, 贴出上图, 给出模型中区域特征提取的流程, 后续理解与解释则围绕图片展开. 我们有如下步骤:</p>
@@ -929,7 +927,7 @@
 </blockquote>
 <p><strong>回归与数据</strong>: 论文在使用了SVM进行区域内内容的<em>class-specific detection</em>后, 开始使用<em>class-specific bounding-box regressor</em>来预测边界框(bounding box)了, 并提及, 此边界框回归和DPM(Deformable Part Models)模型中的边界框回归思想类似. 然而, 它们的不同之处是两者使用的数据来源, 论文中边界框回归使用的数据是CNN输出的特征(向量), 而DPM使用的数据是<em>geometric features computed on the inferred DPM part locations</em>.</p>
 <p>公式符号设置:</p>
-<p>${(P^i,G^i)}_{i=1,…,N}$: 表示N组训练数据对, 其中, $P^i=(P^i_x,P^i_y,P^i_w,P^i_h)$代表第<em>i</em>个候选区域在整张原图的中心点坐标(x,y)以及它的宽和高(w,h). 同理, G符号代表的则是真实框(Ground Truth)对应的四个像素位置坐标值: $G=(G_x,G_y,G_w,G_h)$(此处省略上标 <em>i</em>).</p>
+<p>$\{(P^i,G^i)\}_{i=1,…,N}$: 表示N组训练数据对, 其中, $P^i=(P^i_x,P^i_y,P^i_w,P^i_h)$代表第<em>i</em>个候选区域在整张原图的中心点坐标(x,y)以及它的宽和高(w,h). 同理, G符号代表的则是真实框(Ground Truth)对应的四个像素位置坐标值: $G=(G_x,G_y,G_w,G_h)$(此处省略上标 <em>i</em>).</p>
 <p>Transformation:</p>
 <ul>
 <li>$d_x(P)$, $d_y(P)$: 边界框中心的位移(高宽比不变, scale-invariant);</li>
@@ -950,7 +948,7 @@
 <p>通过以上计算, 则有了我们在<em>(x,y,w,h)</em>四个维度上对真实值的预测了, 下面, 我们要计算这个预测G值与真实G值. 我们有一个参数向量$W_*$, 它是用于学习的的可调参数, 有:</p>
 <p>$d_<em>(P)=W^T_</em>\phi_5(P)$, 其中$\phi_5(P)$是pool5层产生的特征向量</p>
 <p>则关于最优$W_*$的公式为如下公式, 其中加号后面的一项是L2正则项(least squares objective), 故此回归也是岭回归(ridge regression):</p>
-<p>$W_* = argmin_{\hat W_<em>} \displaystyle \sum^{N}<em>{i}(t^i</em></em>-\hat W^T_<em>\phi_5(P^i))^{2}+\lambda||\hat W_</em>||^2$</p>
+<p>$W_<em> = argmin_{\hat W_</em>} \displaystyle \sum^{N}_{i}(t^i_<em>-\hat W^T_</em>\phi_5(P^i))^{2}+\lambda||\hat W_*||^2$</p>
 <p>另外, 还有对关于训练数据<em>(P, G)</em>的回归目标$t_*$的定义:</p>
 <ul>
 <li>$t_x=(G_x-P_x)/P_w$</li>
@@ -968,12 +966,12 @@
 <p>行内与独行</p>
 <ol>
 <li>行内公式：将公式插入到本行内，符号：<code>$公式内容$</code>，如：$xyz$</li>
-<li>独行公式：将公式插入到新的一行内，并且居中，符号：<code>$$公式内容$$</code>，如：$$xyz$$</li>
+<li>独行公式：将公式插入到新的一行内，并且居中，符号：<code>$$公式内容$$</code>，如：<script type="math/tex">xyz</script></li>
 </ol>
 <h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
 <li>上标符号，符号：<code>^</code>，如：$x^4$</li>
 <li>下标符号，符号：<code>_</code>，如：$x_1$</li>
-<li>组合符号，符号：<code>{}</code>，如：${16}<em>{8}O{2+}</em>{2}$</li>
+<li>组合符号，符号：<code>{}</code>，如：${16}_{8}O{2+}_{2}$</li>
 </ol>
 <h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
 <li>汉字形式，符号：<code>\mbox{}</code>，如：$V_{\mbox{初始}}$</li>
@@ -987,7 +985,7 @@
 <h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
 <li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
 <li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
-<li>大空格，符号<code>\</code>，如：$x \  y$</li>
+<li>大空格，符号<code>\</code>，如：$x   y$</li>
 <li>中空格，符号<code>\:</code>，如：$x : y$</li>
 <li>小空格，符号<code>\,</code>，如：$x , y$</li>
 <li>没有空格，符号``，如：$xy$</li>
@@ -1027,7 +1025,7 @@
 <li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
 <li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
 <li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
-<li>矩阵表示，符号：<code>\begin{matrix} \end{matrix}</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]$</li>
+<li>矩阵表示，符号：<code>\begin{matrix} \end{matrix}</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]$</li>
 </ol>
 <h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
 <li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
@@ -1426,7 +1424,7 @@
         
           
             <p>错误: setuptools</p>
-<p><a href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=setuptools-27.2.0&oq=No%20such%20file%20or%20directory%3A%20setuptools-27.2.0&rsv_pq=ed81072e0008b4fa&rsv_t=95d1k1oKTFVKLAuEUYyFrDmnVAP1gW%2FphgT%2Fg4KLiI3I0kyblnGVPTWfF6Y&rqlang=cn&rsv_enter=1&inputT=6524&rsv_sug3=27&rsv_sug2=0&rsv_sug4=6524" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=setuptools-27.2.0&amp;oq=No%2520such%2520file%2520or%2520directory%253A%2520setuptools-27.2.0&amp;rsv_pq=ed81072e0008b4fa&amp;rsv_t=95d1k1oKTFVKLAuEUYyFrDmnVAP1gW%2FphgT%2Fg4KLiI3I0kyblnGVPTWfF6Y&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=6524&amp;rsv_sug3=27&amp;rsv_sug2=0&amp;rsv_sug4=6524</a></p>
+<p><a href="https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=setuptools-27.2.0&amp;oq=No%20such%20file%20or%20directory%3A%20setuptools-27.2.0&amp;rsv_pq=ed81072e0008b4fa&amp;rsv_t=95d1k1oKTFVKLAuEUYyFrDmnVAP1gW%2FphgT%2Fg4KLiI3I0kyblnGVPTWfF6Y&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=6524&amp;rsv_sug3=27&amp;rsv_sug2=0&amp;rsv_sug4=6524" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=setuptools-27.2.0&amp;oq=No%2520such%2520file%2520or%2520directory%253A%2520setuptools-27.2.0&amp;rsv_pq=ed81072e0008b4fa&amp;rsv_t=95d1k1oKTFVKLAuEUYyFrDmnVAP1gW%2FphgT%2Fg4KLiI3I0kyblnGVPTWfF6Y&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=6524&amp;rsv_sug3=27&amp;rsv_sug2=0&amp;rsv_sug4=6524</a></p>
 <p><a href="https://pypi.org/project/setuptools/27.2.0/" target="_blank" rel="noopener">https://pypi.org/project/setuptools/27.2.0/</a></p>
 <p>0703: </p>
 <p>PyCharm怪事: 在PyCharm中设置某个项目的解释器(电脑上有同时安装anaconda和miniconda3, 以及系统自带的Python和后来单独安装的Python3.5), 然而, 在选择项目解释器时, 如果选中miniconda(平时用的多)中的python3.6则会报错: “Invalid Python SDK”, 只好选择anaconda中的python3.6, 原因不知, 只知道是这个结果.</p>
@@ -2246,7 +2244,7 @@
       
         
           
-            <h4 id="MATPLOTLIB-乐园"><a href="#MATPLOTLIB-乐园" class="headerlink" title="MATPLOTLIB_乐园"></a>MATPLOTLIB_乐园</h4><p><a href="[https://www.baidu.com/s?ie=UTF-8&wd=cmap=%27viridis%27](https://www.baidu.com/s?ie=UTF-8&wd=cmap='viridis')">REF1</a> =&gt; <a href="https://stackoverflow.com/questions/32484453/how-to-use-viridis-in-matplotlib-1-4" target="_blank" rel="noopener">REF2</a> =&gt; <a href="https://github.com/BIDS/colormap/blob/master/colormaps.py" target="_blank" rel="noopener">REF3</a></p>
+            <h4 id="MATPLOTLIB-乐园"><a href="#MATPLOTLIB-乐园" class="headerlink" title="MATPLOTLIB_乐园"></a>MATPLOTLIB_乐园</h4><p><a href="[https://www.baidu.com/s?ie=UTF-8&amp;wd=cmap=%27viridis%27](https://www.baidu.com/s?ie=UTF-8&amp;wd=cmap=&#39;viridis&#39;">REF1</a>) =&gt; <a href="https://stackoverflow.com/questions/32484453/how-to-use-viridis-in-matplotlib-1-4" target="_blank" rel="noopener">REF2</a> =&gt; <a href="https://github.com/BIDS/colormap/blob/master/colormaps.py" target="_blank" rel="noopener">REF3</a></p>
 <p>plt.figsize: <a href="https://www.baidu.com/s?ie=UTF-8&amp;wd=plt.figsize" target="_blank" rel="noopener">https://www.baidu.com/s?ie=UTF-8&amp;wd=plt.figsize</a> =&gt; <a href="https://blog.csdn.net/weixin_43685844/article/details/88982811" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43685844/article/details/88982811</a></p>
 
           
