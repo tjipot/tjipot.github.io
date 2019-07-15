@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="TF_APIs_Used_In_Codetf.nn.conv2d[ref]: 这是最先去查找的API函数(足见其使用程度), 它定义在 tensorflow/python/ops/nn_ops.py中, 它对所给的4D input和filter张量(Tensor)进行2D的卷积运算(这里的2-D和4-D别搞混了, 一个是卷积, 一个是Tensor的尺寸), 它有别名tf.compat.v1.nn.">
+<meta name="keywords" content="AlexNet,权重可视化,TF_API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ALEXNET复现">
+<meta property="og:url" content="https://tjipot.github.io/2019/06/16/2019-06-16-AlexNet复现/index.html">
+<meta property="og:site_name" content="Univesre">
+<meta property="og:description" content="TF_APIs_Used_In_Codetf.nn.conv2d[ref]: 这是最先去查找的API函数(足见其使用程度), 它定义在 tensorflow/python/ops/nn_ops.py中, 它对所给的4D input和filter张量(Tensor)进行2D的卷积运算(这里的2-D和4-D别搞混了, 一个是卷积, 一个是Tensor的尺寸), 它有别名tf.compat.v1.nn.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-29T16:28:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ALEXNET复现">
+<meta name="twitter:description" content="TF_APIs_Used_In_Codetf.nn.conv2d[ref]: 这是最先去查找的API函数(足见其使用程度), 它定义在 tensorflow/python/ops/nn_ops.py中, 它对所给的4D input和filter张量(Tensor)进行2D的卷积运算(这里的2-D和4-D别搞混了, 一个是卷积, 一个是Tensor的尺寸), 它有别名tf.compat.v1.nn.">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://tjipot.github.io/2019/06/16/2019-06-16-AlexNet复现/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ALEXNET复现 | Univesre</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Univesre</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Universe Is Not Univesre</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/06/16/2019-06-16-AlexNet复现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haoran Ye">
+      <meta itemprop="description" content="Computer Fake Science">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Univesre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ALEXNET复现
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-16 00:38:06" itemprop="dateCreated datePublished" datetime="2019-06-16T00:38:06+08:00">2019-06-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-30 00:28:48" itemprop="dateModified" datetime="2019-06-30T00:28:48+08:00">2019-06-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/码码码上/" itemprop="url" rel="index"><span itemprop="name">码码码上</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="TF-APIs-Used-In-Code"><a href="#TF-APIs-Used-In-Code" class="headerlink" title="TF_APIs_Used_In_Code"></a>TF_APIs_Used_In_Code</h4><p><code>tf.nn.conv2d</code>[<a href="https://tensorflow.google.cn/api_docs/python/tf/nn/conv2d" target="_blank" rel="noopener">ref</a>]: 这是最先去查找的API函数(足见其使用程度), 它定义在 <a href="https://tensorflow.google.cn/code/stable/tensorflow/python/ops/nn_ops.py" target="_blank" rel="noopener"><code>tensorflow/python/ops/nn_ops.py</code></a>中, 它对所给的4D <code>input</code>和<code>filter</code>张量(Tensor)进行2D的卷积运算(这里的2-D和4-D别搞混了, 一个是卷积, 一个是Tensor的尺寸), 它有别名<code>tf.compat.v1.nn.conv2d</code>和<code>tf.nn.conv2d</code>, 它的函数形式为:</p>
+<a id="more"></a>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.conv2d(</span><br><span class="line">    input,</span><br><span class="line">    filter=<span class="literal">None</span>,</span><br><span class="line">    strides=<span class="literal">None</span>,</span><br><span class="line">    padding=<span class="literal">None</span>,</span><br><span class="line">    use_cudnn_on_gpu=<span class="literal">True</span>,</span><br><span class="line">    data_format=<span class="string">'NHWC'</span>,</span><br><span class="line">    dilations=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">    name=<span class="literal">None</span>,</span><br><span class="line">    filters=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>其中, <strong>Input</strong>和<strong>Filter</strong>的shape如下:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Input Tensor Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[batch, in_height, in_width, in_channels]</td>
+</tr>
+<tr>
+<td style="text-align:center">输入: [批的大小(数据数), 高, 宽, 输入通道数(如RGB)]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Filter/Kernel Tensor Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[filter_height, filter_width, in_channels, out_channels]</td>
+</tr>
+<tr>
+<td style="text-align:center">滤核: [高, 宽, 输入通道数(要被卷积的输入), 输出通道数(输出的特征图数)]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>  下面, 再讨论下它的参数:<br>| 参数名 | 参数说明(针对理解和记忆) |<br>|  ——  | ——  |<br>| <code>input</code> | 参数类型: Tensor(4D), 另: 这里4D中维度顺序(Order)的含义, 与下面的<code>data_format</code>参数值有关. |<br>| filter=None | 参数类型: 4D Tensor, 与<code>input</code>参数同type, shape是: [filter_height, filter_width, in_channels, out_channels]. |<br>| strides=None | <code>strides</code>(步长)参数可以是: 1.<code>int</code>, 2.<code>[ints]</code>(长为1, 2或4), 它表示的是滤核窗口(sliding window)在<code>input</code>的每个维度上的stride. 如果参数值给的是一个单独的<code>int</code>值, 则它会被重复成(replicated)<code>H</code>和 <code>W</code>维度的值. 默认的, <code>N</code>和<code>C</code>维度的值被设置为1(要不然我也理解不了:)). 维度顺序的含义见<code>data_format</code>这个老朋友了. |<br>| padding=None | 字符串值(表示具体的padding algorithm): 1.”SAME”, 2.”VALID”, 或者一个list: 3.表明每个维度(高/宽)上起始边界的具体padding(alg), 如: <strong>a</strong>.<code>&quot;NHWC&quot;</code>(data_format) =&gt; <code>[[0, 0], [pad_top, pad_bottom], [pad_left, pad_right], [0, 0]]</code>, <strong>b</strong>.<code>&quot;NCHW&quot;</code> =&gt; <code>[[0, 0], [0, 0], [pad_top, pad_bottom], [pad_left, pad_right]]</code>. |<br>| use_cudnn_on_gpu=True | An optional <code>bool</code>. Defaults to <code>True</code>. |<br>| data_format=’NHWC’ | Optional, 有”NHWC”(默认)和”NCHW”两种, “NHWC”格式的数据存储顺序为: [batch, height, width, channels], “NCHW”也同理. |<br>| dilations=[1,1,1,1] | 膨胀值(?!), 暂时无解: “An int or list of <code>ints</code> that has length <code>1</code>, <code>2</code> or <code>4</code>, defaults to 1. The dilation factor for each dimension of<code>input</code>. If a single value is given it is replicated in the <code>H</code> and <code>W</code> dimension. By default the <code>N</code> and <code>C</code>dimensions are set to 1. If set to k &gt; 1, there will be k-1 skipped cells between each filter element on that dimension. The dimension order is determined by the value of <code>data_format</code>, see above for details. Dilations in the batch and depth dimensions if a 4-d tensor must be 1”. |<br>| name=None | A name for the operation (optional). |<br>| filters=None | Alias for filter. |</p>
+<p>返回: A <code>Tensor</code>. Has the same type as <code>input</code>, 注: 即返回Tensor的type同输入的type.</p>
+<h4 id="https-tensorflow-google-cn-api-docs-python-tf-reshape"><a href="#https-tensorflow-google-cn-api-docs-python-tf-reshape" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/reshape"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/reshape" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/reshape</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-nn-relu"><a href="#https-tensorflow-google-cn-api-docs-python-tf-nn-relu" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/nn/relu"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/nn/relu" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/nn/relu</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-nn-max-pool"><a href="#https-tensorflow-google-cn-api-docs-python-tf-nn-max-pool" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/nn/max_pool"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/nn/max_pool" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/nn/max_pool</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-nn-dropout"><a href="#https-tensorflow-google-cn-api-docs-python-tf-nn-dropout" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/nn/dropout"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/nn/dropout" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/nn/dropout</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-get-variable"><a href="#https-tensorflow-google-cn-api-docs-python-tf-get-variable" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/get_variable"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/get_variable" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/get_variable</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-nn-bias-add"><a href="#https-tensorflow-google-cn-api-docs-python-tf-nn-bias-add" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/nn/bias_add"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/nn/bias_add" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/nn/bias_add</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-nn-xw-plus-b"><a href="#https-tensorflow-google-cn-api-docs-python-tf-nn-xw-plus-b" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/nn/xw_plus_b"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/nn/xw_plus_b" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/nn/xw_plus_b</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-math-reduce-mean"><a href="#https-tensorflow-google-cn-api-docs-python-tf-math-reduce-mean" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/math/reduce_mean"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/math/reduce_mean" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/math/reduce_mean</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-nn-softmax-cross-entropy-with-logits-v2"><a href="#https-tensorflow-google-cn-api-docs-python-tf-nn-softmax-cross-entropy-with-logits-v2" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/nn/softmax_cross_entropy_with_logits_v2"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/nn/softmax_cross_entropy_with_logits_v2" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/nn/softmax_cross_entropy_with_logits_v2</a></h4><h4 id="https-tensorflow-google-cn-api-docs-python-tf-trainable-variables"><a href="#https-tensorflow-google-cn-api-docs-python-tf-trainable-variables" class="headerlink" title="https://tensorflow.google.cn/api_docs/python/tf/trainable_variables"></a><a href="https://tensorflow.google.cn/api_docs/python/tf/trainable_variables" target="_blank" rel="noopener">https://tensorflow.google.cn/api_docs/python/tf/trainable_variables</a></h4><h4 id="tf-nn-conv2d-dilations"><a href="#tf-nn-conv2d-dilations" class="headerlink" title="tf.nn.conv2d: dilations"></a>tf.nn.conv2d: dilations</h4><p><a href="https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=tf.nn.conv2d dilation 参数&amp;oq=tf.nn.conv2d%20dilation&amp;rsv_pq=8d8ddefb0011af5f&amp;rsv_t=45242FCcBAE8QexdbB3oC707gBsMK3p7ngPowRwLCZmnebhNPFwmzgLWZ1M&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=2196&amp;rsv_sug3=32&amp;rsv_sug1=9&amp;rsv_sug7=000&amp;rsv_sug2=0&amp;rsv_sug4=2618&amp;rsv_sug=1" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=tf.nn.conv2d%20dilation%20%E5%8F%82%E6%95%B0&amp;oq=tf.nn.conv2d%2520dilation&amp;rsv_pq=8d8ddefb0011af5f&amp;rsv_t=45242FCcBAE8QexdbB3oC707gBsMK3p7ngPowRwLCZmnebhNPFwmzgLWZ1M&amp;rqlang=cn&amp;rsv_enter=1&amp;inputT=2196&amp;rsv_sug3=32&amp;rsv_sug1=9&amp;rsv_sug7=000&amp;rsv_sug2=0&amp;rsv_sug4=2618&amp;rsv_sug=1</a></p>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><p><a href="https://blog.csdn.net/qq_39894692/article/details/84288782" target="_blank" rel="noopener">https://blog.csdn.net/qq_39894692/article/details/84288782</a></p>
+<p><a href="https://blog.csdn.net/he_min/article/details/78694383" target="_blank" rel="noopener">https://blog.csdn.net/he_min/article/details/78694383</a></p>
+<h4 id="权重可视化"><a href="#权重可视化" class="headerlink" title="权重可视化"></a>权重可视化</h4><p><a href="https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=alexnet 可视化权重&amp;oq=alexnet&amp;rsv_pq=9c5db92800069791&amp;rsv_t=885cULoYq21CKR68crNrnhwyPz1pSb9BTb31vxMn8LtPh2of0gD47VM5rYk&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=47&amp;rsv_sug1=5&amp;rsv_sug7=100&amp;rsv_sug2=0&amp;inputT=14018&amp;rsv_sug4=14571" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=alexnet%20%E5%8F%AF%E8%A7%86%E5%8C%96%E6%9D%83%E9%87%8D&amp;oq=alexnet&amp;rsv_pq=9c5db92800069791&amp;rsv_t=885cULoYq21CKR68crNrnhwyPz1pSb9BTb31vxMn8LtPh2of0gD47VM5rYk&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=47&amp;rsv_sug1=5&amp;rsv_sug7=100&amp;rsv_sug2=0&amp;inputT=14018&amp;rsv_sug4=14571</a></p>
+<p><a href="https://blog.csdn.net/zxj942405301/article/details/71194359" target="_blank" rel="noopener">https://blog.csdn.net/zxj942405301/article/details/71194359</a></p>
+<hr>
+<h4 id="W3Cschool-TF-Api"><a href="#W3Cschool-TF-Api" class="headerlink" title="W3Cschool_TF_Api"></a>W3Cschool_TF_Api</h4><p><a href="https://www.w3cschool.cn/tensorflow_python/?" target="_blank" rel="noopener">主页</a>链接.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/AlexNet/" rel="tag"># AlexNet</a>
+          
+            <a href="/tags/权重可视化/" rel="tag"># 权重可视化</a>
+          
+            <a href="/tags/TF-API/" rel="tag"># TF_API</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/14/2019-06-14-TENSOR和FLOW/" rel="next" title="TENSOR和FLOW">
+                <i class="fa fa-chevron-left"></i> TENSOR和FLOW
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/27/2019-06-27-NUMPY-LIB-PLG/" rel="prev" title="NUMPY_LIB_PLAYGROUND">
+                NUMPY_LIB_PLAYGROUND <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Haoran Ye</p>
+              <div class="site-description motion-element" itemprop="description">Computer Fake Science</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/tjipot" title="GitHub &rarr; https://github.com/tjipot" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#TF-APIs-Used-In-Code"><span class="nav-number">1.</span> <span class="nav-text">TF_APIs_Used_In_Code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-reshape"><span class="nav-number">2.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/reshape</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-nn-relu"><span class="nav-number">3.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/nn/relu</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-nn-max-pool"><span class="nav-number">4.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/nn/max_pool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-nn-dropout"><span class="nav-number">5.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/nn/dropout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-get-variable"><span class="nav-number">6.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/get_variable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-nn-bias-add"><span class="nav-number">7.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/nn/bias_add</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-nn-xw-plus-b"><span class="nav-number">8.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/nn/xw_plus_b</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-math-reduce-mean"><span class="nav-number">9.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/math/reduce_mean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-nn-softmax-cross-entropy-with-logits-v2"><span class="nav-number">10.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/nn/softmax_cross_entropy_with_logits_v2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https-tensorflow-google-cn-api-docs-python-tf-trainable-variables"><span class="nav-number">11.</span> <span class="nav-text">https://tensorflow.google.cn/api_docs/python/tf/trainable_variables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tf-nn-conv2d-dilations"><span class="nav-number">12.</span> <span class="nav-text">tf.nn.conv2d: dilations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Others"><span class="nav-number">13.</span> <span class="nav-text">Others</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权重可视化"><span class="nav-number">14.</span> <span class="nav-text">权重可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#W3Cschool-TF-Api"><span class="nav-number">15.</span> <span class="nav-text">W3Cschool_TF_Api</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Haoran Ye</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
