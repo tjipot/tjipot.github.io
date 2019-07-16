@@ -388,12 +388,24 @@
                 
               
 
-              <time title="创建时间：2019-07-15 23:38:55 / 修改时间：23:54:09" itemprop="dateCreated datePublished" datetime="2019-07-15T23:38:55+08:00">2019-07-15</time>
+              <time title="创建时间：2019-07-15 23:38:55" itemprop="dateCreated datePublished" datetime="2019-07-15T23:38:55+08:00">2019-07-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-16 13:16:27" itemprop="dateModified" datetime="2019-07-16T13:16:27+08:00">2019-07-16</time>
               
             
           </span>
@@ -450,7 +462,19 @@
             <p><strong>斜率与梯度</strong></p>
 <p>关联: 偏导数, 斜率, 多维空间的斜率, 梯度.</p>
 <p>例子: 我们有函数Z=f(X,Y), 通过此函数我们讲解斜率(偏导数)与梯度的具体不同. 此处, 个人觉得斜率的称谓适合在我们平常用的平面坐标系中(二维)中使用, 而在三维及以上的空间中, 就是偏导数了, 故也可以将偏导数理解成多维空间中的斜率.</p>
+<p> <img src="https://i.loli.net/2019/07/15/5d2ca20f4bdb877300.jpeg" alt="Z=F(X,Y)"></p>
 <p>关于这两者的应用, 个人有个疑惑: 为什么梯度下降中, 我们要减去梯度项, 但如果此时斜率本身就是小于0的, 减去这一项岂不是让值增加了?!</p>
+<p>梯度 =&gt; 倾斜度: tan(alpha)=b:a;</p>
+<p> <img src="https://i.loli.net/2019/07/16/5d2ca5d4819b439168.jpeg" alt="PartialDerivativeOfX"></p>
+<p>以上图例具体在结合反向传播的梯度时, 应在细节上做一下区分, 要不然会混淆却说不出具体原因:</p>
+<p>在对模型WX+b进行求偏导时, 我们的模型参数W既是偏导的对象(情形1), 也是模型在预测时相对于输入X的有确定值的系数(情形2):</p>
+<ul>
+<li><p>在情形1中, 我们对每一个W分量(w1, w2, …)进行偏导运算, 此时, 对W的理解应是”它是变量”, 我们得到了整个函数(损失函数)在每个W分量上的斜率, 而梯度则往往是简略的说法, 在斜率的基础上乘以一个单位值1就成了梯度, 它们的值相等, 但概念不等. 我们把这个梯度加回到该分量w1中回去, 则对应上图中(红点处斜率&lt;0)的X轴的x值变小了, 则整个函数(损失函数)值变大了, 而我们减去这个梯度, 就是减小了损失函数值. (更多细节是: 梯度并不能完全重合与曲面(以上图为例), 在加了一次梯度改变w1(对应图中x维度)的值后, 模型(指参数W)也改变了, 故下次我们需重新计算斜率(即偏导, 即epoch), 获取新的梯度再次更新模型(参数W), 而动量, 自适应动量, 局部最优等概念, 都是上图中的细节)</p>
+</li>
+<li><p>在情形2中, 模型将不被用于训练和求偏导而是用来求值, 此时, 可将模型的参数W理解成输入X的系数, 将X理解成变量(因为输入X是变化着的不同样本), 由于前期进行了训练, 我们的模型参数W有了确定了的合理的值(假设是合理的话, 当然, 模型没训练前也有值), 此时, 再将W作为求偏导的分量对象(如w1)就不太好理解了.</p>
+</li>
+</ul>
+<p>P.S. CV心得: 别跟我说什么CV, 我只认数学结构和技巧, 只不过这些因素被你们人类拿去当做CVision了, 这锅我(数学)不背.</p>
 
           
         
@@ -2564,6 +2588,77 @@
   
 
   
+  
+
+  
+  
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
 
