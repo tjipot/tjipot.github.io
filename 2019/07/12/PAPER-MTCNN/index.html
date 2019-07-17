@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读 Abstract - Face detection and alignment in unconstrained environment are challenging due to vari">
+<meta name="keywords" content="CV,PAPER,以读攻毒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAPER_MTCCN">
+<meta property="og:url" content="https://tjipot.github.io/2019/07/12/PAPER-MTCNN/index.html">
+<meta property="og:site_name" content="Univesre">
+<meta property="og:description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读 Abstract - Face detection and alignment in unconstrained environment are challenging due to vari">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/07/12/5d2892a982edf29524.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/12/5d2891e4163c575358.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/12/5d28a2610ece975207.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/12/5d2891e4249fd38140.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/12/5d2891e5700aa17967.png">
+<meta property="og:image" content="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}">
+<meta property="og:image" content="https://i.loli.net/2019/07/13/5d2996f84d31780977.png">
+<meta property="og:updated_time" content="2019-07-13T13:23:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAPER_MTCCN">
+<meta name="twitter:description" content="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)0.摘要解读 Abstract - Face detection and alignment in unconstrained environment are challenging due to vari">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/12/5d2892a982edf29524.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://tjipot.github.io/2019/07/12/PAPER-MTCNN/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PAPER_MTCCN | Univesre</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Univesre</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Universe Is Not Univesre</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/12/PAPER-MTCNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haoran Ye">
+      <meta itemprop="description" content="Computer Fake Science">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Univesre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PAPER_MTCCN
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-12 17:55:57" itemprop="dateCreated datePublished" datetime="2019-07-12T17:55:57+08:00">2019-07-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-13 21:23:19" itemprop="dateModified" datetime="2019-07-13T21:23:19+08:00">2019-07-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/码码码上/" itemprop="url" rel="index"><span itemprop="name">码码码上</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><a href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016" class="headerlink" title="MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)"></a>MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</h2><p><strong>0.摘要解读</strong> <strong><em>Abstract</em></strong> - Face detection and alignment in unconstrained environment are challenging due to various poses, illuminations and occlusions. Recent studies show that deep learning approaches can achieve impressive performance on these two tasks. <strong><em>文意转义</em></strong>: 人脸检测与对齐(找到几个关键点: 嘴, 鼻子, 眼睛)在开放环境(unconstrained)是一件挑战性的事情. (如果你在阅读时发现公式没有被渲染, 请用Chrome浏览器并安装使用插件:”Math Anywhere”[<a href="https://chrome.google.com/webstore/detail/math-anywhere/gebhifiddmaaeecbaiemfpejghjdjmhc" target="_blank" rel="noopener">REF</a>], 这是一个暂时不完美解决方法)</p>
+<a id="more"></a>
+<p>In this paper, we propose a deep cascaded multi-task framework which exploits the inherent correlation between them to boost up their performance. In particular, our framework adopts a cascaded structure with three stages of carefully designed deep convolutional networks that predict face and landmark location in a coarse-to-fine manner.</p>
+<p>在此篇论文中, 将会提出深度层叠多任务的一个框架, 此框架挖掘出这些任务间的内在关联并提升(boost up)了它们的表现. 具体的, 论文提出的框架采用了一个三阶段的层叠(cascade)结构, 而其中的每个阶段都是经过精心设计的一个深度卷积网络, 即后面要讲到的Proposal, Refine, Output 网络.</p>
+<p>In addition, in the learning process, we propose a new online hard sample mining strategy that can improve the performance automatically without manual sample selection. Our method achieves superior accuracy over the state-of-the-art techniques on the challenging FDDB and WIDER FACE benchmark for face detection, and AFLW benchmark for face alignment, while keeps real time performance.</p>
+<p>此外, 在学习过程中, 论文也提出了一项新的在线(即及时)难例挖掘策略(它能自动提升性能, 且不需要手工筛选采样).    论文的模型方法在人脸检测中超越了FDDB和WIDER FACE这两个基准模型(benchmark), 在人脸对齐中超越了AFLW基准模型, 且都保持了实时性.</p>
+<p><em>Index Terms</em>—Face detection, face alignment, cascaded convolutional neural network (检索关键字: 人脸检测, 人脸对齐, 层叠CNN)</p>
+<p><img src="https://i.loli.net/2019/07/12/5d2892a982edf29524.png" alt="图1-层叠结构的三个任务步骤"></p>
+<p><em>图1: 层叠结构的三个任务步骤</em></p>
+<h4 id="1-论文第II部分-Approach-理论方法-要点笔记"><a href="#1-论文第II部分-Approach-理论方法-要点笔记" class="headerlink" title="1.论文第II部分(Approach, 理论方法)要点笔记"></a>1.论文第II部分(Approach, 理论方法)要点笔记</h4><p>此部分是论文关键性算法的一个阐释, 但如果要在里面找代码实现性的Solution, 会抓狂失望的, 因为, 这部分只有分散的某些局部算法, 却构不成整体宏观视角.</p>
+<p><strong><em>A. Overall Framework</em></strong> </p>
+<p>MTCCN模型结构的流程(pipeline)如<em>图1</em>所示, 以下则是对应的描述:</p>
+<ol>
+<li>首先, 将一个输入图像Resize成不同Scale的, 构建一个系列不同大小的图集(放置在一起有如金字塔形): test image =&gt; image pyramid;</li>
+<li>Proposal Network(P-Net): 获取<em>候选Window</em>(candidate windows)及它们相应的<em>边界框回归向量</em>(bounding box regression vector, 用引用[29]中的方法), 之后, 使用预估后的上述回归向量去调整候选框(的具体坐标位置), 并使用非极值抑制(Non-Maximum Suppression, NMS)剔除那些高度重叠却不是极值的框;</li>
+<li>Refine Network(R-Net): (上一步中的)候选window(图片中的某块区域)输入到此R-Net中, 通过以下校准(calibration)操作排除输入中假(false)的候选window: 边界框回归, 及NMS;</li>
+<li>Output Network(O-Net): 同上一步类似(的模型网络结构), 但这一步更具体: 输出5个脸部标志位置(landmark position), 即两眼, 鼻子, 嘴巴两端.</li>
+</ol>
+<p>以上步骤1-3中的网络模型结构如<em>图2</em>所示.</p>
+<p><img src="https://i.loli.net/2019/07/12/5d2891e4163c575358.png" alt="图2-3个模型的具体结构"><br><em>图2: 3个模型的具体结构</em></p>
+<p><strong><em>B. CNN Architecture</em></strong></p>
+<p>此小节给出在引用[19]中人脸检测性能受限的可能两个因素:</p>
+<ol>
+<li>一些过滤器缺乏权重的多样性(<strong>How/Why?!</strong>), 此种情况可能限制它们生成(对于(人脸)特征的)区分/识别性描述(discriminative description)(的能力);</li>
+<li>相对于其它多类别对象检测和分类任务, 脸部检测是种有挑战的二分类任务: 它需要的是可能少一点的过滤器但更具识别性的能力.</li>
+</ol>
+<p>对此, 论文中的做法是: 减少过滤器数量, 过滤器(尺寸)由5*5改成3*3(减少计算量?!), 增加模型网络深度. 随后, 论文给出<em>表1</em>证明以上改进比引用[19]中的模型有更好的性能: 更佳的表现, 更少的耗时(为保证对比的公平性, 两者使用相同的数据).</p>
+<p><img src="https://i.loli.net/2019/07/12/5d28a2610ece975207.png" alt="表1-MTCCN与其它模型对比"></p>
+<p><em>表1: MTCCN与其它模型对比</em></p>
+<p><strong><em>C. Training</em></strong></p>
+<p>关于训练的设置: 包括几个网络的损失函数, 数据难例挖掘等.</p>
+<h4 id="2-论文第III部分-Experiments-实验细节-要点笔记"><a href="#2-论文第III部分-Experiments-实验细节-要点笔记" class="headerlink" title="2.论文第III部分(Experiments, 实验细节)要点笔记"></a>2.论文第III部分(Experiments, 实验细节)要点笔记</h4><p>论文使用了三个任务训练每个CNN检测器(三个P/R/O子网络): 1.脸/非脸分类, 2.边界框回归, 3.脸部标志定位, 即, 在每个子网络中各自训练这三项任务.</p>
+<p><strong><em>1) Face classification</em></strong>: 这项任务是(二元)分类任务, 对于每个输入(样本)$x_i$, 论文使用的损失计量方法是:</p>
+<p>​    $L^{det}_i=-(y^{det}_ilog(p_i)+(1-y^{det}_i)(1-log(p_i)))$</p>
+<p>其中, $p_i$是网络预测这个输入是人脸的概率, 标记$y^{det}_i$是含两个值的实际值集合$\{0,1\}$.</p>
+<p><strong><em>2) Bounding box regression</em></strong>: 对于边界框的回归, 论文中使用欧式距离(即几项坐标差的平方)作为损失的计量方式: 让模型最后的输出坐标去拟合(通过损失函数的定义及后向传播)距离最近的真实值的坐标, 该损失函数为:</p>
+<p>​    $L^{box}_i=||\hat y^{box}_i-y^{box}_i||^2_2$</p>
+<p>其中, $\hat y^{box}_i$是网络给出的预测值(即输出), 而$y^{box}_i$则是该数据的真实(坐标)值了, 四个坐标值分别为: 边框左上角的x和y, 高度height和宽度width, 所以: $y^{box}_i\in\mathbb{R^4}$(此向量属于4维实数空间).</p>
+<blockquote>
+<p><strong>注</strong>: 特征向量能用于回归(或是分类, 或是landmark标记学习), 是因为这个输入的特征向量(或说feature map)中含有我们的关注的以及不关注的对象的特征, 如关注的是人脸, 不关注的可以是背景或其它不需要学习的对象, 当我们告诉网络这些特征的最终目标(或说定义损失的计量方法)时, 就决定了这些我们关注的特征将产生怎样的结果: 分类, 人脸坐标(location), 关键点坐标(landmark loc.).</p>
+<p>此外, 以下这一点理解也不能缺少: 以上是一个数据的特征与结果的关联, 如果说就用一个样本数据就能学会上述任务我觉得很玄学, 这就是我们为什么需要大量数据以及随机梯度的原因了.</p>
+<p>在不同的人脸图像数据中人脸的坐标位置一般都是不一样的, 那么, 当我给你一个新的人脸, 你怎么就能预测它的位置了?! 因为虽然是不同位置的人脸, 但只要是人脸, 在网络靠后(或是最后)的feature map中, 肯定有它对应的激活神经元, 而因为它们在原图中的位置不同, 所以在一层层的卷积(及其它网络计算)到最后的feature map层之后, 人脸对应的激活神经元会不同, 我们预测位置, 不就要根据不同位置的神经元来做位置回归吗?!  在使用大量数据时, 就是就是告诉网络: 这是个人脸, 它的位置是这个, 下次来别的人脸图像, 你的参数要给力要能预测出位置来.</p>
+<p>(上述讲解没有配图(如何配?), 我先将自己对于这个”人脸/位置回归”网络抽象概念的理解, 梳理一遍, 希望也能有助于本文阅读者) </p>
+</blockquote>
+<p><strong><em>3) Facial landmark localization</em></strong>: 此部分的学习任务, 原理上与上一部分”边框回归”的一模一样(同样的”特征图+坐标”回归形式), 只不过现在要回归的对象是我们规定好的五个位置: 两眼, 鼻尖, 嘴唇两端, 这些点的坐标在训练数据中会给出(此种训练数据与普通的分类数据也是不一样的: 标签/标定值不同), 此处, 损失函数为:</p>
+<p>​    $L^{landmark}_i=||\hat y^{landmark}_i-y^{landmark}_i||^2_2$</p>
+<p>我们要预测的眼部标志位置有5个, 共10个坐标维度, 故: $y^{landmark}_i\in\mathbb{R^{10}}$.</p>
+<p><strong><em>4) Multi-source training</em></strong>: </p>
+<p>对于P/R/O网络中最后的三种训练任务, 它们所需要的数据集会有所不同(如face, non-face和partially aligned face的数据集), 为此, 论文对每个训练任务采用了不同权重的损失计算比例(系数$\alpha$):</p>
+<ul>
+<li>P-Net和R-Net: $\alpha_{det}=1$, $\alpha_{box}=0.5$, $\alpha_{landmark}=0.5$;</li>
+<li>O-Net:  $\alpha_{det}=1$, $\alpha_{box}=0.5$, $\alpha_{landmark}=1$.</li>
+</ul>
+<p>在O-Net中, 其$\alpha$系数增大了(为1), 是想对脸部标志点有更多的权重更新(比重大, 损失值增加了), 以下, 给出论文中对于每个子网络总损失的计算公式(两次求和):</p>
+<script type="math/tex; mode=display">min\sum^{N}_{i=1}\sum_{j\in\{det,box,landmark\}}\alpha_j\beta^j_iL^j_i</script><p>其中, $\beta^j_i\in\{0,1\}$是此样本类别的指示值(indicator)(指示是否是人脸), 以上设置中, 使用SGD(随机梯度下降)训练CNN(“it is natural to employ sgd…”).</p>
+<p><strong><em>5) Online Hard sample mining</em></strong>: </p>
+<p>不同于传统的hard sample mining方法(指在分类器训练完之后再进行mining), 论文中使用online mining策略, 以适应(adaptive)训练的过程, 具体方式为: 在每个(mini)batch的前向过程(forward propagation)中, 将损失值为top 70%的那些样本标定为困难(hard)样本, 在后项传播(backward propagation)中只更新这些样本权重的梯度(gradient).</p>
+<p>(这样操作, 意味着训练过程忽略那些不太能强化模型(detector)的容易样本(easy samples), 实验也表明它的效果比没有人工样本选取的参与(without manual sample selection)要好)</p>
+<h4 id="3-实验部分-EXPERIMENTS"><a href="#3-实验部分-EXPERIMENTS" class="headerlink" title="3.实验部分 / EXPERIMENTS"></a>3.实验部分 / EXPERIMENTS</h4><p>这一部分论文主要做了以下事情: 1.论文评估了上一部分提出的难例挖掘策略的效果(effectiveness), 2.将论文的人脸检测和对齐模型与其它模型(FDDB, WIDER FACE, AFLW)对比, 3.评估模型人脸检测的计算效率(computational efficiency).</p>
+<blockquote>
+<p>注: 以上数据集的缩写分别为: Face Detection Data Set and Benchmark(FDDB), WIDER FACE(无缩写), Annotated Facial Landmarks in the Wild(AFLW).</p>
+</blockquote>
+<p><strong><em>A. Training Data</em></strong></p>
+<p>四种模型训练时的数据标记: 1.负例(Negatives, 与GT标记的脸的IoU小于0.3), 2.正例(Positives, IoU&gt;0.65), 3.部分脸(Part faces, IoU介于0.4与0.65之间), 4.标志脸(Landmark faces, 此数据含有全部5个脸部标志). (其余略)</p>
+<p><strong><em>B. The effectiveness of online hard sample mining</em></strong></p>
+<p>论文训练了两个O-Nets用来对比有与没有online hard sample mining的效果, 且为了更直接地比较效果, 只对O-Nets的人脸分类任务进行了训练, 结果如下图3左:</p>
+<p><img src="https://i.loli.net/2019/07/12/5d2891e4249fd38140.png" alt="图3-O-Net的Online Hard Sample Mining效果比较"></p>
+<p><em>图3: O-Net的Online Hard Sample Mining效果比较(左图). 图注: (a) Validation loss of O-Net with and without hard sample mining. (b) “JA” denotes joint face alignment learning while “No JA” denotes do not joint it. “No JA in BBR” denotes do not joint it while training the CNN for bounding box regression.</em></p>
+<p><strong><em>C. The effectiveness of joint detection and alignment</em></strong></p>
+<p>此处论文讲述的是将人脸检测与对齐一起(joint)训练时带来的好处, 论文中也引入了边界框回归的效果比较, 结论是联合脸部标志一起训练(joint landmarks localization task learning)对人脸分类和边界框回归都具有好处(图3右).</p>
+<p><strong><em>D/E. Evaluation on face detection/alignment</em></strong></p>
+<p>此部分(D)论文展示了一些使用了FDDB和WIDER FACE数据集并有不错(state of the art)人脸识别效果的方法, 并且罗列在图4的(a-d)子图中, 可以看出, 论文的方法超过了基准模型一大截(a large margin), 而E部分, 论文将模型的对齐表现与RCPR等7个方法进行了比较, 其效果要好于这几个模型(图4底).</p>
+<p><img src="https://i.loli.net/2019/07/12/5d2891e5700aa17967.png" alt="图4-MTCCN与基准模型的人脸检测与对齐比较"><br><em>图4: MTCCN与基准模型的人脸检测与对齐比较</em></p>
+<p><strong><em>F. Runtime efficiency</em></strong></p>
+<p>论文说了其方法在人脸检测和对齐(联合任务)中很快, 因为使用了层叠结构, 具体的, 在2.6GHz的CPU中速度是16fps, 在GPU(Nvidia Titan Black)中是99fps, (而且)实现在未经优化的MATLAB代码上.</p>
+<h4 id="4-结论"><a href="#4-结论" class="headerlink" title="4.结论"></a>4.结论</h4><p>论文为人脸检测和对齐(联合)任务提出了多任务及层叠CNN的模型结构, 该结构方法在超越不错的基准模型时还保持了实时性. 后续中, 论文作者会探索发掘人脸检测和其它人脸任务之间的内在关联(inherent correlation), 以进一步提高性能(没说什么的性能).</p>
+<hr>
+<p><strong>文末素材格式区</strong>(请忽略)</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="二项式求解公式" align="left"></p>
+<p>$\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$</p>
+<p> <img src="https://i.loli.net/2019/07/13/5d2996f84d31780977.png" alt="eqn.png"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/CV/" rel="tag"># CV</a>
+          
+            <a href="/tags/PAPER/" rel="tag"># PAPER</a>
+          
+            <a href="/tags/以读攻毒/" rel="tag"># 以读攻毒</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/05/PAPER-SSD/" rel="next" title="post">
+                <i class="fa fa-chevron-left"></i> post
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/15/斜率与梯度/" rel="prev" title="斜率与梯度">
+                斜率与梯度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Haoran Ye</p>
+              <div class="site-description motion-element" itemprop="description">Computer Fake Science</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/tjipot" title="GitHub &rarr; https://github.com/tjipot" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MTCCN-Joint-Face-Detection-and-Alignment-using-Multi-task-Cascaded-Convolutional-Networks-2016"><span class="nav-number">1.</span> <span class="nav-text">MTCCN: Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks (2016)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-论文第II部分-Approach-理论方法-要点笔记"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.论文第II部分(Approach, 理论方法)要点笔记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-论文第III部分-Experiments-实验细节-要点笔记"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.论文第III部分(Experiments, 实验细节)要点笔记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-实验部分-EXPERIMENTS"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.实验部分 / EXPERIMENTS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-结论"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.结论</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Haoran Ye</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

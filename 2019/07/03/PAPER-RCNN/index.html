@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt; 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN),">
+<meta name="keywords" content="CV,PAPER,以读攻毒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAPER_RCNN">
+<meta property="og:url" content="https://tjipot.github.io/2019/07/03/PAPER-RCNN/index.html">
+<meta property="og:site_name" content="Univesre">
+<meta property="og:description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt; 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN),">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/05/5d1f65074044095107.png">
+<meta property="og:updated_time" content="2019-07-08T13:50:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAPER_RCNN">
+<meta name="twitter:description" content="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation0.背景&amp;lt;&amp;lt;精准目标检测和语义分割中的丰富特征层级&amp;gt;&amp;gt; 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN),">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://tjipot.github.io/2019/07/03/PAPER-RCNN/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PAPER_RCNN | Univesre</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Univesre</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Universe Is Not Univesre</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/03/PAPER-RCNN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haoran Ye">
+      <meta itemprop="description" content="Computer Fake Science">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Univesre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PAPER_RCNN
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-03 17:31:48" itemprop="dateCreated datePublished" datetime="2019-07-03T17:31:48+08:00">2019-07-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-08 21:50:15" itemprop="dateModified" datetime="2019-07-08T21:50:15+08:00">2019-07-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/码码码上/" itemprop="url" rel="index"><span itemprop="name">码码码上</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation"><a href="#RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation" class="headerlink" title="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation"></a>RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation</h2><h3 id="0-背景"><a href="#0-背景" class="headerlink" title="0.背景"></a>0.背景</h3><p><em>&lt;&lt;精准目标检测和语义分割中的丰富特征层级&gt;&gt;</em> 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN), 2.基于端到端(YOLO, SSD).</p>
+<p>下面, 我将认为重要的要点总结出来, 以巩固熟悉算法, 但总结的要点并不代表论文的全部.</p>
+<h3 id="1-鸟瞰模型整体"><a href="#1-鸟瞰模型整体" class="headerlink" title="1.鸟瞰模型整体"></a>1.鸟瞰模型整体</h3><p><img src="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png" alt="01_模型鸟瞰.png"></p>
+<p>首先, 贴出上图, 给出模型中区域特征提取的流程, 后续理解与解释则围绕图片展开. 我们有如下步骤:</p>
+<ol>
+<li><p>Input image: 这是RCNN模型的输入数据, 我们要识别此输入图片中的物体与其在图片中的位置(坐标);</p>
+</li>
+<li><p>候选区域的抽选: 通过<em>Selective Search</em>算法, 在图片中抽取出约2000个候选区域(图片的子图, 大小不一);</p>
+</li>
+<li><p>计算出特征: 此特征是CNN网络(论文中用了AlexNet)的输出特征(pool5), 上一步骤的大小不一的候选区域, 在这一步的卷积前, 需要变形(warp)到AlexNet的(227*227)的输入尺寸;</p>
+</li>
+<li><p>SVM分类: 在上一步得到AlexNet输出的抽象特征后, 用SVM将这些特征进行类别分类, 如果RCNN模型要分类20种的对象, 则需要21(20种物体+1个背景)个SVM进行分类, 至于为什么不用AlexNet后面的3个全连接层, 论文也有讨论.</p>
+</li>
+</ol>
+<p>对图片中任意位置对象的分类完成后, 我们还需要定位对象在图中的位置, 论文中也有讲述<em>Bounding box</em>的回归训练, 这在论文的<em>附录C</em>中详细叙述.</p>
+<h3 id="2-论文第二节-Object-detection-with-R-CNN"><a href="#2-论文第二节-Object-detection-with-R-CNN" class="headerlink" title="2.论文第二节: Object detection with R-CNN"></a>2.论文第二节: Object detection with R-CNN</h3><p>论文将它的对象检测系统(object detection system)分为3个部分:</p>
+<ul>
+<li>类别无关(category-independent)的候选区域生成;</li>
+<li>为每个候选区域生成固定长度(fixed-length)的特征向量;</li>
+<li>一组用于分类的(线性)SVM.</li>
+</ul>
+<h4 id="模型设计1-候选区域-Region-Proposals"><a href="#模型设计1-候选区域-Region-Proposals" class="headerlink" title="模型设计1: 候选区域(Region Proposals)"></a>模型设计1: 候选区域(Region Proposals)</h4><p>论文中提到了一系列用于<strong>生成(不关类别)候选区域的方法</strong>(罗列如下), 其中, 论文使用的是<strong>selective search</strong>方法:</p>
+<ul>
+<li>objectness</li>
+<li>selective search(论文选用)</li>
+<li>category-independent object proposals</li>
+<li>constrained parametric min-cuts(CPMC)</li>
+<li>multi-scale combinatorial grouping</li>
+<li>Ciresan et al.</li>
+</ul>
+<p>而, 至于候选区域生成方法具体是如何工作的, 论文中并没有说明.</p>
+<h4 id="模型设计2-特征抽取-Feature-Extraction"><a href="#模型设计2-特征抽取-Feature-Extraction" class="headerlink" title="模型设计2: 特征抽取(Feature Extraction)"></a>模型设计2: 特征抽取(Feature Extraction)</h4><p>模型中SVM使用的特征是一个<strong>4096维</strong>的feature vector, 它是每个候选区域通过AlexNet的前向传播(forward propagating)得到的结果(你看, 此篇论文将目标检测和深度网络结合了). 由于候选区域是不管你AlexNet要227*227尺寸的输入的, 它只产生它认为有意义的区域作为候选(Proposal), 所以, 我们需要对这些候选区域做一个图片的变形(warp, 即拉伸), 原文和我理解的拉伸方式如下(理解了很久, 烧了不少脑细胞):</p>
+<blockquote>
+<p>Regardless of the size or aspect ratio of the candidate region, we warp all pixels in a <strong>tight bounding box</strong> around it to the required size. Prior to warping, we <strong>dilate</strong> the tight bounding box so that at the warped size there are exactly p pixels of warped image context <strong>around the original box</strong> (we use p = 16).</p>
+</blockquote>
+<p>估计即便将以上论文片段翻译成中文, 如果仅凭中文字面意思去理解, 也无解, 所以还是画图吧(如果论文中有配图就好了):</p>
+<p> <img src="https://i.loli.net/2019/07/05/5d1f65074044095107.png" alt="屏幕快照 2019-07-05 22.49.31.png"></p>
+<p>在上图中, 我们有里面的小框, 即我们的<strong><em>tight bounding box</em></strong>(也即<em>候选区域</em>). 由于候选区域是原图的一部分, 如果我们要在使<strong><em>around the original box</em></strong>的pixel为16的话, 则向外扩张(<strong><em>dilate</em></strong>)数标1中的<em>原框(Original T. B. Box)</em>16个像素值, 得到数标2中的<em>Dilated T. B. Box</em>, 而这个有原图的context填充(padding)了的Boundxing Box, 就是我们要resize(即warp)到227*227的”候选区域”(而不是里面的那个了). 如果候选区域图中上下左右方向不够Padding的话, 则用灰度像素替代吧, 具体细节可参考论文中的<em>Figure 7</em>. (再次的, 觉得这是论文的小瑕疵: 没有图呀)</p>
+<h3 id="Appendix-C-Bounding-box-Regression"><a href="#Appendix-C-Bounding-box-Regression" class="headerlink" title="Appendix C- Bounding-box Regression"></a>Appendix C- Bounding-box Regression</h3><p>下面, 讲讲论文中边界框的回归(即定位). 我估计论文之所以没有在正文中讲边界框的回归定位而是在附录中讲, 是因为之前的候选区域抓取的时候已经有了该候选区域的坐标值了, 而这一步, 只是提升用的:</p>
+<blockquote>
+<p>原文: <em>We use a simple bounding-box regression stage to improve localization performance.</em></p>
+</blockquote>
+<p><strong>回归与数据</strong>: 论文在使用了SVM进行区域内内容的<em>class-specific detection</em>后, 开始使用<em>class-specific bounding-box regressor</em>来预测边界框(bounding box)了, 并提及, 此边界框回归和DPM(Deformable Part Models)模型中的边界框回归思想类似. 然而, 它们的不同之处是两者使用的数据来源, 论文中边界框回归使用的数据是CNN输出的特征(向量), 而DPM使用的数据是<em>geometric features computed on the inferred DPM part locations</em>.</p>
+<p>公式符号设置:</p>
+<p>$\{(P^i,G^i)\}_{i=1,…,N}$: 表示N组训练数据对, 其中, $P^i=(P^i_x,P^i_y,P^i_w,P^i_h)$代表第<em>i</em>个候选区域在整张原图的中心点坐标(x,y)以及它的宽和高(w,h). 同理, G符号代表的则是真实框(Ground Truth)对应的四个像素位置坐标值: $G=(G_x,G_y,G_w,G_h)$(此处省略上标 <em>i</em>).</p>
+<p>Transformation:</p>
+<ul>
+<li>$d_x(P)$, $d_y(P)$: 边界框中心的位移(高宽比不变, scale-invariant);</li>
+<li>$d_w(P)$, $d_h(P)$: 边界框高宽变化的转换(log-space translation);</li>
+<li>$\hat G$: 转换后的predicted ground-truth box.</li>
+</ul>
+<p>$\hat G$具体公式:</p>
+<ul>
+<li><p>$\hat G_x=P_wd_x(P)+P_x$</p>
+</li>
+<li><p>$\hat G_y=P_hd_y(P)+P_y$</p>
+</li>
+<li><p>$\hat G_w=P_wexp(d_w(P))$</p>
+</li>
+<li><p>$\hat G_h=P_hexp(d_h(P))$</p>
+</li>
+</ul>
+<p>通过以上计算, 则有了我们在<em>(x,y,w,h)</em>四个维度上对真实值的预测了, 下面, 我们要计算这个预测G值与真实G值. 我们有一个参数向量$W_*$, 它是用于学习的的可调参数, 有:</p>
+<p>$d_<em>(P)=W^T_</em>\phi_5(P)$, 其中$\phi_5(P)$是pool5层产生的特征向量</p>
+<p>则关于最优$W_*$的公式为如下公式, 其中加号后面的一项是L2正则项(least squares objective), 故此回归也是岭回归(ridge regression):</p>
+<p>$W_<em> = argmin_{\hat W_</em>} \displaystyle \sum^{N}_{i}(t^i_<em>-\hat W^T_</em>\phi_5(P^i))^{2}+\lambda||\hat W_*||^2$</p>
+<p>另外, 还有对关于训练数据<em>(P, G)</em>的回归目标$t_*$的定义:</p>
+<ul>
+<li>$t_x=(G_x-P_x)/P_w$</li>
+<li>$t_y=(G_y-P_y)/P_h$</li>
+<li>$t_w=log(G_w/P_w)$</li>
+<li>$t_h=log(G_h/P_h)$</li>
+</ul>
+<p>直觉地理解上面的目标项, 就是让训练参数$W$尽量去拟合<strong>pool5层特征值</strong>和<strong>G数据与P数据在(x,y)上的位移值和在(w,h)上的缩放值</strong>, 这样, CNN的特征值与位移/缩放就关联上了, 目标检测中的定位问题也就完成了.</p>
+<p>在此附录C末尾, 作者提到两点细微的问题: </p>
+<ol>
+<li>正则化在此处对模型是重要的: 论文设置了$\lambda=1000$, 在评估数据中(validation set);</li>
+<li>选择(P, G)数据对时需选择两者相距不远的(not <em>far from</em>), 否则这个转换就没什么意义了(transform P to G does not make sense), 个人觉得, 这是因为如果一个P相距所有的G都太远, 则说明这个候选区域P本身就是没有选对的(selective search这一步只是把所有候选区域选出来, 当然会选出不含目标的区域), 故不应将P和G关联. 以上只是我的一个猜想推理.</li>
+</ol>
+<p>以上, 论文的部分讲解与理解.</p>
+<p>行内与独行</p>
+<ol>
+<li>行内公式：将公式插入到本行内，符号：<script type="math/tex">公式内容</script>，如：$xyz$</li>
+<li>独行公式：将公式插入到新的一行内，并且居中，符号：<script type="math/tex">$公式内容$$$，如：</script>xyz$$</li>
+</ol>
+<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
+<li>上标符号，符号：<code>^</code>，如：$x^4$</li>
+<li>下标符号，符号：<code>_</code>，如：$x_1$</li>
+<li>组合符号，符号：<code>{}</code>，如：${16}_{8}O{2+}_{2}$</li>
+</ol>
+<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
+<li>汉字形式，符号：<code>\mbox{}</code>，如：$V_{\mbox{初始}}$</li>
+<li>字体控制，符号：<code>\displaystyle</code>，如：$\displaystyle \frac{x+y}{y+z}$</li>
+<li>下划线符号，符号：<code>\underline</code>，如：$\underline{x+y}$</li>
+<li>标签，符号<code>\tag{数字}</code>，如：$\tag{11}$</li>
+<li>上大括号，符号：<code>\overbrace{算式}</code>，如：$\overbrace{a+b+c+d}^{2.0}$</li>
+<li>下大括号，符号：<code>\underbrace{算式}</code>，如：$a+\underbrace{b+c}_{1.0}+d$</li>
+<li>上位符号，符号：<code>\stacrel{上位符号}{基位符号}</code>，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</li>
+</ol>
+<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
+<li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
+<li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
+<li>大空格，符号<code>\</code>，如：$x \  y$</li>
+<li>中空格，符号<code>\:</code>，如：$x : y$</li>
+<li>小空格，符号<code>\,</code>，如：$x , y$</li>
+<li>没有空格，符号``，如：$xy$</li>
+<li>紧贴，符号<code>\!</code>，如：$x ! y$</li>
+</ol>
+<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><ol>
+<li>括号，符号：<code>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</code>，如：$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</li>
+<li>中括号，符号：<code>[]</code>，如：$[x+y]$</li>
+<li>大括号，符号：<code>\{ \}</code>，如：${x+y}$</li>
+<li>自适应括号，符号：<code>\left \right</code>，如：$\left(x\right)$，$\left(x{yz}\right)$</li>
+<li>组合公式，符号：<code>{上位公式 \choose 下位公式}</code>，如：${n+1 \choose k}={n \choose k}+{n \choose k-1}$</li>
+<li>组合公式，符号：<code>{上位公式 \atop 下位公式}</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</li>
+</ol>
+<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><ol>
+<li>加法运算，符号：<code>+</code>，如：$x+y=z$</li>
+<li>减法运算，符号：<code>-</code>，如：$x-y=z$</li>
+<li>加减运算，符号：<code>\pm</code>，如：$x \pm y=z$</li>
+<li>减甲运算，符号：<code>\mp</code>，如：$x \mp y=z$</li>
+<li>乘法运算，符号：<code>\times</code>，如：$x \times y=z$</li>
+<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y=z$</li>
+<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y=z$</li>
+<li>除法运算，符号：<code>\div</code>，如：$x \div y=z$</li>
+<li>斜法运算，符号：<code>/</code>，如：$x/y=z$</li>
+<li>分式表示，符号：<code>\frac{分子}{分母}</code>，如：$\frac{x+y}{y+z}$</li>
+<li>分式表示，符号：<code>{分子} \voer {分母}</code>，如：${x+y} \over {y+z}$</li>
+<li>绝对值表示，符号：<code>||</code>，如：$|x+y|$</li>
+</ol>
+<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><ol>
+<li>平均数运算，符号：<code>\overline{算式}</code>，如：$\overline{xyz}$</li>
+<li>开二次方运算，符号：<code>\sqrt</code>，如：$\sqrt x$</li>
+<li>开方运算，符号：<code>\sqrt[开方数]{被开方数}</code>，如：$\sqrt[3]{x+y}$</li>
+<li>对数运算，符号：<code>\log</code>，如：$\log(x)$</li>
+<li>极限运算，符号：<code>\lim</code>，如：$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>极限运算，符号：<code>\displaystyle \lim</code>，如：$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\sum</code>，如：$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\displaystyle \sum</code>，如：$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
+<li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
+<li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
+<li>矩阵表示，符号：<code>\begin{matrix} \end{matrix}</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]$</li>
+</ol>
+<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
+<li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
+<li>大于运算，符号：<code>&gt;</code>，如：$x+y&gt;z$</li>
+<li>小于运算，符号：<code>&lt;</code>，如：$x+y&lt;z$</li>
+<li>大于等于运算，符号：<code>\geq</code>，如：$x+y \geq z$</li>
+<li>小于等于运算，符号：<code>\leq</code>，如：$x+y \leq z$</li>
+<li>不等于运算，符号：<code>\neq</code>，如：$x+y \neq z$</li>
+<li>不大于等于运算，符号：<code>\ngeq</code>，如：$x+y \ngeq z$</li>
+<li>不大于等于运算，符号：<code>\not\geq</code>，如：$x+y \not\geq z$</li>
+<li>不小于等于运算，符号：<code>\nleq</code>，如：$x+y \nleq z$</li>
+<li>不小于等于运算，符号：<code>\not\leq</code>，如：$x+y \not\leq z$</li>
+<li>约等于运算，符号：<code>\approx</code>，如：$x+y \approx z$</li>
+<li>恒定等于运算，符号：<code>\equiv</code>，如：$x+y \equiv z$</li>
+</ol>
+<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><ol>
+<li>属于运算，符号：<code>\in</code>，如：$x \in y$</li>
+<li>不属于运算，符号：<code>\notin</code>，如：$x \notin y$</li>
+<li>不属于运算，符号：<code>\not\in</code>，如：$x \not\in y$</li>
+<li>子集运算，符号：<code>\subset</code>，如：$x \subset y$</li>
+<li>子集运算，符号：<code>\supset</code>，如：$x \supset y$</li>
+<li>真子集运算，符号：<code>\subseteq</code>，如：$x \subseteq y$</li>
+<li>非真子集运算，符号：<code>\subsetneq</code>，如：$x \subsetneq y$</li>
+<li>真子集运算，符号：<code>\supseteq</code>，如：$x \supseteq y$</li>
+<li>非真子集运算，符号：<code>\supsetneq</code>，如：$x \supsetneq y$</li>
+<li>非子集运算，符号：<code>\not\subset</code>，如：$x \not\subset y$</li>
+<li>非子集运算，符号：<code>\not\supset</code>，如：$x \not\supset y$</li>
+<li>并集运算，符号：<code>\cup</code>，如：$x \cup y$</li>
+<li>交集运算，符号：<code>\cap</code>，如：$x \cap y$</li>
+<li>差集运算，符号：<code>\setminus</code>，如：$x \setminus y$</li>
+<li>同或运算，符号：<code>\bigodot</code>，如：$x \bigodot y$</li>
+<li>同与运算，符号：<code>\bigotimes</code>，如：$x \bigotimes y$</li>
+<li>实数集合，符号：<code>\mathbb{R}</code>，如：$\mathbb{R}$ </li>
+<li>自然数集合，符号：<code>\mathbb{Z}</code>，如：$\mathbb{Z}$ </li>
+<li>空集，符号：<code>\emptyset</code>，如：$\emptyset$</li>
+</ol>
+<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><ol>
+<li>无穷，符号：<code>\infty</code>，如：$\infty$</li>
+<li>虚数，符号：<code>\imath</code>，如：$\imath$</li>
+<li>虚数，符号：<code>\jmath</code>，如：$\jmath$</li>
+<li>数学符号，符号<code>\hat{a}</code>，如：$\hat{a}$</li>
+<li>数学符号，符号<code>\check{a}</code>，如：$\check{a}$</li>
+<li>数学符号，符号<code>\breve{a}</code>，如：$\breve{a}$</li>
+<li>数学符号，符号<code>\tilde{a}</code>，如：$\tilde{a}$</li>
+<li>数学符号，符号<code>\bar{a}</code>，如：$\bar{a}$</li>
+<li>矢量符号，符号<code>\vec{a}</code>，如：$\vec{a}$</li>
+<li>数学符号，符号<code>\acute{a}</code>，如：$\acute{a}$</li>
+<li>数学符号，符号<code>\grave{a}</code>，如：$\grave{a}$</li>
+<li>数学符号，符号<code>\mathring{a}</code>，如：$\mathring{a}$</li>
+<li>一阶导数符号，符号<code>\dot{a}</code>，如：$\dot{a}$</li>
+<li>二阶导数符号，符号<code>\ddot{a}</code>，如：$\ddot{a}$</li>
+<li>上箭头，符号：<code>\uparrow</code>，如：$\uparrow$</li>
+<li>上箭头，符号：<code>\Uparrow</code>，如：$\Uparrow$</li>
+<li>下箭头，符号：<code>\downarrow</code>，如：$\downarrow$</li>
+<li>下箭头，符号：<code>\Downarrow</code>，如：$\Downarrow$</li>
+<li>左箭头，符号：<code>\leftarrow</code>，如：$\leftarrow$</li>
+<li>左箭头，符号：<code>\Leftarrow</code>，如：$\Leftarrow$</li>
+<li>右箭头，符号：<code>\rightarrow</code>，如：$\rightarrow$</li>
+<li>右箭头，符号：<code>\Rightarrow</code>，如：$\Rightarrow$</li>
+<li>底端对齐的省略号，符号：<code>\ldots</code>，如：$1,2,\ldots,n$</li>
+<li>中线对齐的省略号，符号：<code>\cdots</code>，如：$x_1^2 + x_2^2 + \cdots + x_n^2$</li>
+<li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
+<li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/CV/" rel="tag"># CV</a>
+          
+            <a href="/tags/PAPER/" rel="tag"># PAPER</a>
+          
+            <a href="/tags/以读攻毒/" rel="tag"># 以读攻毒</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/02/TF-BASIS-低阶API/" rel="next" title="TF_BASIS_低阶API">
+                <i class="fa fa-chevron-left"></i> TF_BASIS_低阶API
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/05/PAPER-SSD/" rel="prev" title="post">
+                post <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Haoran Ye</p>
+              <div class="site-description motion-element" itemprop="description">Computer Fake Science</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/tjipot" title="GitHub &rarr; https://github.com/tjipot" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation"><span class="nav-number">1.</span> <span class="nav-text">RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-背景"><span class="nav-number">1.1.</span> <span class="nav-text">0.背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-鸟瞰模型整体"><span class="nav-number">1.2.</span> <span class="nav-text">1.鸟瞰模型整体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-论文第二节-Object-detection-with-R-CNN"><span class="nav-number">1.3.</span> <span class="nav-text">2.论文第二节: Object detection with R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型设计1-候选区域-Region-Proposals"><span class="nav-number">1.3.1.</span> <span class="nav-text">模型设计1: 候选区域(Region Proposals)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型设计2-特征抽取-Feature-Extraction"><span class="nav-number">1.3.2.</span> <span class="nav-text">模型设计2: 特征抽取(Feature Extraction)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Appendix-C-Bounding-box-Regression"><span class="nav-number">1.4.</span> <span class="nav-text">Appendix C- Bounding-box Regression</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上标、下标与组合"><span class="nav-number">2.</span> <span class="nav-text">上标、下标与组合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#汉字、字体与格式"><span class="nav-number">3.</span> <span class="nav-text">汉字、字体与格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#占位符"><span class="nav-number">4.</span> <span class="nav-text">占位符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定界符与组合"><span class="nav-number">5.</span> <span class="nav-text">定界符与组合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四则运算"><span class="nav-number">6.</span> <span class="nav-text">四则运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级运算"><span class="nav-number">7.</span> <span class="nav-text">高级运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑运算"><span class="nav-number">8.</span> <span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合运算"><span class="nav-number">9.</span> <span class="nav-text">集合运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学符号"><span class="nav-number">10.</span> <span class="nav-text">数学符号</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Haoran Ye</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
