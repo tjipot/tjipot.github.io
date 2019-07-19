@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/07/18/5d3023b8c01b471669.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/18/5d3039a2e7e4217060.png">
-<meta property="og:updated_time" content="2019-07-18T15:51:44.000Z">
+<meta property="og:updated_time" content="2019-07-19T02:03:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAPER_YOLO">
 <meta name="twitter:description" content="You Only Look Once: Unified, Real-Time Object Detection从标题中可知, YOLO模型最大的特点应是”统一/实时”, 其实这是相对于R-CNN系列区域候选方法来说的. 区域候选(或者滑动窗口)方法的模型由几个不同的流程模块构成, 这就不是统一的了(一体性, unified), 由于整个模型由不同模块构成, 这又使得整个模型的耗时增加, 所以就又很">
@@ -389,12 +389,24 @@
                 
               
 
-              <time title="创建时间：2019-07-18 09:38:51 / 修改时间：23:51:44" itemprop="dateCreated datePublished" datetime="2019-07-18T09:38:51+08:00">2019-07-18</time>
+              <time title="创建时间：2019-07-18 09:38:51" itemprop="dateCreated datePublished" datetime="2019-07-18T09:38:51+08:00">2019-07-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-19 10:03:20" itemprop="dateModified" datetime="2019-07-19T10:03:20+08:00">2019-07-19</time>
               
             
           </span>
@@ -447,6 +459,7 @@
 
       
         <h4 id="You-Only-Look-Once-Unified-Real-Time-Object-Detection"><a href="#You-Only-Look-Once-Unified-Real-Time-Object-Detection" class="headerlink" title="You Only Look Once: Unified, Real-Time Object Detection"></a>You Only Look Once: Unified, Real-Time Object Detection</h4><p>从标题中可知, YOLO模型最大的特点应是”统一/实时”, 其实这是相对于R-CNN系列区域候选方法来说的. 区域候选(或者滑动窗口)方法的模型由几个不同的流程模块构成, 这就不是统一的了(一体性, unified), 由于整个模型由不同模块构成, 这又使得整个模型的耗时增加, 所以就又很难实时了(real-time).</p>
+<a id="more"></a>
 <p>个人觉得模型的神奇之处在于从图1的模型结构图看, 它的模块就是串行一路的, 从输入到输出的过程中, 没有一个分支. 整个模型可以分为两个部分: </p>
 <ol>
 <li>以<strong>卷积为主</strong>的前半部分: 此部分进行一层层的卷积操作将输入图片的诸如形状, 颜色等特征进行抽象提取(数学/几何模式上, 不要从人类视觉的角度切入), 最终以前半部分的抽象特征输出为结束;</li>
@@ -482,13 +495,14 @@
 </ol>
 <p>关于训练中的参数设置, 论文中给出了如下结果: </p>
 <ul>
-<li>训练进行了135个epoch(训练/验证集, from PASCAL VOC 2007和2012), 在2012上测试时, 使用了2007的测试数据用于训练(注意是测试数据用于训练), 训练中: batch_size=64, </li>
+<li>训练进行了135个epoch(训练/验证集, from PASCAL VOC 2007和2012), 在2012上测试时, 使用了2007的测试数据用于训练(注意是测试数据用于训练), 训练中: batch_size=64, momentum=0.9, decay=0.0005;</li>
+<li>学习率(“步长”)是动态变化的: 初始几个epoch, 缓慢地将学习率从$10^{-3}$上升至$10^{-2}$, 然后使用$10^{-2}$这个值的学习率一直学习/训练到75个epoch, 接着$10^{-3}$进行30个epoch, 再接着$10^{-4}$进行30个epoch, 至此, 总共135个epoch学习完毕; (注: 论文提到如果初始阶段就上较高的学习率, 则模型不会收敛(diverge), 因为不稳定的梯度使然(unstable gradient, 应指梯度爆炸))</li>
+<li>为了避免过拟合, 论文进行了: 1.丢弃(dropout), 2.数据增强(extensive data augmentation). 论文使用的丢弃层(dropout layer)是在第一个全连接层之后(说为了防止在layers之间的co-adaptation, 具体啥意思?), 丢弃率为0.5, 而数据增强则有三个措施: 1.随机缩放和平移(random scaling and translation), 最小至20%的原图大小, 2.在图像的HSV颜色空间中随机增大曝光值和饱和度值到1.5倍.</li>
 </ul>
-<p>MM</p>
 <hr>
-<p>Reference</p>
+<p><strong><em>Reference</em></strong></p>
 <ol>
-<li>简书翻译: <a href="https://www.jianshu.com/p/a2a22b0c4742" target="_blank" rel="noopener">https://www.jianshu.com/p/a2a22b0c4742</a>;</li>
+<li>简书翻译: <a href="https://www.jianshu.com/p/a2a22b0c4742" target="_blank" rel="noopener">https://www.jianshu.com/p/a2a22b0c4742</a>, 实际没怎么看(这里只Mark): 要想看懂论文逻辑, 无他, 唯手熟尔(没有捷径的);</li>
 </ol>
 
       
