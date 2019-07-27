@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-26 23:29:13" itemprop="dateModified" datetime="2019-07-26T23:29:13+08:00">2019-07-26</time>
+                <time title="修改时间：2019-07-27 16:23:21" itemprop="dateModified" datetime="2019-07-27T16:23:21+08:00">2019-07-27</time>
               
             
           </span>
@@ -460,6 +460,9 @@
         
           
             <p><strong>关于CS231n课的一些笔记</strong> </p>
+<p>$L_i=-log(\frac{e^{f_y{_i}}}{\sum_je^{f_j}})$</p>
+<p>$L=\frac{1}{N} \displaystyle \sum_i L_i + \frac{1}{2} \lambda \displaystyle\sum_k \displaystyle\sum_l W^{2}_{k,l}$</p>
+<p>$\frac{\partial L_i}{\partial f_k} = p_k - \mathbb{ONE}(y_i=k)$</p>
 
           
         
@@ -1288,7 +1291,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-08 21:50:15" itemprop="dateModified" datetime="2019-07-08T21:50:15+08:00">2019-07-08</time>
+                <time title="修改时间：2019-07-27 18:57:40" itemprop="dateModified" datetime="2019-07-27T18:57:40+08:00">2019-07-27</time>
               
             
           </span>
@@ -1344,7 +1347,8 @@
           
             <h2 id="RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation"><a href="#RCNN-Rich-Feature-Hierarchies-For-Accurate-Object-Detection-And-Semantic-Segmentation" class="headerlink" title="RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation"></a>RCNN: Rich Feature Hierarchies For Accurate Object Detection And Semantic Segmentation</h2><h3 id="0-背景"><a href="#0-背景" class="headerlink" title="0.背景"></a>0.背景</h3><p><em>&lt;&lt;精准目标检测和语义分割中的丰富特征层级&gt;&gt;</em> 这篇论文的主要意义可以说是利用深度学习(CNN)进行目标检测的开山之作. 现在的目标检测算法主要有两类: 1.基于候选区域(RegionCNN), 2.基于端到端(YOLO, SSD).</p>
 <p>下面, 我将认为重要的要点总结出来, 以巩固熟悉算法, 但总结的要点并不代表论文的全部.</p>
-<h3 id="1-鸟瞰模型整体"><a href="#1-鸟瞰模型整体" class="headerlink" title="1.鸟瞰模型整体"></a>1.鸟瞰模型整体</h3><p><img src="https://i.loli.net/2019/07/05/5d1f473dc95fa49192.png" alt="01_模型鸟瞰.png"></p>
+<h3 id="1-鸟瞰模型整体"><a href="#1-鸟瞰模型整体" class="headerlink" title="1.鸟瞰模型整体"></a>1.鸟瞰模型整体</h3><p><img src="https://i.loli.net/2019/07/27/5d3c2da786bac57201.png" alt="01_模型鸟瞰.png"></p>
+<p><em>图1: 模型鸟瞰</em></p>
 <p>首先, 贴出上图, 给出模型中区域特征提取的流程, 后续理解与解释则围绕图片展开. 我们有如下步骤:</p>
 <ol>
 <li><p>Input image: 这是RCNN模型的输入数据, 我们要识别此输入图片中的物体与其在图片中的位置(坐标);</p>
@@ -1378,7 +1382,8 @@
 <p>Regardless of the size or aspect ratio of the candidate region, we warp all pixels in a <strong>tight bounding box</strong> around it to the required size. Prior to warping, we <strong>dilate</strong> the tight bounding box so that at the warped size there are exactly p pixels of warped image context <strong>around the original box</strong> (we use p = 16).</p>
 </blockquote>
 <p>估计即便将以上论文片段翻译成中文, 如果仅凭中文字面意思去理解, 也无解, 所以还是画图吧(如果论文中有配图就好了):</p>
-<p> <img src="https://i.loli.net/2019/07/05/5d1f65074044095107.png" alt="屏幕快照 2019-07-05 22.49.31.png"></p>
+<p> <img src="https://i.loli.net/2019/07/27/5d3c2da790cd171616.png" alt="边框示意"></p>
+<p><em>图2: 边框示意</em></p>
 <p>在上图中, 我们有里面的小框, 即我们的<strong><em>tight bounding box</em></strong>(也即<em>候选区域</em>). 由于候选区域是原图的一部分, 如果我们要在使<strong><em>around the original box</em></strong>的pixel为16的话, 则向外扩张(<strong><em>dilate</em></strong>)数标1中的<em>原框(Original T. B. Box)</em>16个像素值, 得到数标2中的<em>Dilated T. B. Box</em>, 而这个有原图的context填充(padding)了的Boundxing Box, 就是我们要resize(即warp)到227*227的”候选区域”(而不是里面的那个了). 如果候选区域图中上下左右方向不够Padding的话, 则用灰度像素替代吧, 具体细节可参考论文中的<em>Figure 7</em>. (再次的, 觉得这是论文的小瑕疵: 没有图呀)</p>
 <h3 id="Appendix-C-Bounding-box-Regression"><a href="#Appendix-C-Bounding-box-Regression" class="headerlink" title="Appendix C- Bounding-box Regression"></a>Appendix C- Bounding-box Regression</h3><p>下面, 讲讲论文中边界框的回归(即定位). 我估计论文之所以没有在正文中讲边界框的回归定位而是在附录中讲, 是因为之前的候选区域抓取的时候已经有了该候选区域的坐标值了, 而这一步, 只是提升用的:</p>
 <blockquote>
