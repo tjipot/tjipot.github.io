@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-27 23:58:31" itemprop="dateModified" datetime="2019-07-27T23:58:31+08:00">2019-07-27</time>
+                <time title="修改时间：2019-07-28 00:13:10" itemprop="dateModified" datetime="2019-07-28T00:13:10+08:00">2019-07-28</time>
               
             
           </span>
@@ -463,8 +463,10 @@
 <p>$L_i=-log(\frac{e^{f_y{_i}}}{\sum_je^{f_j}})$</p>
 <p>$L=\frac{1}{N} \displaystyle \sum_i L_i + \frac{1}{2} \lambda \displaystyle\sum_k \displaystyle\sum_l W^{2}_{k,l}$</p>
 <p>$\frac{\partial L_i}{\partial f_k} = p_k - \mathbb{ONE}(y_i=k)$</p>
-<h4 id="关于Hidden层的直觉性思考"><a href="#关于Hidden层的直觉性思考" class="headerlink" title="关于Hidden层的直觉性思考"></a>关于Hidden层的直觉性思考</h4><p>直觉性的理解: 对于输入空间中$x1$和$x2$不同取值, 隐藏层将它们原先的一次组合(没有隐藏层的线性(vanilla)模型)</p>
-<p><img src="https://i.loli.net/2019/07/27/5d3c73a573b9b94062.png" alt="隐藏层对原线性模型的干预"></p>
+<h4 id="关于Hidden层的直觉性思考"><a href="#关于Hidden层的直觉性思考" class="headerlink" title="关于Hidden层的直觉性思考"></a>关于Hidden层的直觉性思考</h4><p>直觉性的理解: 对于输入空间中$x1$和$x2$不同取值, 隐藏层将它们原先的一次组合(即: 没有隐藏层的线性(vanilla)模型)进行”二次加工”, 比如: 输入数据点在第一层模型分类的基础上, 再次进行调整, 使得图1中的一条直线段在不同的取值小区间内呈现不同的位移/扭去(直线变曲线), 完成此例中的螺旋分类. </p>
+<p>激活函数的加入, 使得原先的”线段式”曲线变得更平滑(消除了不同线段连接间的折角特征), 原先的”线段式”曲线变成真正的曲线(平滑的), 这像是一个消除图像马赛克的过程/模拟.</p>
+<p>todo: 贴网络传导图</p>
+<p><img src="https://i.loli.net/2019/07/27/5d 3c73a573b9b94062.png" alt="隐藏层对原线性模型的干预"></p>
 
           
         
