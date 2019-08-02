@@ -94,21 +94,18 @@
 
 
 
-  <meta name="description" content="斜率与梯度  关键词: 偏导数, 斜率, 多维空间的斜率, 梯度. 例子讲解: 我们有函数$Z=f(X,Y)$(如下图1), 通过此函数我们讲解斜率(偏导数)与梯度的具体异同. 此处, 个人觉得斜率的称谓适合在我们平常用的平面坐标系中(二维)中使用, 而在三维及以上的空间中, 就是偏导数了, 故也可以将偏导数理解成多维空间中的斜率.">
-<meta name="keywords" content="Math">
+  <meta name="description" content="关于底层的一些笔记: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址,">
+<meta name="keywords" content="OS,Assembly">
 <meta property="og:type" content="article">
-<meta property="og:title" content="斜率与梯度">
-<meta property="og:url" content="https://tjipot.github.io/2019/07/15/斜率与梯度/index.html">
+<meta property="og:title" content="计算机的底层逻辑">
+<meta property="og:url" content="https://tjipot.github.io/2019/07/23/计算机纵深/index.html">
 <meta property="og:site_name" content="Univesre">
-<meta property="og:description" content="斜率与梯度  关键词: 偏导数, 斜率, 多维空间的斜率, 梯度. 例子讲解: 我们有函数$Z=f(X,Y)$(如下图1), 通过此函数我们讲解斜率(偏导数)与梯度的具体异同. 此处, 个人觉得斜率的称谓适合在我们平常用的平面坐标系中(二维)中使用, 而在三维及以上的空间中, 就是偏导数了, 故也可以将偏导数理解成多维空间中的斜率.">
+<meta property="og:description" content="关于底层的一些笔记: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/07/15/5d2ca20f4bdb877300.jpeg">
-<meta property="og:image" content="https://i.loli.net/2019/07/16/5d2ca5d4819b439168.jpeg">
-<meta property="og:updated_time" content="2019-08-02T10:05:12.000Z">
+<meta property="og:updated_time" content="2019-08-02T15:46:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="斜率与梯度">
-<meta name="twitter:description" content="斜率与梯度  关键词: 偏导数, 斜率, 多维空间的斜率, 梯度. 例子讲解: 我们有函数$Z=f(X,Y)$(如下图1), 通过此函数我们讲解斜率(偏导数)与梯度的具体异同. 此处, 个人觉得斜率的称谓适合在我们平常用的平面坐标系中(二维)中使用, 而在三维及以上的空间中, 就是偏导数了, 故也可以将偏导数理解成多维空间中的斜率.">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/15/5d2ca20f4bdb877300.jpeg">
+<meta name="twitter:title" content="计算机的底层逻辑">
+<meta name="twitter:description" content="关于底层的一些笔记: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址,">
 
 
 
@@ -116,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://tjipot.github.io/2019/07/15/斜率与梯度/">
+  <link rel="canonical" href="https://tjipot.github.io/2019/07/23/计算机纵深/">
 
 
 
@@ -126,7 +123,7 @@
   };
 </script>
 
-  <title>斜率与梯度 | Univesre</title>
+  <title>计算机的底层逻辑 | Univesre</title>
   
 
 
@@ -346,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/15/斜率与梯度/">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/23/计算机纵深/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Haoran Ye">
@@ -363,7 +360,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">斜率与梯度
+          <h1 class="post-title" itemprop="name headline">计算机的底层逻辑
 
               
             
@@ -389,7 +386,7 @@
                 
               
 
-              <time title="创建时间：2019-07-15 23:38:55" itemprop="dateCreated datePublished" datetime="2019-07-15T23:38:55+08:00">2019-07-15</time>
+              <time title="创建时间：2019-07-23 10:34:09" itemprop="dateCreated datePublished" datetime="2019-07-23T10:34:09+08:00">2019-07-23</time>
             
 
             
@@ -406,7 +403,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-02 18:05:12" itemprop="dateModified" datetime="2019-08-02T18:05:12+08:00">2019-08-02</time>
+                <time title="修改时间：2019-08-02 23:46:25" itemprop="dateModified" datetime="2019-08-02T23:46:25+08:00">2019-08-02</time>
               
             
           </span>
@@ -423,7 +420,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/札记/" itemprop="url" rel="index"><span itemprop="name">札记</span></a></span>
 
                 
                 
@@ -458,39 +455,69 @@
       
 
       
-        <p><strong>斜率与梯度</strong>  <strong>关键词</strong>: 偏导数, 斜率, 多维空间的斜率, 梯度. <strong>例子讲解</strong>: 我们有函数$Z=f(X,Y)$(如下图1), 通过此函数我们讲解斜率(偏导数)与梯度的具体异同. 此处, 个人觉得斜率的称谓适合在我们平常用的平面坐标系中(二维)中使用, 而在三维及以上的空间中, 就是偏导数了, 故也可以将偏导数理解成多维空间中的斜率.</p>
-<a id="more"></a>
-<p> <img src="https://i.loli.net/2019/07/15/5d2ca20f4bdb877300.jpeg" alt="Z=F(X,Y)"></p>
-<p><em>图1.</em></p>
-<p>关于这两者的应用, 个人有个疑惑: 为什么梯度下降中, 我们要减去梯度项, 但如果此时斜率本身就是小于0的, 减去这一项岂不是让值增加了?! 如: $w := w - \alpha \nabla_wf(w)$, 此处, 我们将上述表述中的每一项理清: </p>
-<ol>
-<li>我们有下图2中红点处的一斜率/梯度, 其值&lt;0, 我们要梯度下降, 就是让函数值$Z$下降(亦: 损失函数函数值$Loss$);</li>
-<li>我们减去此梯度值($w - \alpha \nabla_wf(w)$), 被减数是$w$(并不是函数值$Z$), 则实际$w$值增加了, 对于整个函数来说, 其值是减少的; </li>
-<li>此处, 我混淆了两个细节:<ol>
-<li>被减数是$w$而不是函数值$Z$, 通过$w$的增加, 从而使$Z$值减少;</li>
-<li>在形如$WX+b$的常用模型中, $W$是我们要学习的模型参数, 又是我们偏导的对象(易理解成变量)(你也可以对$X$求偏导, 但那没意义), 而$X$是输入(易理解成常量), 我们怎么可以去改变变量的值呢, 它是不固定的呀(要不断改变接收新值), 上面这个想法正是我混淆的根源. 上面, 我是惯性了我的思维了, 就像$y=f(x)$那样, 觉得$W$就像$x$那样就是不断变化的;</li>
-<li><strong>总结</strong>: 其实我们的$W$和$X$都是变量, 对于$W$, 我们变化它是为了寻找到一个适合输入数据$X$的一组值, 而对于$X$, 则本身就是不同的有变化的数据.</li>
-</ol>
-</li>
-</ol>
-<p> <img src="https://i.loli.net/2019/07/16/5d2ca5d4819b439168.jpeg" alt="PartialDerivativeOfX"></p>
-<p><em>图2.</em> <em>(梯度不完全等同于倾斜度: $tan(\alpha)=b:a$)</em></p>
-<p>以上图例具体在结合反向传播的梯度时, 应在细节上做一下区分, 要不然会混淆却说不出具体原因, 在对模型WX+b进行求偏导时, 我们的模型参数W既是偏导的对象(情形1), 也是模型在预测时相对于输入X的有确定值的系数(情形2):</p>
+        <p><strong>关于底层的一些笔记</strong>: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址, 却连一个分页表都看不到, 只能靠想象与抽象去理解, 难怪计算机这么难学(假如果真如此的话): 在一台具象的电脑之下, 隐藏里太多的细节故事, 我看称之为事故也不为过了.</p>
+<p><strong>思维模式</strong>: 不同编程层次中的几种思维模式: </p>
 <ul>
-<li><p>在情形1中, 我们对每一个$W$分量($w1$, $w2$, …)进行偏导运算, 此时, 对$W$的理解应是”它是变量”, 我们得到了整个函数(损失函数)在每个$W$分量上的斜率, 而梯度则往往是简略的说法, 在斜率的基础上乘以一个单位值1就成了梯度, 此时它们的值相等, 但概念不等. 我们把这个梯度加回到该分量$w1$中回去, 则对应上图中(红点处斜率&lt;0)的$X$轴的$x$值变小了, 则整个函数(损失函数)值变大了, 而我们减去这个梯度, 就是减小了损失函数值.</p>
-<blockquote>
-<p>更多细节是: 梯度并不能完全重合与曲面(以上图为例), 在加了一次梯度改变$w1$(对应图中$x$维度)的值后, 模型(指参数$W$)也改变了, 故下次我们需重新计算斜率(即偏导, 即epoch), 获取新的梯度再次更新模型(参数$W$), 而学习率, 动量, 自适应动量, 局部最优等概念, 都是上图中的细节.</p>
-</blockquote>
+<li><p>使用高级编程语言(如C++/Python), 脑力主要集中于编程语言的语法, 库的使用, 算法的实现, 程序的设计, 项目环境配置, 等等;</p>
 </li>
-<li><p>在情形2中, 模型将不被用于训练和求偏导而是用来求值, 此时, 可将模型的参数$W$理解成输入X的系数, 将$X$理解成变量(因为输入$X$是变化着的不同样本), 由于前期进行了训练, 我们的模型参数$W$有了确定了的合理的值(假设是合理的话, 当然, 模型没训练前也有值), 此时, 再将$W$作为求偏导的分量对象(如$w1$)就不太好理解了.</p>
+<li><p>使用底层(并非低级)编程语言(如汇编), 则思维模式需转向到各种寄存器, 各种基本操作之间的顺序, 等;</p>
 </li>
 </ul>
-<p>以上, 总结了梯度和斜率中我混淆的地方, 它们也是ML数学和常用数学使我混淆的地方: 如$X$在ML中是输入(像常量)而常用数学中$x$是自变量.</p>
-<p><em>(P.S. CV心得: 别跟我说什么CV, 我只认数学结构和技巧, 只不过这些因素被你们人类拿去当做CVision了, 这锅我(数学)不背: C中根本没有V, 是人类的Romantic裹挟了我数学)</em></p>
-<p><a href="https://baijiahao.baidu.com/s?id=1627719346341492607&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1627719346341492607&amp;wfr=spider&amp;for=pc</a></p>
-<p><a href="https://blog.csdn.net/xuejianbest/article/details/85050541" target="_blank" rel="noopener">https://blog.csdn.net/xuejianbest/article/details/85050541</a></p>
-<p><a href="https://www.wolframalpha.com/input/?i=gradient&amp;assumption={&quot;C&quot;,+&quot;gradient&quot;}+-&gt;+{&quot;MathWorld&quot;}" target="_blank" rel="noopener">https://www.wolframalpha.com/input/?i=gradient&amp;assumption=%7B%22C%22,+%22gradient%22%7D+-%3E+%7B%22MathWorld%22%7D</a></p>
-<p><a href="http://mathworld.wolfram.com/Gradient.html" target="_blank" rel="noopener">http://mathworld.wolfram.com/Gradient.html</a></p>
+<p>其实还不止以上所列的两种模式/习惯, 假如把<strong>编译器</strong>也算进去的话, 那么又多了一种思维模式/习惯(扫描, 编译, …), 还可以有:</p>
+<ul>
+<li>计算机硬件的总线: 数据总线, 地址总线和控制总线, 冯诺依曼架构(指令与数据共用内存)和哈佛架构(指令与数据各自有各自的内存);</li>
+<li>CPU指令流水线: 取值, 解码, 执行, 存储, 写回, 5个阶段, 它们的处理时间最好相等, 要不然最慢的流水线级处理时间将成为系统的时钟周期</li>
+</ul>
+<p>的在需要不同的思维模型/惯性, 这是导致可能”学不进去”的一个原因了. 脑力才是最高的</p>
+<p>根据</p>
+<p>几乎不可能, 还有显卡嗯</p>
+<p>另: 查某些资料最好都要去google搜索, 百度搜索的同质化太严重, 而且中文环境的内容质量也是要考虑的要点, 如BIOS的介绍();</p>
+<p><a href="https://computer.howstuffworks.com/graphics-card.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/graphics-card.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/analog-digital.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/analog-digital.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/tv.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/tv.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/operating-system.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/operating-system.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/touch-screens.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/touch-screens.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/history-of-the-personal-computer.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/history-of-the-personal-computer.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/bios.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/bios.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/bytes.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/bytes.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/digital-electronics.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/digital-electronics.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/how-to-tech/how-to-build-your-own-arcade-machine.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/how-to-tech/how-to-build-your-own-arcade-machine.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/question319.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/question319.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/microprocessor.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/microprocessor.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/c.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/c.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/how-to-tech/build-a-computer.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/how-to-tech/build-a-computer.htm</a></p>
+<p>显卡绘图原理:</p>
+<p><a href="http://www.sohu.com/a/298769121_120099975" target="_blank" rel="noopener">http://www.sohu.com/a/298769121_120099975</a></p>
+<p><a href="https://www.cnblogs.com/foohack/p/4596910.html" target="_blank" rel="noopener">https://www.cnblogs.com/foohack/p/4596910.html</a></p>
+<p><a href="https://diy.pconline.com.cn/graphics/study_gra/0902/1558974.html" target="_blank" rel="noopener">https://diy.pconline.com.cn/graphics/study_gra/0902/1558974.html</a></p>
+<p><a href="https://blog.csdn.net/hxh129/article/details/7839988" target="_blank" rel="noopener">https://blog.csdn.net/hxh129/article/details/7839988</a></p>
+<p><strong>X Window 系统的窗口显示原理</strong>: </p>
+<p><a href="https://blog.csdn.net/linuxheik/article/details/7678678" target="_blank" rel="noopener">https://blog.csdn.net/linuxheik/article/details/7678678</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/</a></p>
+<p><a href="https://blog.csdn.net/ITBoxes/article/details/72790008" target="_blank" rel="noopener">https://blog.csdn.net/ITBoxes/article/details/72790008</a></p>
+<p><strong>关于X Window的一些理解</strong>:<br><a href="https://blog.csdn.net/ldx19980108/article/details/73822820" target="_blank" rel="noopener">https://blog.csdn.net/ldx19980108/article/details/73822820</a></p>
+<p><strong>X Window的奥秘</strong>:</p>
+<p><a href="https://www.cnblogs.com/lijinze-tsinghua/p/8686298.html" target="_blank" rel="noopener">https://www.cnblogs.com/lijinze-tsinghua/p/8686298.html</a></p>
+<p><strong>百度百科</strong>:</p>
+<p><a href="https://baike.baidu.com/item/X Window" target="_blank" rel="noopener">https://baike.baidu.com/item/X%20Window</a></p>
+<p>Hexo_mathjax:</p>
+<p><a href="https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=mathjax hexo&amp;oq=mathjax&amp;rsv_pq=e805b1a70005b287&amp;rsv_t=3b23b0VzemdKtU7Laq6fJcv5F0PYXcSN7ZctD5EqR0Se1wWI5cd3xagfyHQ&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=3&amp;rsv_sug1=3&amp;rsv_sug7=000&amp;bs=mathjax" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=mathjax%20hexo&amp;oq=mathjax&amp;rsv_pq=e805b1a70005b287&amp;rsv_t=3b23b0VzemdKtU7Laq6fJcv5F0PYXcSN7ZctD5EqR0Se1wWI5cd3xagfyHQ&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=3&amp;rsv_sug1=3&amp;rsv_sug7=000&amp;bs=mathjax</a></p>
+<p><a href="https://blog.csdn.net/u014630987/article/details/78670258" target="_blank" rel="noopener">https://blog.csdn.net/u014630987/article/details/78670258</a></p>
+<p><a href="https://www.google.com/search?q=hexo+mathjax配置&amp;sa=X&amp;ved=2ahUKEwjxn8yB77jjAhVUE4gKHfFYBOIQ1QIoAHoECAoQAQ&amp;biw=1680&amp;bih=939" target="_blank" rel="noopener">https://www.google.com/search?q=hexo+mathjax%E9%85%8D%E7%BD%AE&amp;sa=X&amp;ved=2ahUKEwjxn8yB77jjAhVUE4gKHfFYBOIQ1QIoAHoECAoQAQ&amp;biw=1680&amp;bih=939</a></p>
+<p><a href="https://i-m.dev/tools/" target="_blank" rel="noopener">https://i-m.dev/tools/</a></p>
+<p>numpy与scipy:</p>
+<p><a href="https://docs.scipy.org/doc/" target="_blank" rel="noopener">https://docs.scipy.org/doc/</a></p>
+<p><a href="https://blog.csdn.net/tymatlab/article/details/79009618" target="_blank" rel="noopener">https://blog.csdn.net/tymatlab/article/details/79009618</a></p>
+<p><a href="https://www.baidu.com/s?ie=UTF-8&amp;wd=TypeError%3A Cannot read property &#39;utcOffset&#39; of null" target="_blank" rel="noopener">https://www.baidu.com/s?ie=UTF-8&amp;wd=TypeError%3A%20Cannot%20read%20property%20%27utcOffset%27%20of%20null</a></p>
+<p><a href="https://blog.csdn.net/buppt/article/details/78016407" target="_blank" rel="noopener">https://blog.csdn.net/buppt/article/details/78016407</a></p>
+<p>Google Unix: <a href="https://www.google.com/search?biw=1680&amp;bih=939&amp;ei=gYkxXZ6OIYvW-QaWzIZA&amp;q=what+is+unix+terminal&amp;oq=what+is+unix+terminal&amp;gs_l=psy-ab.3.1.0i7i30j0i203j0i8i30l6j0i8i10i30.49026.72796..77259...5.0..0.179.4218.4j33......0....1..gws-wiz.....10..0i71j35i39j0j0i67j0i131j0i30j0i5i30j0i7i10i30j0i13j0i8i7i30j0i8i7i10i30j0i7i30i19j0i8i7i30i19j0i8i7i10i30i19.nipETkQ1gg4" target="_blank" rel="noopener">https://www.google.com/search?biw=1680&amp;bih=939&amp;ei=gYkxXZ6OIYvW-QaWzIZA&amp;q=what+is+unix+terminal&amp;oq=what+is+unix+terminal&amp;gs_l=psy-ab.3.1.0i7i30j0i203j0i8i30l6j0i8i10i30.49026.72796..77259...5.0..0.179.4218.4j33......0....1..gws-wiz.....10..0i71j35i39j0j0i67j0i131j0i30j0i5i30j0i7i10i30j0i13j0i8i7i30j0i8i7i10i30j0i7i30i19j0i8i7i30i19j0i8i7i10i30i19.nipETkQ1gg4</a></p>
+<p><a href="http://mally.stanford.edu/~sr/computing/basic-unix.html" target="_blank" rel="noopener">http://mally.stanford.edu/~sr/computing/basic-unix.html</a></p>
+<p><a href="https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Unix_shell</a></p>
+<p><a href="http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html" target="_blank" rel="noopener">http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html</a></p>
+<p>MMM</p>
+<p>快点来报道: </p>
+<p>程序: 高级编程, CPU, 汇编.</p>
 
       
     </div>
@@ -517,7 +544,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Math/" rel="tag"># Math</a>
+            <a href="/tags/OS/" rel="tag"># OS</a>
+          
+            <a href="/tags/Assembly/" rel="tag"># Assembly</a>
           
         </div>
       
@@ -530,8 +559,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/12/PAPER-MTCNN/" rel="next" title="PAPER_MTCCN">
-                <i class="fa fa-chevron-left"></i> PAPER_MTCCN
+              <a href="/2019/07/18/PAPER-YOLO/" rel="next" title="PAPER_YOLO">
+                <i class="fa fa-chevron-left"></i> PAPER_YOLO
               </a>
             
           </div>
@@ -540,8 +569,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/18/PAPER-YOLO/" rel="prev" title="PAPER_YOLO">
-                PAPER_YOLO <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/23/CV-札记/" rel="prev" title="CV_札记">
+                CV_札记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

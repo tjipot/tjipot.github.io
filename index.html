@@ -561,6 +561,241 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/23/计算机纵深/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haoran Ye">
+      <meta itemprop="description" content="Computer Fake Science">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Univesre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/23/计算机纵深/" class="post-title-link" itemprop="url">计算机的底层逻辑</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-23 10:34:09" itemprop="dateCreated datePublished" datetime="2019-07-23T10:34:09+08:00">2019-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-02 23:46:25" itemprop="dateModified" datetime="2019-08-02T23:46:25+08:00">2019-08-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/札记/" itemprop="url" rel="index"><span itemprop="name">札记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>关于底层的一些笔记</strong>: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址, 却连一个分页表都看不到, 只能靠想象与抽象去理解, 难怪计算机这么难学(假如果真如此的话): 在一台具象的电脑之下, 隐藏里太多的细节故事, 我看称之为事故也不为过了.</p>
+<p><strong>思维模式</strong>: 不同编程层次中的几种思维模式: </p>
+<ul>
+<li><p>使用高级编程语言(如C++/Python), 脑力主要集中于编程语言的语法, 库的使用, 算法的实现, 程序的设计, 项目环境配置, 等等;</p>
+</li>
+<li><p>使用底层(并非低级)编程语言(如汇编), 则思维模式需转向到各种寄存器, 各种基本操作之间的顺序, 等;</p>
+</li>
+</ul>
+<p>其实还不止以上所列的两种模式/习惯, 假如把<strong>编译器</strong>也算进去的话, 那么又多了一种思维模式/习惯(扫描, 编译, …), 还可以有:</p>
+<ul>
+<li>计算机硬件的总线: 数据总线, 地址总线和控制总线, 冯诺依曼架构(指令与数据共用内存)和哈佛架构(指令与数据各自有各自的内存);</li>
+<li>CPU指令流水线: 取值, 解码, 执行, 存储, 写回, 5个阶段, 它们的处理时间最好相等, 要不然最慢的流水线级处理时间将成为系统的时钟周期</li>
+</ul>
+<p>的在需要不同的思维模型/惯性, 这是导致可能”学不进去”的一个原因了. 脑力才是最高的</p>
+<p>根据</p>
+<p>几乎不可能, 还有显卡嗯</p>
+<p>另: 查某些资料最好都要去google搜索, 百度搜索的同质化太严重, 而且中文环境的内容质量也是要考虑的要点, 如BIOS的介绍();</p>
+<p><a href="https://computer.howstuffworks.com/graphics-card.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/graphics-card.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/analog-digital.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/analog-digital.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/tv.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/tv.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/operating-system.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/operating-system.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/touch-screens.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/touch-screens.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/history-of-the-personal-computer.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/history-of-the-personal-computer.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/bios.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/bios.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/bytes.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/bytes.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/digital-electronics.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/digital-electronics.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/how-to-tech/how-to-build-your-own-arcade-machine.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/how-to-tech/how-to-build-your-own-arcade-machine.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/question319.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/question319.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/microprocessor.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/microprocessor.htm</a></p>
+<p><a href="https://computer.howstuffworks.com/c.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/c.htm</a></p>
+<p><a href="https://electronics.howstuffworks.com/how-to-tech/build-a-computer.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/how-to-tech/build-a-computer.htm</a></p>
+<p>显卡绘图原理:</p>
+<p><a href="http://www.sohu.com/a/298769121_120099975" target="_blank" rel="noopener">http://www.sohu.com/a/298769121_120099975</a></p>
+<p><a href="https://www.cnblogs.com/foohack/p/4596910.html" target="_blank" rel="noopener">https://www.cnblogs.com/foohack/p/4596910.html</a></p>
+<p><a href="https://diy.pconline.com.cn/graphics/study_gra/0902/1558974.html" target="_blank" rel="noopener">https://diy.pconline.com.cn/graphics/study_gra/0902/1558974.html</a></p>
+<p><a href="https://blog.csdn.net/hxh129/article/details/7839988" target="_blank" rel="noopener">https://blog.csdn.net/hxh129/article/details/7839988</a></p>
+<p><strong>X Window 系统的窗口显示原理</strong>: </p>
+<p><a href="https://blog.csdn.net/linuxheik/article/details/7678678" target="_blank" rel="noopener">https://blog.csdn.net/linuxheik/article/details/7678678</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-cn-xwin/</a></p>
+<p><a href="https://blog.csdn.net/ITBoxes/article/details/72790008" target="_blank" rel="noopener">https://blog.csdn.net/ITBoxes/article/details/72790008</a></p>
+<p><strong>关于X Window的一些理解</strong>:<br><a href="https://blog.csdn.net/ldx19980108/article/details/73822820" target="_blank" rel="noopener">https://blog.csdn.net/ldx19980108/article/details/73822820</a></p>
+<p><strong>X Window的奥秘</strong>:</p>
+<p><a href="https://www.cnblogs.com/lijinze-tsinghua/p/8686298.html" target="_blank" rel="noopener">https://www.cnblogs.com/lijinze-tsinghua/p/8686298.html</a></p>
+<p><strong>百度百科</strong>:</p>
+<p><a href="https://baike.baidu.com/item/X Window" target="_blank" rel="noopener">https://baike.baidu.com/item/X%20Window</a></p>
+<p>Hexo_mathjax:</p>
+<p><a href="https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=mathjax hexo&amp;oq=mathjax&amp;rsv_pq=e805b1a70005b287&amp;rsv_t=3b23b0VzemdKtU7Laq6fJcv5F0PYXcSN7ZctD5EqR0Se1wWI5cd3xagfyHQ&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=3&amp;rsv_sug1=3&amp;rsv_sug7=000&amp;bs=mathjax" target="_blank" rel="noopener">https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=baidu&amp;wd=mathjax%20hexo&amp;oq=mathjax&amp;rsv_pq=e805b1a70005b287&amp;rsv_t=3b23b0VzemdKtU7Laq6fJcv5F0PYXcSN7ZctD5EqR0Se1wWI5cd3xagfyHQ&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=3&amp;rsv_sug1=3&amp;rsv_sug7=000&amp;bs=mathjax</a></p>
+<p><a href="https://blog.csdn.net/u014630987/article/details/78670258" target="_blank" rel="noopener">https://blog.csdn.net/u014630987/article/details/78670258</a></p>
+<p><a href="https://www.google.com/search?q=hexo+mathjax配置&amp;sa=X&amp;ved=2ahUKEwjxn8yB77jjAhVUE4gKHfFYBOIQ1QIoAHoECAoQAQ&amp;biw=1680&amp;bih=939" target="_blank" rel="noopener">https://www.google.com/search?q=hexo+mathjax%E9%85%8D%E7%BD%AE&amp;sa=X&amp;ved=2ahUKEwjxn8yB77jjAhVUE4gKHfFYBOIQ1QIoAHoECAoQAQ&amp;biw=1680&amp;bih=939</a></p>
+<p><a href="https://i-m.dev/tools/" target="_blank" rel="noopener">https://i-m.dev/tools/</a></p>
+<p>numpy与scipy:</p>
+<p><a href="https://docs.scipy.org/doc/" target="_blank" rel="noopener">https://docs.scipy.org/doc/</a></p>
+<p><a href="https://blog.csdn.net/tymatlab/article/details/79009618" target="_blank" rel="noopener">https://blog.csdn.net/tymatlab/article/details/79009618</a></p>
+<p><a href="https://www.baidu.com/s?ie=UTF-8&amp;wd=TypeError%3A Cannot read property &#39;utcOffset&#39; of null" target="_blank" rel="noopener">https://www.baidu.com/s?ie=UTF-8&amp;wd=TypeError%3A%20Cannot%20read%20property%20%27utcOffset%27%20of%20null</a></p>
+<p><a href="https://blog.csdn.net/buppt/article/details/78016407" target="_blank" rel="noopener">https://blog.csdn.net/buppt/article/details/78016407</a></p>
+<p>Google Unix: <a href="https://www.google.com/search?biw=1680&amp;bih=939&amp;ei=gYkxXZ6OIYvW-QaWzIZA&amp;q=what+is+unix+terminal&amp;oq=what+is+unix+terminal&amp;gs_l=psy-ab.3.1.0i7i30j0i203j0i8i30l6j0i8i10i30.49026.72796..77259...5.0..0.179.4218.4j33......0....1..gws-wiz.....10..0i71j35i39j0j0i67j0i131j0i30j0i5i30j0i7i10i30j0i13j0i8i7i30j0i8i7i10i30j0i7i30i19j0i8i7i30i19j0i8i7i10i30i19.nipETkQ1gg4" target="_blank" rel="noopener">https://www.google.com/search?biw=1680&amp;bih=939&amp;ei=gYkxXZ6OIYvW-QaWzIZA&amp;q=what+is+unix+terminal&amp;oq=what+is+unix+terminal&amp;gs_l=psy-ab.3.1.0i7i30j0i203j0i8i30l6j0i8i10i30.49026.72796..77259...5.0..0.179.4218.4j33......0....1..gws-wiz.....10..0i71j35i39j0j0i67j0i131j0i30j0i5i30j0i7i10i30j0i13j0i8i7i30j0i8i7i10i30j0i7i30i19j0i8i7i30i19j0i8i7i10i30i19.nipETkQ1gg4</a></p>
+<p><a href="http://mally.stanford.edu/~sr/computing/basic-unix.html" target="_blank" rel="noopener">http://mally.stanford.edu/~sr/computing/basic-unix.html</a></p>
+<p><a href="https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Unix_shell</a></p>
+<p><a href="http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html" target="_blank" rel="noopener">http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html</a></p>
+<p>MMM</p>
+<p>快点来报道: </p>
+<p>程序: 高级编程, CPU, 汇编.</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/18/PAPER-YOLO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -623,7 +858,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-25 23:56:00" itemprop="dateModified" datetime="2019-07-25T23:56:00+08:00">2019-07-25</time>
+                <time title="修改时间：2019-08-02 17:49:14" itemprop="dateModified" datetime="2019-08-02T17:49:14+08:00">2019-08-02</time>
               
             
           </span>
@@ -802,7 +1037,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-18 00:14:14" itemprop="dateModified" datetime="2019-07-18T00:14:14+08:00">2019-07-18</time>
+                <time title="修改时间：2019-08-02 18:05:12" itemprop="dateModified" datetime="2019-08-02T18:05:12+08:00">2019-08-02</time>
               
             
           </span>
@@ -1333,7 +1568,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-27 18:57:19" itemprop="dateModified" datetime="2019-07-27T18:57:19+08:00">2019-07-27</time>
+                <time title="修改时间：2019-08-02 17:47:40" itemprop="dateModified" datetime="2019-08-02T17:47:40+08:00">2019-08-02</time>
               
             
           </span>
@@ -1596,6 +1831,7 @@
 <li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
 <li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
 </ol>
+<p><a href="https://www.cnblogs.com/peaceWang/p/Markdown-tian-jia-Latex-shu-xue-gong-shi.html" target="_blank" rel="noopener">https://www.cnblogs.com/peaceWang/p/Markdown-tian-jia-Latex-shu-xue-gong-shi.html</a></p>
 
           
         
@@ -2166,160 +2402,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/06/29/CV-ALG/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Haoran Ye">
-      <meta itemprop="description" content="Computer Fake Science">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Univesre">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/29/CV-ALG/" class="post-title-link" itemprop="url">CV_ALG</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-29 21:33:30" itemprop="dateCreated datePublished" datetime="2019-06-29T21:33:30+08:00">2019-06-29</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-08 21:52:21" itemprop="dateModified" datetime="2019-07-08T21:52:21+08:00">2019-07-08</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2366,7 +2448,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2468,7 +2550,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
