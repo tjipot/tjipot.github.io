@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="Univesre">
 <meta property="og:description" content="关于底层的一些笔记: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-02T15:46:25.000Z">
+<meta property="og:updated_time" content="2019-08-02T16:16:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机的底层逻辑">
 <meta name="twitter:description" content="关于底层的一些笔记: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址,">
@@ -403,7 +403,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-02 23:46:25" itemprop="dateModified" datetime="2019-08-02T23:46:25+08:00">2019-08-02</time>
+                <time title="修改时间：2019-08-03 00:16:14" itemprop="dateModified" datetime="2019-08-03T00:16:14+08:00">2019-08-03</time>
               
             
           </span>
@@ -466,10 +466,16 @@
 <p>其实还不止以上所列的两种模式/习惯, 假如把<strong>编译器</strong>也算进去的话, 那么又多了一种思维模式/习惯(扫描, 编译, …), 还可以有:</p>
 <ul>
 <li>计算机硬件的总线: 数据总线, 地址总线和控制总线, 冯诺依曼架构(指令与数据共用内存)和哈佛架构(指令与数据各自有各自的内存);</li>
-<li>CPU指令流水线: 取值, 解码, 执行, 存储, 写回, 5个阶段, 它们的处理时间最好相等, 要不然最慢的流水线级处理时间将成为系统的时钟周期</li>
+<li>CPU指令流水线: 取值, 解码, 执行, 存储, 写回, 5个阶段, 它们的处理时间最好相等, 要不然最慢的流水线级处理时间将成为系统的时钟周期, 以及流水线处理中的”冒险”(Hazard)概念(导致流水线耽搁不能按时按设计执行);</li>
+<li>BIOS也是一种软件程序: 完全超越了高级编程语言的概念(更重要, 关乎开机及硬件正常), 比汇编还要更接近硬件(它无法用编译器编译出?!), 确保同一个计算机中的芯片(chips), 硬盘(hard drives), 端口(ports)及CPU能一起正常运转;</li>
+<li>视窗X Window系统: 超越原先的BIOS单色调简单图形/形状, 转而将更多颜色, 更多形状的界面(GUI)绘制到屏幕上, 由此也引出CPU与GPU的关系;</li>
 </ul>
+<p>此外, 还有此外, 如GPU中也有BIOS等等, 不一而足. 以上举了这么些不同范畴的概念, 只不过想验证下计算机的高层底层的思维习惯/模式可以有多么不同, 而在学习/了解的过程中要保持一种失望的预期, 才能在费脑细胞的计算机学习中保持愉悦的状态.</p>
 <p>的在需要不同的思维模型/惯性, 这是导致可能”学不进去”的一个原因了. 脑力才是最高的</p>
 <p>根据</p>
+<p><strong><em>Reference</em></strong></p>
+<p>1.CPU自制入门;</p>
+<p>2.<a href="https://computer.howstuffworks.com/bios.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/bios.htm</a>;</p>
 <p>几乎不可能, 还有显卡嗯</p>
 <p>另: 查某些资料最好都要去google搜索, 百度搜索的同质化太严重, 而且中文环境的内容质量也是要考虑的要点, 如BIOS的介绍();</p>
 <p><a href="https://computer.howstuffworks.com/graphics-card.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/graphics-card.htm</a></p>
@@ -478,7 +484,6 @@
 <p><a href="https://computer.howstuffworks.com/operating-system.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/operating-system.htm</a></p>
 <p><a href="https://computer.howstuffworks.com/touch-screens.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/touch-screens.htm</a></p>
 <p><a href="https://computer.howstuffworks.com/history-of-the-personal-computer.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/history-of-the-personal-computer.htm</a></p>
-<p><a href="https://computer.howstuffworks.com/bios.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/bios.htm</a></p>
 <p><a href="https://computer.howstuffworks.com/bytes.htm" target="_blank" rel="noopener">https://computer.howstuffworks.com/bytes.htm</a></p>
 <p><a href="https://electronics.howstuffworks.com/digital-electronics.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/digital-electronics.htm</a></p>
 <p><a href="https://electronics.howstuffworks.com/how-to-tech/how-to-build-your-own-arcade-machine.htm" target="_blank" rel="noopener">https://electronics.howstuffworks.com/how-to-tech/how-to-build-your-own-arcade-machine.htm</a></p>
