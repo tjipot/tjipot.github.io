@@ -104,7 +104,10 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/08/04/stmHou7FhWkOdnS.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/04/klWoEZLrMHXcd7Q.png">
-<meta property="og:updated_time" content="2019-08-04T09:21:57.000Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/QRUk7nSb3hmEofj.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/yRYGhNaI7dAW25p.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/2WktS5pOX3h8Jnr.png">
+<meta property="og:updated_time" content="2019-08-04T11:01:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="桌面系统的虚与实">
 <meta name="twitter:description" content="背景 此篇文章是从之前的计算机纵深这篇文章的独立出来的, 因为发现, 想写的内容实在有点多, 如果放在那篇文章中的话, 会造成不好的文章结构, 这个部分过于详细会像一个人背了很重书包的人一样, 不和谐(应该托运或放行李中才对). 这篇文章中是基于我对现今操作系统(OS)中的的”命令/终端/图形界面“这几个方面的疑惑而展开的, 希望通过结合之前的知识以及写文章整理思路, 解决掉”直觉性/理解上”的疑">
@@ -389,7 +392,7 @@
                 
               
 
-              <time title="创建时间：2019-08-04 10:53:39 / 修改时间：17:21:57" itemprop="dateCreated datePublished" datetime="2019-08-04T10:53:39+08:00">2019-08-04</time>
+              <time title="创建时间：2019-08-04 10:53:39 / 修改时间：19:01:58" itemprop="dateCreated datePublished" datetime="2019-08-04T10:53:39+08:00">2019-08-04</time>
             
 
             
@@ -520,7 +523,39 @@
 </li>
 </ol>
 <p><strong>行文至此</strong>, 图形用户界面的大致机理已经整理得差不多了: 不管是<strong>终端界面</strong>还是<strong>图形界面</strong>(它们都是OS下的软件), <strong>最终都是</strong>: <strong>软件生成中断</strong> =&gt; <strong>OS或软件响应中断</strong>(打开新程序(系统调用), 保存数据(软件内执行, 不过数据保存还是通过系统调用的IO)). <strong>这其中的区别</strong>, 则是表象上的表现形式以及随之而来的内容丰富性: <strong>一个</strong>是”简陋的”单色文字界面, <strong>另一个</strong>则是色彩丰富的图形图片.</p>
-<h4 id="相关参考-事物"><a href="#相关参考-事物" class="headerlink" title="相关参考/事物"></a>相关参考/事物</h4>
+<h4 id="相关参考-概念"><a href="#相关参考-概念" class="headerlink" title="相关参考/概念"></a>相关参考/概念</h4><p>计算机软硬件中的任意一个概念都不是游离的, 它都是这个强耦合体系中的其中一个耦合点, 在上述行文中, 我自认为有些概念是没有去扩展开的(注意篇幅及文章结构!), 我将它们罗列如下(包含索引), 以便将来的查阅和扩充: 1.X窗口系统[<a href="https://zh.wikipedia.org/wiki/X_Window系統" target="_blank" rel="noopener">Ref</a>], 2.视窗系统[<a href="https://zh.wikipedia.org/wiki/視窗系統" target="_blank" rel="noopener">Ref</a>], 3.</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a><em>Reference</em>:</h4><ol>
+<li>维基百科, <em>用户界面</em>, <a href="https://zh.wikipedia.org/wiki/用户界面" target="_blank" rel="noopener">Ref</a>;</li>
+<li>维基百科, <em>图形用户界面</em>, <a href="https://zh.wikipedia.org/wiki/图形用户界面" target="_blank" rel="noopener">Ref</a>;</li>
+<li>维基百科, <em>命令行界面</em>, <a href="https://zh.wikipedia.org/wiki/命令行界面" target="_blank" rel="noopener">Ref</a>;</li>
+<li>维基百科, <em>Unix</em>, <a href="https://zh.wikipedia.org/wiki/UNIX" target="_blank" rel="noopener">Ref</a>;</li>
+<li>维基百科, <em>Unix Shell</em>, <a href="https://zh.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">Ref</a>;</li>
+<li>维基百科, <em>MS-DOS</em>, <a href="https://zh.wikipedia.org/wiki/MS-DOS" target="_blank" rel="noopener">Ref</a>;</li>
+<li>维基百科, <em>X显示管理器</em>, <a href="https://zh.wikipedia.org/wiki/X显示管理器" target="_blank" rel="noopener">Ref</a>;</li>
+</ol>
+<h4 id="附录1-命令行界面"><a href="#附录1-命令行界面" class="headerlink" title="附录1 - 命令行界面"></a>附录1 - 命令行界面</h4><p>命令行界面, 真的, 与图形界面的<strong>区别不大</strong>: 它们都是OS中的一种软件(虽然人们常叫它们终端, 但是它们是软件终端, 而不是上个世纪70/80年代的实体终端机器了), 它们一个低配”简陋”了些, 另一个高配”丰富”了些, 但完全说它们区别不大也不够负责任(至少从理解者的角度来说): 图形界面多了不同的”中断/响应”来源, 比如鼠标, 比如触控板, 图形系统(如Unix上的X Window)将窗口中的事件响应到OS, 由OS进行相应的操作(如网络, 如保存), <strong>这一点</strong>, 与命令行界面是相同的. 以下再一小叙命令行界面(<em>Source: Wikipedia, <a href="https://zh.wikipedia.org/wiki/命令行界面" target="_blank" rel="noopener">Ref</a></em>), 以消除陌生感, 并附图(图3)铁证命令行界面:</p>
+<blockquote>
+<p>通常认为, 命令行界面（CLI）没有<a href="https://zh.wikipedia.org/wiki/图形用户界面" target="_blank" rel="noopener">图形用户界面</a>（GUI）那么方便用户操作。因为，命令行界面的<a href="https://zh.wikipedia.org/wiki/软件" target="_blank" rel="noopener">软件</a>通常需要用户记忆操作的命令，但是，由于其本身的特点，命令行界面要较图形用户界面节约计算机系统的资源。在熟记命令的前提下，使用命令行界面往往要较使用图形用户界面的操作速度要快。所以，在现在的图形用户界面的操作系统中，通常<strong>都保留着可选的命令行界面</strong>。</p>
+<p>虽然现在许多计算机系统都提供了图形化的操作方式，但是却都没有因而停止提供文字模式的命令行操作方式，相反的，许多系统反而更加强这部分的功能，例如<a href="https://zh.wikipedia.org/wiki/Windows" target="_blank" rel="noopener">Windows</a>就不只加强了操作命令的功能和数量，也一直在改善Shell Programming的方式。而之所以要加强、改善，自然是因为不够好；操作系统的图形化操作方式对单一客户端计算机的操作，已经相当方便，但如果是一群<a href="https://zh.wikipedia.org/wiki/用戶端" target="_blank" rel="noopener">客户端</a>计算机，或者是24小时运作的<a href="https://zh.wikipedia.org/wiki/伺服器" target="_blank" rel="noopener">服务器</a>计算机及<a href="https://zh.wikipedia.org/wiki/路由器" target="_blank" rel="noopener">路由器</a>、<a href="https://zh.wikipedia.org/wiki/交換器" target="_blank" rel="noopener">交换器</a>等<a href="https://zh.wikipedia.org/wiki/電信設備" target="_blank" rel="noopener">电信设备</a>，图形化操作方式有时会力有未逮，所以需要不断增强命令行界面的<a href="https://zh.wikipedia.org/wiki/腳本語言" target="_blank" rel="noopener">脚本语言</a>和<a href="https://zh.wikipedia.org/wiki/巨集" target="_blank" rel="noopener">宏</a>语言来提供丰富的控制与<a href="https://zh.wikipedia.org/wiki/自動化" target="_blank" rel="noopener">自动化</a>的系统管理能力，例如Linux系统的<a href="https://zh.wikipedia.org/wiki/Bash" target="_blank" rel="noopener">Bash</a>或是Windows系统的<a href="https://zh.wikipedia.org/wiki/Windows_PowerShell" target="_blank" rel="noopener">Windows PowerShell</a>。</p>
+</blockquote>
+<p> <img src="https://i.loli.net/2019/08/04/QRUk7nSb3hmEofj.png" alt="03_Bash_screenshot.png"></p>
+<p><em>Fig.3, Bash CLI in Gentoo Linux, Source: <a href="https://zh.wikipedia.org/wiki/命令行界面" target="_blank" rel="noopener">Ref</a>.</em></p>
+<p>再引用维基中的内容, 说明/证实一下”命令行界面是OS中的一种软件”, 常见的CLI程序:</p>
+<blockquote>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/Bash" target="_blank" rel="noopener">bash</a> / <a href="https://zh.wikipedia.org/wiki/Bourne_shell" target="_blank" rel="noopener">sh</a> / <a href="https://zh.wikipedia.org/wiki/Korn_shell" target="_blank" rel="noopener">ksh</a> / <a href="https://zh.wikipedia.org/wiki/C_Shell" target="_blank" rel="noopener">csh</a> / <a href="https://zh.wikipedia.org/wiki/Z_shell" target="_blank" rel="noopener">zsh</a>（<a href="https://zh.wikipedia.org/wiki/Unix-like" target="_blank" rel="noopener">Unix-like</a>系统）</li>
+<li><a href="https://zh.wikipedia.org/wiki/COMMAND.COM" target="_blank" rel="noopener">COMMAND.COM</a>（<a href="https://zh.wikipedia.org/wiki/MS-DOS" target="_blank" rel="noopener">MS-DOS</a>系统）</li>
+<li><a href="https://zh.wikipedia.org/wiki/Cmd.exe" target="_blank" rel="noopener">cmd.exe</a> / <a href="https://zh.wikipedia.org/wiki/命令提示字元" target="_blank" rel="noopener">命令提示符</a>（<a href="https://zh.wikipedia.org/wiki/Windows_NT" target="_blank" rel="noopener">Windows NT</a>和<a href="https://zh.wikipedia.org/wiki/Windows_CE" target="_blank" rel="noopener">Windows CE</a>系统）</li>
+<li><a href="https://zh.wikipedia.org/wiki/Windows_PowerShell" target="_blank" rel="noopener">Windows PowerShell</a>（支持<a href="https://zh.wikipedia.org/wiki/.NET_Framework" target="_blank" rel="noopener">.NET Framework</a>技术的Windows NT系统）</li>
+</ul>
+</blockquote>
+<p>它们都是勤劳的小蜜蜂, 踏实地将Shell命令(命令行语句)发送给系统(系统内核), 申请系统调用, 请求执行命令行中指定的程序(如: <code>python</code>, <code>g++</code>, <code>javac</code>), 再多说一句, 依次看来, 命令行软件像不像那种转包的包工头, 自己不执行命令, 而将命令”层层外包”, 但命令行中则是转包给”OS/内核”.</p>
+<h4 id="附录2-微软开源MS-DOS代码"><a href="#附录2-微软开源MS-DOS代码" class="headerlink" title="附录2 - 微软开源MS-DOS代码"></a>附录2 - 微软开源MS-DOS代码</h4><p>在2014年, 微软开源了早期的MS-DOS代码[<a href="https://blogs.microsoft.com/blog/2014/03/25/microsoft-makes-source-code-for-ms-dos-and-word-for-windows-available-to-public/" target="_blank" rel="noopener">Ref</a>], 我还记得更早之前看到比尔盖茨手拿软盘的照片(不过拿的应该不是MS-DOS的了), 不禁感觉到一个时代的意思, 在此附图两张(图4/5), 也算是致敬一下计算机和代码这种宇宙力量:</p>
+<p> <img src="https://i.loli.net/2019/08/04/yRYGhNaI7dAW25p.jpg" alt="04_Bill_Gates_And_Floppy_Disk.jpg"></p>
+<p><em>Fig.4, Bill Gates With Floppy Disk, <a href="https://www.zdnet.com/pictures/photos-a-bill-gates-retrospective/3/" target="_blank" rel="noopener">Ref</a>.</em></p>
+<p> <img src="https://i.loli.net/2019/08/04/2WktS5pOX3h8Jnr.png" alt="05_MS_DOS_Products.png"></p>
+<p><em>Fig.5, MS_DOS_Products, <a href="https://blogs.microsoft.com/blog/2014/03/25/microsoft-makes-source-code-for-ms-dos-and-word-for-windows-available-to-public/" target="_blank" rel="noopener">Ref</a>.</em></p>
+
       
     </div>
 
@@ -797,7 +832,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#图形用户界面的历史"><span class="nav-number">1.</span> <span class="nav-text">图形用户界面的历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图形用户界面工作机理"><span class="nav-number">2.</span> <span class="nav-text">图形用户界面工作机理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关参考-事物"><span class="nav-number">3.</span> <span class="nav-text">相关参考/事物</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#图形用户界面的历史"><span class="nav-number">1.</span> <span class="nav-text">图形用户界面的历史</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图形用户界面工作机理"><span class="nav-number">2.</span> <span class="nav-text">图形用户界面工作机理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相关参考-概念"><span class="nav-number">3.</span> <span class="nav-text">相关参考/概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附录1-命令行界面"><span class="nav-number">5.</span> <span class="nav-text">附录1 - 命令行界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#附录2-微软开源MS-DOS代码"><span class="nav-number">6.</span> <span class="nav-text">附录2 - 微软开源MS-DOS代码</span></a></li></ol></div>
             
 
           </div>
