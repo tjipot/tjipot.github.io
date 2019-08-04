@@ -102,10 +102,14 @@
 <meta property="og:site_name" content="Univesre">
 <meta property="og:description" content="关于底层的一些笔记: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-04T10:56:22.000Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/M534U8gkKnFAOux.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/3oe5shZ6HfaSunK.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/04/3kWQDrSM1P4zREp.jpg">
+<meta property="og:updated_time" content="2019-08-04T15:55:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机的底层逻辑">
 <meta name="twitter:description" content="关于底层的一些笔记: 常说要多了解点计算机底层的东西, 那么问题有: 1.要了解多少底层东西(才够用), 2.底层有多少东西要了解? 最近发现底层真是个无底洞: 平常常说CPU/计算机是工作在0/1的基础上的, 但这么说其实没有多少作用: 在用高级编程语言编程时看到的明明就是具体的字符字母, 平常使用电脑时看到的明明就是GUI图形界面, 哪里来的0/1之说?! 而你说CPU使用分页表去多级寻址,">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/04/M534U8gkKnFAOux.png">
 
 
 
@@ -403,7 +407,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-04 18:56:22" itemprop="dateModified" datetime="2019-08-04T18:56:22+08:00">2019-08-04</time>
+                <time title="修改时间：2019-08-04 23:55:14" itemprop="dateModified" datetime="2019-08-04T23:55:14+08:00">2019-08-04</time>
               
             
           </span>
@@ -572,11 +576,35 @@
 <p><a href="https://blog.csdn.net/tymatlab/article/details/79009618" target="_blank" rel="noopener">https://blog.csdn.net/tymatlab/article/details/79009618</a></p>
 <p><a href="https://www.baidu.com/s?ie=UTF-8&amp;wd=TypeError%3A Cannot read property &#39;utcOffset&#39; of null" target="_blank" rel="noopener">https://www.baidu.com/s?ie=UTF-8&amp;wd=TypeError%3A%20Cannot%20read%20property%20%27utcOffset%27%20of%20null</a></p>
 <p><a href="https://blog.csdn.net/buppt/article/details/78016407" target="_blank" rel="noopener">https://blog.csdn.net/buppt/article/details/78016407</a></p>
-<p>Google Unix: <a href="https://www.google.com/search?biw=1680&amp;bih=939&amp;ei=gYkxXZ6OIYvW-QaWzIZA&amp;q=what+is+unix+terminal&amp;oq=what+is+unix+terminal&amp;gs_l=psy-ab.3.1.0i7i30j0i203j0i8i30l6j0i8i10i30.49026.72796..77259...5.0..0.179.4218.4j33......0....1..gws-wiz.....10..0i71j35i39j0j0i67j0i131j0i30j0i5i30j0i7i10i30j0i13j0i8i7i30j0i8i7i10i30j0i7i30i19j0i8i7i30i19j0i8i7i10i30i19.nipETkQ1gg4" target="_blank" rel="noopener">https://www.google.com/search?biw=1680&amp;bih=939&amp;ei=gYkxXZ6OIYvW-QaWzIZA&amp;q=what+is+unix+terminal&amp;oq=what+is+unix+terminal&amp;gs_l=psy-ab.3.1.0i7i30j0i203j0i8i30l6j0i8i10i30.49026.72796..77259...5.0..0.179.4218.4j33......0....1..gws-wiz.....10..0i71j35i39j0j0i67j0i131j0i30j0i5i30j0i7i10i30j0i13j0i8i7i30j0i8i7i10i30j0i7i30i19j0i8i7i30i19j0i8i7i10i30i19.nipETkQ1gg4</a></p>
-<p><a href="http://mally.stanford.edu/~sr/computing/basic-unix.html" target="_blank" rel="noopener">http://mally.stanford.edu/~sr/computing/basic-unix.html</a></p>
-<p><a href="https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Unix_shell</a></p>
-<p><a href="http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html" target="_blank" rel="noopener">http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html</a></p>
+<h4 id="Unix-Shell"><a href="#Unix-Shell" class="headerlink" title="Unix - Shell"></a>Unix - Shell</h4><p>首先, 要讲一下关于Shell的命名问题: Shell为什么叫<strong>壳</strong>(Shell)?! 简单说来就是, shell这层壳就是套在操作系统外面的一个机制, 有了shell, 操作系统的内核就可以将自己与外部使用环境隔离开来, 保证了内核的安全, 故取名这么一个东西叫shell也是很正确了(维基百科: “<em>普通意义上的shell就是可以接受用户输入命令的程序</em>“, <a href="https://zh.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">Ref</a>).</p>
+<p>在使用中, shell的工作机理也是这样的: 用户输入命令行语句(shell脚本语句)或者执行一个shell脚本, 由终端(在Mac中是Terminal)这个软件将命令行语句传递给相应执行程序, 从而达到运行某个程序的目的. 当然, 我们可以双击某个执行程序运行该程序, 但这是图形界面的运行方式, 在1970或者1980图形界面还不像现在这么流行的年代, 启动程序的方式是通过终端来进行的, 而且, 双击打开某个程序的话, 怎么传递参数给这个程序?! 此外, 使用鼠标操作程序的方式在现在看来应该是打开”应用/软件”吧(不应该叫程序: 程序和程序猿不是很搭吗:D).</p>
+<p>尽管有很多shell的存在(如: ash, bash, dash, ksh, zsh), 但上述shell的机理不应有区别, 不同shell的区别应当是语言(shell script)风格方面的, 而不是shell功能定位和主旨上的.</p>
+<p><strong>要命的配置文件</strong> 在使用高级编程语言进行编程活动时, 时常会遇到引用库不存在的问题, 这类问题的原因也时常和包含路径有关(<code>$PATH</code>):</p>
+<blockquote>
+<p>Shells read configuration files in various circumstances. These files usually contain commands for the shell and are executed when loaded; they are usually used to set important variables used to find executables, like <a href="https://en.wikipedia.org/wiki/$PATH" target="_blank" rel="noopener">$PATH</a>, and others that control the behavior and appearance of the shell. The table in this section shows the configuration files for popular shells.</p>
+</blockquote>
+<p>上述引用讲了几个要点: 1.shell会读取配置文件(如: <code>~./.bash_profile</code>), 2.这些配置文件中包含的是shell可执行的脚本命令(当它启动时), 3.通常会在这些配置文件中设置诸如<code>$PATH</code>这样的重要变量(以及其它用于控制shell行为和外观的变量), 4.如下表格(此处未引用)显示了一些常用shell的相关配置文件.</p>
+<p>可知, shell去读取某个配置文件是一种<strong>固定模式</strong>, 当一个系统中的shell终端确定时, 这个将要读取的配置文件就确定了, 不需要认为地再去设定. 联想到Mac(或类Unix系统)中根目录下的一些文件, 如: <code>usr</code>, <code>bin</code>, <code>sbin</code>, <code>opt</code>, <code>etc</code>, 这些文件夹<strong>也是固定命名的</strong>(由于历史原因! 历史是没法改变的! 时光是无法倒流的!), 无论Mac的图形界面设计如何迭代, 这些隐藏的文件的命名是永远变不了了(好丑的命名:D), 谁叫Mac是类Unix且是”私有”的系统呢.</p>
+<p>下面, 附”Unix shell”图几张, 都还蛮有意思的: </p>
+<p><img src="https://i.loli.net/2019/08/04/M534U8gkKnFAOux.png" alt="01_Unix命令_1.png"></p>
+<p><em>图1. Unix命令_1, Reference#3</em></p>
+<p><img src="https://i.loli.net/2019/08/04/3oe5shZ6HfaSunK.png" alt="02_Unix命令_2.png"></p>
+<p><em>图2. Unix命令_2, Reference#3</em> </p>
+<p> <img src="https://i.loli.net/2019/08/04/3kWQDrSM1P4zREp.jpg" alt="03_Vi命令.jpg"></p>
+<p><em>图3. Vi命令, Reference#3</em></p>
+<p><em>(后记: 搜索时尽量用Google, 百度也可以结合使用, 不过光百度的话, 会让我失望的(或者反之亦然?! 不过就这几次的经验来看, Google的惊喜还是不错的))</em></p>
+<p><strong><em>Reference</em></strong></p>
+<ol>
+<li>维基百科, Unix shell, <a href="https://zh.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">Ref_中文</a> =&gt; <a href="http://www.freeos.com/guides/lsst/" target="_blank" rel="noopener">Shell_Book</a>, <a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank" rel="noopener">Ref_英文</a>;</li>
+<li>维基百科, PATH(variable), <a href="https://en.wikipedia.org/wiki/PATH_(variable" target="_blank" rel="noopener">Ref</a>);</li>
+<li>Reddit, Unix Shell Posters Re-made, <a href="https://www.reddit.com/r/linux/comments/9nvni0/unix_shell_posters_remade/" target="_blank" rel="noopener">Ref</a>;</li>
+</ol>
+<p><strong><em>其它参考</em></strong></p>
+<ol>
+<li>关于Terminal, Console, Shell和Command Line的区别释疑, 可参考: <a href="https://askubuntu.com/questions/506510/what-is-the-difference-between-terminal-console-shell-and-command-line" target="_blank" rel="noopener">Ref</a>, 含图片示例, 或另一个类似提问[<a href="https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con" target="_blank" rel="noopener">Ref</a>];</li>
+<li>萨里大学(University of Surrey)关于Unix的介绍(UNIX Introduction), <a href="http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html" target="_blank" rel="noopener">Ref</a>;</li>
+<li>Mally.stanford.edu关于基本Unix命令的讲解, <a href="http://mally.stanford.edu/~sr/computing/basic-unix.html" target="_blank" rel="noopener">Ref</a>;</li>
+</ol>
 
       
     </div>
@@ -860,7 +888,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于X-Window"><span class="nav-number">1.</span> <span class="nav-text">关于X Window</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于X-Window"><span class="nav-number">1.</span> <span class="nav-text">关于X Window</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unix-Shell"><span class="nav-number">2.</span> <span class="nav-text">Unix - Shell</span></a></li></ol></div>
             
 
           </div>
