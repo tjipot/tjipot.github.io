@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-14 22:56:42" itemprop="dateModified" datetime="2019-11-14T22:56:42+08:00">2019-11-14</time>
+                <time title="修改时间：2019-11-14 22:58:33" itemprop="dateModified" datetime="2019-11-14T22:58:33+08:00">2019-11-14</time>
               
             
           </span>
@@ -460,7 +460,7 @@
         
           <p><strong>背景</strong> 此篇文章是从之前的<em>计算机纵深</em>这篇文章的独立出来的, 因为发现, 想写的内容实在有点多, 如果放在那篇文章中的话, 会造成不好的文章结构, 这个部分过于详细会像一个人背了很重书包的人一样, 不和谐(应该托运或放行李中才对). 这篇文章中是基于我对现今操作系统(OS)中的的”<strong>命令/终端/图形界面</strong>“这几个方面的疑惑而展开的, 希望通过结合之前的知识以及写文章整理思路, 解决掉”直觉性/理解上”的疑惑. MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM</p>
 <p>MMM</p>
-<p>MMMMMMMM</p>
+<p>MMMMMMMMM</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -470,6 +470,224 @@
             </div>
           
           <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/23/CV-札记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Haoran Ye">
+      <meta itemprop="description" content="Computer Fake Science">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Univesre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/23/CV-札记/" class="post-title-link" itemprop="url">CV_札记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-23 10:34:09" itemprop="dateCreated datePublished" datetime="2019-07-23T10:34:09+08:00">2019-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-31 12:37:38" itemprop="dateModified" datetime="2019-07-31T12:37:38+08:00">2019-07-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/札记/" itemprop="url" rel="index"><span itemprop="name">札记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>关于CS231n课的一些笔记</strong> </p>
+<p>$L_i=-log(\frac{e^{f_y{_i}}}{\sum_je^{f_j}})$</p>
+<p>$L=\frac{1}{N} \displaystyle \sum_i L_i + \frac{1}{2} \lambda \displaystyle\sum_k \displaystyle\sum_l W^{2}_{k,l}$</p>
+<p>$\frac{\partial L_i}{\partial f_k} = p_k - \mathbb{ONE}(y_i=k)$</p>
+<h4 id="关于Hidden层的直觉性思考"><a href="#关于Hidden层的直觉性思考" class="headerlink" title="关于Hidden层的直觉性思考"></a>关于Hidden层的直觉性思考</h4><p>直觉性的理解: 对于输入空间中$x1$和$x2$不同取值, 隐藏层将它们原先的一次组合(即: 没有隐藏层的线性(vanilla)模型)进行”二次加工”, 比如: 输入数据点在第一层模型分类的基础上, 再次进行调整, 使得图1中的三条直线段在不同的取值区间(小范围内)内呈现不同的位移/扭曲(直线变曲线), 完成此例中的螺旋分类. </p>
+<p>激活函数的加入, 使得原先的”线段式”曲线变得更平滑(消除了不同线段连接间的折角特征), 原先的”线段式”曲线变成真正的曲线(平滑的), 这像是一个消除图像马赛克的过程/模拟.</p>
+<p>todo: 贴网络传导图</p>
+<p> <img src="https://i.loli.net/2019/07/28/5d3cf5e90ddcf27564.png" alt="隐藏层对原线性模型的干预"></p>
+<p>好记性不如烂笔头(要理论, 也要工程):</p>
+<p>1.jupyter notebook平常使用三步走: ;</p>
+<p>matplotlib.plot三步走: ;</p>
+<p>文字的先天不足: 文字就是文字, 在解释/描述程序世界时总是外界事物, 能用例子看懂了, 你还想要文字来描述吗: 编程语言的API再详细, 那也不是程序设计时的内在逻辑, 如<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html?highlight=scatter#matplotlib.pyplot.scatter这个API的描述" target="_blank" rel="noopener">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html?highlight=scatter#matplotlib.pyplot.scatter这个API的描述</a>;</p>
+<hr>
+<h4 id="Matplotlib的API简记"><a href="#Matplotlib的API简记" class="headerlink" title="Matplotlib的API简记"></a>Matplotlib的API简记</h4><p>首先, Matplotlib是因其作者想要在Python中使用像Matlab一样的画图(便利)方式而写出来的一个Python的画图库(主要是数据图的绘制而不是图像的显示/绘制, 图像的显示/绘制应该用OpenCV, 即cv2模块(但安装的时候是’pip install opencv-python’(或者python-opencv, 哪个对用哪个))), 此库的前三个字母就是Matlab的前三个字母, 接着是两个单词: plot(绘制)和lib(库). Matplotlib的<code>pyplot</code>模块最为常用: 体现为代码语句<code>import matplotlib.pyplot as plt</code>的使用频率.</p>
+<p>在做cs231n中模型的总结时, 调用到其一些函数, 做个总结, 加深印象(第一个api我会写得详细一些, 其它的话都是一样的套路就不那么详细, 除非有新的要点出现):</p>
+<p><strong><code>plt.contourf()</code></strong>[<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.contourf.html" target="_blank" rel="noopener">REF</a>]: 调用格式(Call signatures): <code>contour([X, Y,] Z, [levels], **kwargs)</code>:</p>
+<p><code>X</code>和<code>Y</code>参数是数组(<code>np.array()</code>)形式的变量(如: <code>np.arange(9)</code>), 代表的是平面坐标系中的两个维度上的坐标<code>X</code>和<code>Y</code>$^{[注1]}$, 调用时可以省略不给(它们在中括号(<code>[]</code>)中), 不给的话, 在函数内有默认的值(整数索引, “integer indices”)会被填充进去: <code>X=range(M), Y=range(N)</code>, 即<code>X</code>从<code>0</code>到<code>M-1</code>, 以及<code>Y</code>从<code>0</code>到<code>N</code>.</p>
+<p><code>X</code>和<code>Y</code>是<code>Z</code>中元素值的坐标, 它们的维度要么是2D的, 或者要么是1D的(详见下图关于<strong><code>X,Y</code></strong>的说明).</p>
+<p><code>Z</code>参数是必须给的, 它的shape是<code>(N,M)</code>, 对应<code>len(Y)/Z的行数</code>和<code>len(X)/Z的列数</code>, 即把<code>X</code>和<code>Y</code>相应位置的索引对应到相应的<code>Z</code>值(等高图中的高度).</p>
+<blockquote>
+<p>注1: 经常弄错的是, 我把<code>(x1,y1)</code>当做参数<code>X</code>, 把<code>(x2,y2)</code>当做参数<code>Y</code>传给numpy函数, 但numpy中把所有<code>X</code>维度和<code>Y</code>维度上的一系列坐标分开处理, 只不过用相同的索引<code>i</code>将两个数组中的坐标对应起来(如<code>X[1]</code>对应<code>Y[1]</code>): 就是这样的, 轮子就是这样的.</p>
+</blockquote>
+<p>说了这么多, 上图吧(一图胜千字):</p>
+<p> <img src="https://i.loli.net/2019/07/29/5d3e4ff5a4e6566270.png" alt="01_CONTOURF参数API.png"></p>
+<p><em>图1: 参数说明</em></p>
+<p> <img src="https://i.loli.net/2019/07/29/5d3e53463cb8289198.png" alt="02_等高图.png"><br><em>图2: 等高图例</em></p>
+<p><strong><code>contourf()</code></strong>函数在<code>matplotlib</code>库中的原代码为[<a href="https://matplotlib.org/_modules/matplotlib/pyplot.html#contourf" target="_blank" rel="noopener">REF</a>]:</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; @docstring.copy(Axes.contourf)</span><br><span class="line">&gt; <span class="function"><span class="keyword">def</span> <span class="title">contourf</span><span class="params">(*args, data=None, **kwargs)</span>:</span></span><br><span class="line">&gt;     __ret = gca().contourf(</span><br><span class="line">&gt;         *args, **(&#123;<span class="string">"data"</span>: data&#125; <span class="keyword">if</span> data <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">else</span> &#123;&#125;),</span><br><span class="line">&gt;         **kwargs)</span><br><span class="line">&gt;     <span class="keyword">if</span> __ret._A <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>: sci(__ret)  <span class="comment"># noqa</span></span><br><span class="line">&gt;     <span class="keyword">return</span> __ret</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>在这个函数内部, 它调用的是<code>gca().contourf()</code>, 而<code>gca()</code>又<code>return gcf().gca(**kwargs)</code>, 而<code>gcf()</code>$^{[注]}$的定义返回的是<code>figManager.canvas.figure</code>或者<code>figure()</code>, 至此, 终于好像看到了绘图的一线曙光了.</p>
+<p>而<code>figure()</code>返回的是<code>figManager.canvas.figure</code>, 这就明白了: 如果在<code>gcf()</code>调用中, 有<code>figManager.canvas.figure</code>对象的存在, 则直接返回它, 如果没有此对象, 则调用<code>figure()</code>, 生成一个<code>figManager.canvas.figure</code>对象后返回它.</p>
+<blockquote>
+<p>注: <code>gcf()</code>的意涵是: Get Current Figure, <code>gca()</code>的意涵是: Get the Current :class:<code>~matplotlib.axes.Axes</code> (instance on the<br>current figure matching the given keyword args, or create one)</p>
+</blockquote>
+<p>函数返回的是: <strong><code>c</code></strong>(contour), 一个<strong><code>QuadContourSet</code></strong>对象, 详见[<a href="https://matplotlib.org/api/contour_api.html#matplotlib.contour.QuadContourSet" target="_blank" rel="noopener">REF</a>].</p>
+<p>最后, <code>contourf()</code>的<code>**kwargs</code>参数在此函数页面的<strong>Other Parameters</strong>中被说明, 包含: <strong>corner_mask</strong>, <strong>colors</strong>, <strong>alpha</strong>, <strong>cmap</strong>, <strong>norm</strong>, <strong>vmin/vmax</strong>, <strong>origin</strong>, <strong>extent</strong>, <strong>locator</strong>, <strong>extend</strong>, <strong>xunits/yunits</strong>, <strong>antialiased</strong>, <strong>Nchunk</strong>, <strong>linewidths</strong>, <strong>linestyles</strong>, <strong>hatches</strong>.</p>
+<p>作为<code>contourf()</code>API的总结结尾, 引用一个它的使用用例[<a href="https://matplotlib.org/gallery/images_contours_and_fields/irregulardatagrid.html#sphx-glr-gallery-images-contours-and-fields-irregulardatagrid-py" target="_blank" rel="noopener">REF</a>]:</p>
+<p> <img src="https://i.loli.net/2019/07/29/5d3e5e02caf7b21998.png" alt="03_Irregularly_Contour.png"></p>
+<p> <em>图3: Irregularly_Contour</em></p>
+<h3 id="Concise-Pyplot-Toturial-简要Pyplot说明-REF"><a href="#Concise-Pyplot-Toturial-简要Pyplot说明-REF" class="headerlink" title="Concise Pyplot Toturial - 简要Pyplot说明[REF]"></a>Concise Pyplot Toturial - 简要Pyplot说明[<a href="https://matplotlib.org/tutorials/introductory/pyplot.html#sphx-glr-tutorials-introductory-pyplot-py" target="_blank" rel="noopener">REF</a>]</h3><p><em>An introduction to the pyplot interface.</em></p>
+<p> <img src="https://i.loli.net/2019/07/29/5d3e606d8d35219023.png" alt="04_Part_Of_A_Figure.png"><br><em>图: Part Of A Figure</em></p>
+<p>首先, 我们常见的是: <code>import matplotlib.pyplot as plt</code>, 通过上述语句, 我们</p>
+<p>MMM</p>
+<p>快点来报道: </p>
+<p>程序: 高级编程, CPU, 汇编.</p>
+
+          
         
       
     </div>
@@ -787,224 +1005,6 @@
 <li>萨里大学(University of Surrey)关于Unix的介绍(UNIX Introduction), <a href="http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html" target="_blank" rel="noopener">Ref</a>;</li>
 <li>Mally.stanford.edu关于基本Unix命令的讲解, <a href="http://mally.stanford.edu/~sr/computing/basic-unix.html" target="_blank" rel="noopener">Ref</a>;</li>
 </ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tjipot.github.io/2019/07/23/CV-札记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Haoran Ye">
-      <meta itemprop="description" content="Computer Fake Science">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Univesre">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/23/CV-札记/" class="post-title-link" itemprop="url">CV_札记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-23 10:34:09" itemprop="dateCreated datePublished" datetime="2019-07-23T10:34:09+08:00">2019-07-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-31 12:37:38" itemprop="dateModified" datetime="2019-07-31T12:37:38+08:00">2019-07-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/札记/" itemprop="url" rel="index"><span itemprop="name">札记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>关于CS231n课的一些笔记</strong> </p>
-<p>$L_i=-log(\frac{e^{f_y{_i}}}{\sum_je^{f_j}})$</p>
-<p>$L=\frac{1}{N} \displaystyle \sum_i L_i + \frac{1}{2} \lambda \displaystyle\sum_k \displaystyle\sum_l W^{2}_{k,l}$</p>
-<p>$\frac{\partial L_i}{\partial f_k} = p_k - \mathbb{ONE}(y_i=k)$</p>
-<h4 id="关于Hidden层的直觉性思考"><a href="#关于Hidden层的直觉性思考" class="headerlink" title="关于Hidden层的直觉性思考"></a>关于Hidden层的直觉性思考</h4><p>直觉性的理解: 对于输入空间中$x1$和$x2$不同取值, 隐藏层将它们原先的一次组合(即: 没有隐藏层的线性(vanilla)模型)进行”二次加工”, 比如: 输入数据点在第一层模型分类的基础上, 再次进行调整, 使得图1中的三条直线段在不同的取值区间(小范围内)内呈现不同的位移/扭曲(直线变曲线), 完成此例中的螺旋分类. </p>
-<p>激活函数的加入, 使得原先的”线段式”曲线变得更平滑(消除了不同线段连接间的折角特征), 原先的”线段式”曲线变成真正的曲线(平滑的), 这像是一个消除图像马赛克的过程/模拟.</p>
-<p>todo: 贴网络传导图</p>
-<p> <img src="https://i.loli.net/2019/07/28/5d3cf5e90ddcf27564.png" alt="隐藏层对原线性模型的干预"></p>
-<p>好记性不如烂笔头(要理论, 也要工程):</p>
-<p>1.jupyter notebook平常使用三步走: ;</p>
-<p>matplotlib.plot三步走: ;</p>
-<p>文字的先天不足: 文字就是文字, 在解释/描述程序世界时总是外界事物, 能用例子看懂了, 你还想要文字来描述吗: 编程语言的API再详细, 那也不是程序设计时的内在逻辑, 如<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html?highlight=scatter#matplotlib.pyplot.scatter这个API的描述" target="_blank" rel="noopener">https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html?highlight=scatter#matplotlib.pyplot.scatter这个API的描述</a>;</p>
-<hr>
-<h4 id="Matplotlib的API简记"><a href="#Matplotlib的API简记" class="headerlink" title="Matplotlib的API简记"></a>Matplotlib的API简记</h4><p>首先, Matplotlib是因其作者想要在Python中使用像Matlab一样的画图(便利)方式而写出来的一个Python的画图库(主要是数据图的绘制而不是图像的显示/绘制, 图像的显示/绘制应该用OpenCV, 即cv2模块(但安装的时候是’pip install opencv-python’(或者python-opencv, 哪个对用哪个))), 此库的前三个字母就是Matlab的前三个字母, 接着是两个单词: plot(绘制)和lib(库). Matplotlib的<code>pyplot</code>模块最为常用: 体现为代码语句<code>import matplotlib.pyplot as plt</code>的使用频率.</p>
-<p>在做cs231n中模型的总结时, 调用到其一些函数, 做个总结, 加深印象(第一个api我会写得详细一些, 其它的话都是一样的套路就不那么详细, 除非有新的要点出现):</p>
-<p><strong><code>plt.contourf()</code></strong>[<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.contourf.html" target="_blank" rel="noopener">REF</a>]: 调用格式(Call signatures): <code>contour([X, Y,] Z, [levels], **kwargs)</code>:</p>
-<p><code>X</code>和<code>Y</code>参数是数组(<code>np.array()</code>)形式的变量(如: <code>np.arange(9)</code>), 代表的是平面坐标系中的两个维度上的坐标<code>X</code>和<code>Y</code>$^{[注1]}$, 调用时可以省略不给(它们在中括号(<code>[]</code>)中), 不给的话, 在函数内有默认的值(整数索引, “integer indices”)会被填充进去: <code>X=range(M), Y=range(N)</code>, 即<code>X</code>从<code>0</code>到<code>M-1</code>, 以及<code>Y</code>从<code>0</code>到<code>N</code>.</p>
-<p><code>X</code>和<code>Y</code>是<code>Z</code>中元素值的坐标, 它们的维度要么是2D的, 或者要么是1D的(详见下图关于<strong><code>X,Y</code></strong>的说明).</p>
-<p><code>Z</code>参数是必须给的, 它的shape是<code>(N,M)</code>, 对应<code>len(Y)/Z的行数</code>和<code>len(X)/Z的列数</code>, 即把<code>X</code>和<code>Y</code>相应位置的索引对应到相应的<code>Z</code>值(等高图中的高度).</p>
-<blockquote>
-<p>注1: 经常弄错的是, 我把<code>(x1,y1)</code>当做参数<code>X</code>, 把<code>(x2,y2)</code>当做参数<code>Y</code>传给numpy函数, 但numpy中把所有<code>X</code>维度和<code>Y</code>维度上的一系列坐标分开处理, 只不过用相同的索引<code>i</code>将两个数组中的坐标对应起来(如<code>X[1]</code>对应<code>Y[1]</code>): 就是这样的, 轮子就是这样的.</p>
-</blockquote>
-<p>说了这么多, 上图吧(一图胜千字):</p>
-<p> <img src="https://i.loli.net/2019/07/29/5d3e4ff5a4e6566270.png" alt="01_CONTOURF参数API.png"></p>
-<p><em>图1: 参数说明</em></p>
-<p> <img src="https://i.loli.net/2019/07/29/5d3e53463cb8289198.png" alt="02_等高图.png"><br><em>图2: 等高图例</em></p>
-<p><strong><code>contourf()</code></strong>函数在<code>matplotlib</code>库中的原代码为[<a href="https://matplotlib.org/_modules/matplotlib/pyplot.html#contourf" target="_blank" rel="noopener">REF</a>]:</p>
-<blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; @docstring.copy(Axes.contourf)</span><br><span class="line">&gt; <span class="function"><span class="keyword">def</span> <span class="title">contourf</span><span class="params">(*args, data=None, **kwargs)</span>:</span></span><br><span class="line">&gt;     __ret = gca().contourf(</span><br><span class="line">&gt;         *args, **(&#123;<span class="string">"data"</span>: data&#125; <span class="keyword">if</span> data <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">else</span> &#123;&#125;),</span><br><span class="line">&gt;         **kwargs)</span><br><span class="line">&gt;     <span class="keyword">if</span> __ret._A <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>: sci(__ret)  <span class="comment"># noqa</span></span><br><span class="line">&gt;     <span class="keyword">return</span> __ret</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>在这个函数内部, 它调用的是<code>gca().contourf()</code>, 而<code>gca()</code>又<code>return gcf().gca(**kwargs)</code>, 而<code>gcf()</code>$^{[注]}$的定义返回的是<code>figManager.canvas.figure</code>或者<code>figure()</code>, 至此, 终于好像看到了绘图的一线曙光了.</p>
-<p>而<code>figure()</code>返回的是<code>figManager.canvas.figure</code>, 这就明白了: 如果在<code>gcf()</code>调用中, 有<code>figManager.canvas.figure</code>对象的存在, 则直接返回它, 如果没有此对象, 则调用<code>figure()</code>, 生成一个<code>figManager.canvas.figure</code>对象后返回它.</p>
-<blockquote>
-<p>注: <code>gcf()</code>的意涵是: Get Current Figure, <code>gca()</code>的意涵是: Get the Current :class:<code>~matplotlib.axes.Axes</code> (instance on the<br>current figure matching the given keyword args, or create one)</p>
-</blockquote>
-<p>函数返回的是: <strong><code>c</code></strong>(contour), 一个<strong><code>QuadContourSet</code></strong>对象, 详见[<a href="https://matplotlib.org/api/contour_api.html#matplotlib.contour.QuadContourSet" target="_blank" rel="noopener">REF</a>].</p>
-<p>最后, <code>contourf()</code>的<code>**kwargs</code>参数在此函数页面的<strong>Other Parameters</strong>中被说明, 包含: <strong>corner_mask</strong>, <strong>colors</strong>, <strong>alpha</strong>, <strong>cmap</strong>, <strong>norm</strong>, <strong>vmin/vmax</strong>, <strong>origin</strong>, <strong>extent</strong>, <strong>locator</strong>, <strong>extend</strong>, <strong>xunits/yunits</strong>, <strong>antialiased</strong>, <strong>Nchunk</strong>, <strong>linewidths</strong>, <strong>linestyles</strong>, <strong>hatches</strong>.</p>
-<p>作为<code>contourf()</code>API的总结结尾, 引用一个它的使用用例[<a href="https://matplotlib.org/gallery/images_contours_and_fields/irregulardatagrid.html#sphx-glr-gallery-images-contours-and-fields-irregulardatagrid-py" target="_blank" rel="noopener">REF</a>]:</p>
-<p> <img src="https://i.loli.net/2019/07/29/5d3e5e02caf7b21998.png" alt="03_Irregularly_Contour.png"></p>
-<p> <em>图3: Irregularly_Contour</em></p>
-<h3 id="Concise-Pyplot-Toturial-简要Pyplot说明-REF"><a href="#Concise-Pyplot-Toturial-简要Pyplot说明-REF" class="headerlink" title="Concise Pyplot Toturial - 简要Pyplot说明[REF]"></a>Concise Pyplot Toturial - 简要Pyplot说明[<a href="https://matplotlib.org/tutorials/introductory/pyplot.html#sphx-glr-tutorials-introductory-pyplot-py" target="_blank" rel="noopener">REF</a>]</h3><p><em>An introduction to the pyplot interface.</em></p>
-<p> <img src="https://i.loli.net/2019/07/29/5d3e606d8d35219023.png" alt="04_Part_Of_A_Figure.png"><br><em>图: Part Of A Figure</em></p>
-<p>首先, 我们常见的是: <code>import matplotlib.pyplot as plt</code>, 通过上述语句, 我们</p>
-<p>MMM</p>
-<p>快点来报道: </p>
-<p>程序: 高级编程, CPU, 汇编.</p>
 
           
         
